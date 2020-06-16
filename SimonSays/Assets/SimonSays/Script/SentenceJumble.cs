@@ -88,7 +88,7 @@ public class SentenceJumble : MonoBehaviour
         RepositionObject();
         timer -= Time.deltaTime;
         timerSeconds.text = timer.ToString("0");
-        if (timer <= 0)
+        if (timer <= 1)
         {
             CheckSentence();
         }
