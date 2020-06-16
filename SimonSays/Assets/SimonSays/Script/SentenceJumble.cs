@@ -28,8 +28,6 @@ public class Sentence
             result = "";
 
             List<string> words = new List<string>(Regex.Matches(sentence, "\\w+").OfType<Match>().Select(m => m.Value).ToArray());
-            //UnityEngine.Debug.Log(words[0]);
-            //UnityEngine.Debug.Log(words[1]);
             //UnityEngine.Debug.Log(words.Count);
             while (words.Count > 0)
             {
@@ -98,13 +96,21 @@ public class SentenceJumble : MonoBehaviour
 
     void RepositionObject()
     {
-        if(wordObjects.Count == 0)
+        float center = 0;
+        if (wordObjects.Count == 0)
         {
             return;
         }
 
-        float center = (wordObjects.Count - 1) / 2;
-        for (int i =0; i<wordObjects.Count; i++)
+        if (wordObjects.Count % 2 == 0)
+        {
+            center = ((wordObjects.Count - 1) / 2) + 0.5f;
+        }
+        else
+        {
+            center = (wordObjects.Count - 1) / 2;
+        }
+        for (int i = 0; i < wordObjects.Count; i++)
         {
             wordObjects[i].rectTransform.anchoredPosition
                 = Vector2.Lerp(wordObjects[i].rectTransform.anchoredPosition,
@@ -116,10 +122,10 @@ public class SentenceJumble : MonoBehaviour
     /// <summary>
     /// Show a random sentence on the screen
     /// </summary>
-    public void ShowScramble()
-    {
-        ShowScramble(UnityEngine.Random.Range(0, sentences.Length - 1));
-    }
+    //public void ShowScramble()
+    //{
+    //    ShowScramble(UnityEngine.Random.Range(0, sentences.Length - 1));
+    //}
 
     /// <summary>
     /// Show sentence from collection with desired index
@@ -134,24 +140,16 @@ public class SentenceJumble : MonoBehaviour
         }
 
         //Sentences finished
-        if (index > sentences.Length - 1)
-        {
-            UnityEngine.Debug.LogError("Index out of range, please enter range between 0-" + (sentences.Length - 1).ToString());
-            return;
-        }
+        //if (index > sentences.Length - 1)
+        //{
+        //    UnityEngine.Debug.LogError("Index out of range, please enter range between 0-" + (sentences.Length - 1).ToString());
+        //    return;
+        //}
 
-        string words_s = sentences[index].GetString();
-        //UnityEngine.Debug.Log("words_s");
-        //UnityEngine.Debug.Log(words_s);
-        string[] words_w = Regex.Matches(words_s, "\\w+").OfType<Match>().Select(m => m.Value).ToArray();
-        //UnityEngine.Debug.Log("words_w");
-        //UnityEngine.Debug.Log(words_w[0]);
-        //UnityEngine.Debug.Log(words_w[1]);
-        //UnityEngine.Debug.Log(words_w[2]);
-        //UnityEngine.Debug.Log(words_w[3]);
-        //UnityEngine.Debug.Log(words_w[4]);
-        //UnityEngine.Debug.Log(words_w[5]);
-        foreach (string w in words_w)
+        string wordString = sentences[index].GetString();
+        string[] wordsInSentence = Regex.Matches(wordString, "\\w+").OfType<Match>().Select(m => m.Value).ToArray();
+
+        foreach (string w in wordsInSentence)
         {
             WordObject clone = Instantiate(prefab.gameObject).GetComponent<WordObject>();
             clone.transform.SetParent(container);
@@ -162,7 +160,7 @@ public class SentenceJumble : MonoBehaviour
         currentSentence = index;
     }
 
-    public void Swap (int indexA, int indexB) //Chack: May be not needed
+    public void Swap (int indexA, int indexB)
     {
         WordObject tmpA = wordObjects[indexA];
         wordObjects[indexA] = wordObjects[indexB];
@@ -196,17 +194,23 @@ public class SentenceJumble : MonoBehaviour
 
     public void CheckSentence()
     {
-        StartCoroutine(CoCheckSentence()); //Check
+        StartCoroutine(CoCheckSentence());
     }
 
-    IEnumerator CoCheckSentence() //Check
+    IEnumerator CoCheckSentence()
     {
         yield return new WaitForSeconds(0.5f);
         string sentence = "";
+        int numOfWords = wordObjects.Count;
+
         foreach (WordObject wordObject in wordObjects)
         {
-            sentence += " "; 
             sentence += wordObject.word;
+            if (numOfWords > 1)
+            {
+                sentence += " ";
+                numOfWords--;
+            }
             //UnityEngine.Debug.Log("sentence");
             //UnityEngine.Debug.Log(sentence);
         }
@@ -218,7 +222,7 @@ public class SentenceJumble : MonoBehaviour
             //currentSentence++;
             //ShowScramble(currentSentence);
             SceneManager.LoadScene("Arena");
-        } else //I should add a screen to ask it to retry and start again?
+        } else
         {
             SceneManager.LoadScene("WrongAns");
         }
