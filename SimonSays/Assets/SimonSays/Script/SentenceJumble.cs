@@ -63,7 +63,7 @@ public class SentenceJumble : MonoBehaviour
 
     public static SentenceJumble main;
 
-    private float timer = 30f;
+    private float timer = 20f;
     private Text timerSeconds;
 
     public void ChangeScene(string scene)
