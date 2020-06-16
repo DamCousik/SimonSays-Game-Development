@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEditor.VersionControl;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class CharacterMovement : MonoBehaviour
 {
@@ -11,23 +12,47 @@ public class CharacterMovement : MonoBehaviour
     public float plainLeftMax;
     public float plainRightMax = -1.52f;
     public float leftRightSpeed = 1.57f;
-    Rigidbody rigidBody;
     bool left;
     bool right;
-    private Animator m_Animator;
     private float m_currentV = 0;
     private float m_currentH = 0;
     private readonly float m_interpolation = 10;
+    public Text healthObj;
+    int healthCount = 3;
+    public GameObject gameOverPanel;
 
-    // Start is called before the first frame update
-    void Start()
+    //public float cameraMoveSpeed;
+    //public GameObject mainCamera;
+
+    public void Initialize(GameObject character)
     {
-        rigidBody = GetComponent<Rigidbody>();
-        m_Animator = GetComponent<Animator>();
+        m_animator = character.GetComponent<Animator>();
+        m_rigidBody = character.GetComponent<Rigidbody>();
 
+        //mainCamera.transform.localPosition = new Vector3(0, 0, 0);
+        //mainCamera.transform.localRotation = Quaternion.Euler(18, 180, 0);
     }
 
-    // Update is called once per frame
+    [SerializeField] private float m_jumpForce = 4;
+     
+    [SerializeField] private Animator m_animator;
+    [SerializeField] private Rigidbody m_rigidBody;
+
+    private bool m_wasGrounded;
+    //private Vector3 m_currentDirection = Vector3.zero;
+
+    private float m_jumpTimeStamp = 0;
+    private float m_minJumpInterval = 0.25f;
+
+    private bool m_isGrounded;
+    private List<Collider> m_collisions = new List<Collider>();
+
+    void Awake()
+    {
+        if (!m_animator) { gameObject.GetComponent<Animator>(); }
+        if (!m_rigidBody) { gameObject.GetComponent<Animator>(); }
+    }
+
     void Update()
     {
         transform.Translate(0, 0, speed * Time.deltaTime);
@@ -47,8 +72,8 @@ public class CharacterMovement : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-                rigidBody.velocity = Vector3.zero;
-                rigidBody.velocity = Vector3.up * height;
+                m_rigidBody.velocity = Vector3.zero;
+                m_rigidBody.velocity = Vector3.up * height;
             }
             if (left == true)
             {
@@ -81,8 +106,8 @@ public class CharacterMovement : MonoBehaviour
             }
             if (TWOfinger)
             {
-                rigidBody.velocity = Vector3.zero;
-                rigidBody.velocity = Vector3.up * height;
+                m_rigidBody.velocity = Vector3.zero;
+                m_rigidBody.velocity = Vector3.up * height;
             }
             if (left == true)
             {
@@ -111,24 +136,118 @@ public class CharacterMovement : MonoBehaviour
         direction.y = 0;
         direction = direction.normalized * directionLength;
 
-        m_Animator.SetFloat("MoveSpeed", direction.magnitude);
+        m_animator.SetFloat("MoveSpeed", direction.magnitude);
+        m_animator.SetBool("Grounded", m_isGrounded);
+
+        JumpingAndLanding();
+
+        m_wasGrounded = m_isGrounded;
 
     }
 
-    [System.Obsolete]
+    private void OnCollisionEnter(Collision collision)
+    {
+        ContactPoint[] contactPoints = collision.contacts;
+        for (int i = 0; i < contactPoints.Length; i++)
+        {
+            if (Vector3.Dot(contactPoints[i].normal, Vector3.up) > 0.5f)
+            {
+                if (!m_collisions.Contains(collision.collider))
+                {
+                    m_collisions.Add(collision.collider);
+                }
+                m_isGrounded = true;
+            }
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        ContactPoint[] contactPoints = collision.contacts;
+        bool validSurfaceNormal = false;
+        for (int i = 0; i < contactPoints.Length; i++)
+        {
+            if (Vector3.Dot(contactPoints[i].normal, Vector3.up) > 0.5f)
+            {
+                validSurfaceNormal = true; break;
+            }
+        }
+
+        if (validSurfaceNormal)
+        {
+            m_isGrounded = true;
+            if (!m_collisions.Contains(collision.collider))
+            {
+                m_collisions.Add(collision.collider);
+            }
+        }
+        else
+        {
+            if (m_collisions.Contains(collision.collider))
+            {
+                m_collisions.Remove(collision.collider);
+            }
+            if (m_collisions.Count == 0) { m_isGrounded = false; }
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (m_collisions.Contains(collision.collider))
+        {
+            m_collisions.Remove(collision.collider);
+        }
+        if (m_collisions.Count == 0) { m_isGrounded = false; }
+    }
+
+    private void JumpingAndLanding()
+    {
+        bool jumpCooldownOver = (Time.time - m_jumpTimeStamp) >= m_minJumpInterval;
+
+        if (jumpCooldownOver && m_isGrounded && Input.GetKey(KeyCode.Space))
+        {
+            m_jumpTimeStamp = Time.time;
+            m_rigidBody.AddForce(Vector3.up * m_jumpForce, ForceMode.Impulse);
+        }
+
+        if (!m_wasGrounded && m_isGrounded)
+        {
+            m_animator.SetTrigger("Land");
+        }
+
+        if (!m_isGrounded && m_wasGrounded)
+        {
+            m_animator.SetTrigger("Jump");
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag=="Obstacle")
-        { 
-            Debug.Log("You hit an obstYOU DIE!!");
-            Application.LoadLevel(Application.loadedLevel);
+        if (other.gameObject.CompareTag("Obstacle"))
+        {
+            Debug.Log("You hit an obstacle - YOU LOSE A LIFE!!");
+            healthCount -= 1;
+            healthObj.text = "Health : " + healthCount;
+
+            if (healthCount < 1)
+            {
+                Debug.Log("You are all out of lives! Sorry, but SimonSays - YOU DIE!!");
+                m_rigidBody.velocity = Vector3.zero;
+                m_rigidBody.isKinematic = true;
+                m_animator.gameObject.SetActive(false);
+                healthCount = 0;
+                healthObj.text = "Health : " + healthCount;
+                gameOverPanel.SetActive(true);
+            }
         }
-        else if(other.gameObject.tag == "LethalObstacle")
+        else if (other.gameObject.tag == "LethalObstacle")
         {
             Debug.Log("You've reached the end of the zone! Goodbye!!");
             UnityEditor.EditorApplication.isPlaying = false;
             //Application.Quit();
         }
     }
-
 }
+
+
+

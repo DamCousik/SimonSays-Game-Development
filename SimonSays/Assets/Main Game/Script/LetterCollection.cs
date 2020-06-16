@@ -5,19 +5,18 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LetterCollection : MonoBehaviour
-{
-    private Rigidbody rb;
+{ 
     public Dictionary<string, int> charValueFrequencies = new Dictionary<string, int>();
     public Dictionary<string, int> charWordFrequencies = new Dictionary<string, int>();
     public List<string> collectedLetters = new List<string>();
     public int countIncorrectLetters = 0;
     public int countCorrectLetters = 0;
+    
     int wordLength = 0;
     bool isGameWon = true;
    
     void Start()
-    {
-        rb = GetComponent<Rigidbody>();
+    { 
         charValueFrequencies.Add("A", 1);
         charValueFrequencies.Add("B", 1);
         charValueFrequencies.Add("C", 1);
@@ -200,23 +199,23 @@ public class LetterCollection : MonoBehaviour
                     break;
             }
 
-            //if (!(charWordFrequencies.ContainsKey(other.gameObject.tag) && !(other.gameObject.tag.Equals("Obstacle")) || (charWordFrequencies[other.gameObject.tag] < 0)))
-            //{
-            //    countIncorrectLetters += 1;
-            //}
-            if(charWordFrequencies.ContainsKey(other.gameObject.tag))
+            if (!(charWordFrequencies.ContainsKey(other.gameObject.tag) && !(other.gameObject.tag.Equals("Obstacle")) || (charWordFrequencies[other.gameObject.tag] < 0)))
+            {
+                countIncorrectLetters += 1;
+            }
+            if (charWordFrequencies.ContainsKey(other.gameObject.tag))
             {
                 charWordFrequencies[other.gameObject.tag]--;
                 countCorrectLetters += 1;
             }
-                
-            //if (countIncorrectLetters > 3)
-            //{
-            //    Debug.Log("You collected 3 incorrected letters! - YOU LOSE!!");
-            //    UnityEditor.EditorApplication.isPlaying = false;
-            //}
 
-            if(countCorrectLetters == wordLength)
+            if (countIncorrectLetters > 3)
+            {
+                Debug.Log("You collected 3 incorrected letters! - YOU NEED TO START OVER!!");
+                SceneManager.LoadScene("ArenaZone");
+            }
+
+            if (countCorrectLetters == wordLength)
             {
                 for (int i = 0; i < collectedLetters.Count; i++)
                 {
@@ -230,17 +229,15 @@ public class LetterCollection : MonoBehaviour
                 {
                     Debug.Log("Congratulations! You've successfully spelt out the word - SIMON! SimonSays - YOU WIN!!!");
                     SceneManager.LoadScene("ArenaZone");
-                    UnityEditor.EditorApplication.isPlaying = false;
                 }
                 else
                 {
                     Debug.Log("You've collected extra letters which are irrelevant to the word. Sorry, but SimonSays - YOU LOSE!!!");
-                    UnityEditor.EditorApplication.isPlaying = false;
+                    SceneManager.LoadScene("ArenaZone");
                 }
                 
             }
         }
-
         catch(Exception)
         {
             Debug.Log("OOPS! You bumped into a wrong letter");
