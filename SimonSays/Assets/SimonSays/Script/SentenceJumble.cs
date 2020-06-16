@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Security.Cryptography;
+using System.Text.RegularExpressions;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
-public class Word
+public class Sentence
 {
-    public string word;
+    public string sentence;
 
     [Header("leave empty if you want randomised")]
     public string desiredRandom;
@@ -19,27 +21,34 @@ public class Word
         {
             return desiredRandom;
         }
-        string result = word;
+        string result = sentence;
 
-        while (result == word)
+        while (result == sentence)
         {
             result = "";
-            List<char> characters = new List<char>(word.ToCharArray());
-            while (characters.Count > 0)
-            {
-                int indexChar = UnityEngine.Random.Range(0, characters.Count - 1);
-                result += characters[indexChar];
 
-                characters.RemoveAt(indexChar);
+            List<string> words = new List<string>(Regex.Matches(sentence, "\\w+").OfType<Match>().Select(m => m.Value).ToArray());
+            //UnityEngine.Debug.Log(words[0]);
+            //UnityEngine.Debug.Log(words[1]);
+            //UnityEngine.Debug.Log(words.Count);
+            while (words.Count > 0)
+            {
+                int indexWord = UnityEngine.Random.Range(0, words.Count - 1);
+                result += words[indexWord];
+                result += " ";
+
+                words.RemoveAt(indexWord);
             }
         }
+        //UnityEngine.Debug.Log("Scrambled sentence");
+        //UnityEngine.Debug.Log(result);
         return result;
     }
 }
 
 public class SentenceJumble : MonoBehaviour
 {
-    public Word[] words;
+    public Sentence[] sentences;
 
     [Header("UI REFERENCE")]
     public WordObject prefab;
@@ -47,12 +56,20 @@ public class SentenceJumble : MonoBehaviour
     public float space;
     public float lerpSpeed = 5;
 
-    List<WordObject> charObjects = new List<WordObject>();
+    List<WordObject> wordObjects = new List<WordObject>();
     WordObject firstSelected;
 
-    public int currentWord;
+    public int currentSentence;
 
     public static SentenceJumble main;
+
+    private float timer = 30f;
+    private Text timerSeconds;
+
+    public void ChangeScene(string scene)
+    {
+        CheckSentence();
+    }
 
     void Awake()
     {
@@ -63,95 +80,112 @@ public class SentenceJumble : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ShowScramble(currentWord);
+        ShowScramble(currentSentence);
+        timerSeconds = GameObject.Find("Timer").GetComponent<Text>();
     }
 
     // Update is called once per frame
     void Update()
     {
         RepositionObject();
+        timer -= Time.deltaTime;
+        timerSeconds.text = timer.ToString("0");
+        if (timer <= 0)
+        {
+            CheckSentence();
+        }
     }
 
-    void RepositionObject() //Check if needed or not
+    void RepositionObject()
     {
-        if(charObjects.Count == 0)
+        if(wordObjects.Count == 0)
         {
             return;
         }
 
-        float center = (charObjects.Count - 1) / 2;
-        for (int i =0; i<charObjects.Count; i++)
+        float center = (wordObjects.Count - 1) / 2;
+        for (int i =0; i<wordObjects.Count; i++)
         {
-            charObjects[i].rectTransform.anchoredPosition
-                = Vector2.Lerp(charObjects[i].rectTransform.anchoredPosition,
+            wordObjects[i].rectTransform.anchoredPosition
+                = Vector2.Lerp(wordObjects[i].rectTransform.anchoredPosition,
                 new Vector2((i - center) * space, 0), lerpSpeed * Time.deltaTime);
-            charObjects[i].index = i;
+            wordObjects[i].index = i;
         }
     }
 
     /// <summary>
-    /// Show a random word on the screen
+    /// Show a random sentence on the screen
     /// </summary>
     public void ShowScramble()
     {
-        ShowScramble(UnityEngine.Random.Range(0, words.Length - 1));
+        ShowScramble(UnityEngine.Random.Range(0, sentences.Length - 1));
     }
 
     /// <summary>
-    /// Show word from collection with desired index
+    /// Show sentence from collection with desired index
     /// </summary>
     /// <param name="index"index of the element></param>
     public void ShowScramble(int index)
     {
-        charObjects.Clear();
+        wordObjects.Clear();
         foreach(Transform child in container)
         {
             Destroy(child.gameObject);
         }
 
-        //Words finished
-        if (index > words.Length - 1)
+        //Sentences finished
+        if (index > sentences.Length - 1)
         {
-            UnityEngine.Debug.LogError("Index out of range, please enter range between 0-" + (words.Length - 1).ToString());
+            UnityEngine.Debug.LogError("Index out of range, please enter range between 0-" + (sentences.Length - 1).ToString());
             return;
         }
 
-        char[] chars = words[index].GetString().ToCharArray();
-        foreach (char c in chars)
+        string words_s = sentences[index].GetString();
+        //UnityEngine.Debug.Log("words_s");
+        //UnityEngine.Debug.Log(words_s);
+        string[] words_w = Regex.Matches(words_s, "\\w+").OfType<Match>().Select(m => m.Value).ToArray();
+        //UnityEngine.Debug.Log("words_w");
+        //UnityEngine.Debug.Log(words_w[0]);
+        //UnityEngine.Debug.Log(words_w[1]);
+        //UnityEngine.Debug.Log(words_w[2]);
+        //UnityEngine.Debug.Log(words_w[3]);
+        //UnityEngine.Debug.Log(words_w[4]);
+        //UnityEngine.Debug.Log(words_w[5]);
+        foreach (string w in words_w)
         {
             WordObject clone = Instantiate(prefab.gameObject).GetComponent<WordObject>();
             clone.transform.SetParent(container);
 
-            charObjects.Add(clone.Init(c));
+            wordObjects.Add(clone.Init(w));
         }
 
-        currentWord = index;
+        currentSentence = index;
     }
 
-    public void Swap (int indexA, int indexB) //Chaek: May be not needed
+    public void Swap (int indexA, int indexB) //Chack: May be not needed
     {
-        WordObject tmpA = charObjects[indexA];
-        charObjects[indexA] = charObjects[indexB];
-        charObjects[indexB] = tmpA;
+        WordObject tmpA = wordObjects[indexA];
+        wordObjects[indexA] = wordObjects[indexB];
+        wordObjects[indexB] = tmpA;
 
-        charObjects[indexA].transform.SetAsLastSibling();
-        charObjects[indexB].transform.SetAsLastSibling();
+        wordObjects[indexA].transform.SetAsLastSibling();
+        wordObjects[indexB].transform.SetAsLastSibling();
 
-        CheckWord();
+        //CheckSentence();
     }
 
-    public void Select(WordObject charObject)
+    public void Select(WordObject wordObject)
     {
         if(firstSelected)
         {
-            Swap(firstSelected.index, charObject.index);
+            Swap(firstSelected.index, wordObject.index);
 
             //Unselect
             firstSelected.Select();
-            charObject.Select();
+            wordObject.Select();
         } else
         {
-            firstSelected = charObject;
+            firstSelected = wordObject;
         }
     }
 
@@ -160,24 +194,33 @@ public class SentenceJumble : MonoBehaviour
         firstSelected = null;
     }
 
-    public void CheckWord()
+    public void CheckSentence()
     {
-        StartCoroutine(CoCheckWord()); //Check
+        StartCoroutine(CoCheckSentence()); //Check
     }
 
-    IEnumerator CoCheckWord() //Check
+    IEnumerator CoCheckSentence() //Check
     {
         yield return new WaitForSeconds(0.5f);
-        string word = "";
-        foreach (WordObject charObject in charObjects)
+        string sentence = "";
+        foreach (WordObject wordObject in wordObjects)
         {
-            word += charObject.character;
+            sentence += " "; 
+            sentence += wordObject.word;
+            //UnityEngine.Debug.Log("sentence");
+            //UnityEngine.Debug.Log(sentence);
         }
 
-        if (word == words[currentWord].word)
+        //UnityEngine.Debug.Log("sentences[currentSentence].sentence");
+        //UnityEngine.Debug.Log(sentences[currentSentence].sentence);
+        if (sentence == sentences[currentSentence].sentence)
         {
-            currentWord++;
-            ShowScramble(currentWord);
+            //currentSentence++;
+            //ShowScramble(currentSentence);
+            SceneManager.LoadScene("Arena");
+        } else //I should add a screen to ask it to retry and start again?
+        {
+            SceneManager.LoadScene("WrongAns");
         }
     }
 }

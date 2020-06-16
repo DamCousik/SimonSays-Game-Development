@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class WordObject : MonoBehaviour
 {
-    public char character;
+    public string word;
     public Text text;
     public Image image;
     public RectTransform rectTransform;//Check
@@ -18,10 +18,10 @@ public class WordObject : MonoBehaviour
 
     bool isSelected = false;
 
-    public WordObject Init(char c)
+    public WordObject Init(string w)
     {
-        character = c;
-        text.text = c.ToString();
+        word = w;
+        text.text = w.ToString();
         gameObject.SetActive(true);
         return this;
     }
