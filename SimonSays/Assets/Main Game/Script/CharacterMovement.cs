@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Net.Mime;
 using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -20,6 +21,7 @@ public class CharacterMovement : MonoBehaviour
     public Text healthObj;
     public int healthCount = 3;
     public GameObject gameOverPanel;
+    public  bool chrctrIsDead = false;
 
     public void Initialize(GameObject character)
     {
@@ -225,6 +227,7 @@ public class CharacterMovement : MonoBehaviour
 
             if (healthCount < 1)
             {
+                chrctrIsDead = true;
                 Debug.Log("You are all out of lives! Sorry, but SimonSays - YOU DIE!!");
                 m_rigidBody.velocity = Vector3.zero;
                 m_rigidBody.isKinematic = true;

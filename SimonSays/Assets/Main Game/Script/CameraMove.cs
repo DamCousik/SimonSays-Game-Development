@@ -19,7 +19,13 @@ public class CameraMove : MonoBehaviour {
 
     void FixedUpdate()
     {
-        MoveObj();
+	    CharacterMovement tryM = character.GetComponent<CharacterMovement>();
+	    if (!tryM.chrctrIsDead)
+	    {
+		    //print("Nice woke FINE");
+		    MoveObj();
+	    }
+        
     }
 
     //IEnumerator cameraCoroutine()
