@@ -5,15 +5,20 @@ using UnityEngine;
 public class ShuffleZones : MonoBehaviour
 {
     public GameObject[] zones;
-     
-    
-    void Start () {
-        
-        Shuffle(zones);
-        //Reset(zones);     
+
+
+    void Start()
+    {
+        StartCoroutine(ExecuteAfterTime(2));
     }
-        
-   
+
+    IEnumerator ExecuteAfterTime(float time)
+    {
+        yield return new WaitForSeconds(time);
+        Shuffle(zones);
+
+    }
+
     void Shuffle (GameObject[] gameObjects) {
         for (int i = 0; i < gameObjects.Length; i++) {
  

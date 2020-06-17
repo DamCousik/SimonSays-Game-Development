@@ -18,28 +18,21 @@ public class CharacterMovement : MonoBehaviour
     private float m_currentH = 0;
     private readonly float m_interpolation = 10;
     public Text healthObj;
-    int healthCount = 3;
+    public int healthCount = 3;
     public GameObject gameOverPanel;
-
-    //public float cameraMoveSpeed;
-    //public GameObject mainCamera;
 
     public void Initialize(GameObject character)
     {
         m_animator = character.GetComponent<Animator>();
         m_rigidBody = character.GetComponent<Rigidbody>();
-
-        //mainCamera.transform.localPosition = new Vector3(0, 0, 0);
-        //mainCamera.transform.localRotation = Quaternion.Euler(18, 180, 0);
     }
 
     [SerializeField] private float m_jumpForce = 4;
      
-    [SerializeField] private Animator m_animator;
-    [SerializeField] private Rigidbody m_rigidBody;
+    [SerializeField] public Animator m_animator;
+    [SerializeField] public Rigidbody m_rigidBody;
 
     private bool m_wasGrounded;
-    //private Vector3 m_currentDirection = Vector3.zero;
 
     private float m_jumpTimeStamp = 0;
     private float m_minJumpInterval = 0.25f;
@@ -228,6 +221,7 @@ public class CharacterMovement : MonoBehaviour
             Debug.Log("You hit an obstacle - YOU LOSE A LIFE!!");
             healthCount -= 1;
             healthObj.text = "Health : " + healthCount;
+            //SceneManager.LoadScene("Zone-A-Screen");
 
             if (healthCount < 1)
             {
@@ -240,12 +234,22 @@ public class CharacterMovement : MonoBehaviour
                 gameOverPanel.SetActive(true);
             }
         }
-        else if (other.gameObject.tag == "LethalObstacle")
+        else if (other.gameObject.CompareTag("LethalObstacle"))
         {
             Debug.Log("You've reached the end of the zone! Goodbye!!");
             UnityEditor.EditorApplication.isPlaying = false;
             //Application.Quit();
         }
+    }
+
+    public void playAgainUI()
+    {
+        SceneManager.LoadScene("ArenaZone");
+    }
+
+    public void mainMenuUI()
+    {
+        SceneManager.LoadScene("StartGameScreen");
     }
 }
 

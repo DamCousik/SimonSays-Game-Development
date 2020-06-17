@@ -14,7 +14,9 @@ public class LetterCollection : MonoBehaviour
     
     int wordLength = 0;
     bool isGameWon = true;
-   
+
+    public CharacterMovement charMove;
+
     void Start()
     { 
         charValueFrequencies.Add("A", 1);
@@ -45,11 +47,11 @@ public class LetterCollection : MonoBehaviour
         charValueFrequencies.Add("Z", 1);
 
 
-        charWordFrequencies.Add("S", 1);
-        charWordFrequencies.Add("I", 1);
-        charWordFrequencies.Add("M", 1);
-        charWordFrequencies.Add("O", 1);
-        charWordFrequencies.Add("N", 1);
+        charWordFrequencies.Add("F", 1);
+        charWordFrequencies.Add("A", 1);
+        charWordFrequencies.Add("U", 1);
+        charWordFrequencies.Add("L", 1);
+        charWordFrequencies.Add("T", 1);
 
         foreach (KeyValuePair<string, int> item in charWordFrequencies)
         {
@@ -209,7 +211,7 @@ public class LetterCollection : MonoBehaviour
                 countCorrectLetters += 1;
             }
 
-            if (countIncorrectLetters > 3)
+            if (countIncorrectLetters == 3)
             {
                 Debug.Log("You collected 3 incorrected letters! - YOU NEED TO START OVER!!");
                 SceneManager.LoadScene("ArenaZone");
@@ -227,7 +229,7 @@ public class LetterCollection : MonoBehaviour
                 }
                 if(isGameWon)
                 {
-                    Debug.Log("Congratulations! You've successfully spelt out the word - SIMON! SimonSays - YOU WIN!!!");
+                    Debug.Log("Congratulations! You've successfully spelt out the word - FAULT! SimonSays - YOU COMPLETED ZONE 2!!!");
                     SceneManager.LoadScene("ArenaZone");
                 }
                 else
