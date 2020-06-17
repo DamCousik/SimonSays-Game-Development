@@ -137,6 +137,18 @@ public class CharacterMovement : MonoBehaviour
         JumpingAndLanding();
 
         m_wasGrounded = m_isGrounded;
+        
+        if (!m_isGrounded && transform.position.y < -3)
+        {
+            chrctrIsDead = true;
+            Debug.Log("You are drowning NOW :( ! Sorry, but SimonSays - YOU drown!!");
+            m_rigidBody.velocity = Vector3.zero;
+            m_rigidBody.isKinematic = true;
+            m_animator.gameObject.SetActive(false);
+            healthCount = 0;
+            //healthObj.text = "Health : " + healthCount;
+            gameOverPanel.SetActive(true);
+        }
 
     }
 
