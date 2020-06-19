@@ -5,6 +5,9 @@ using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+#if UNITY_EDITOR
+    using UnityEditor;
+#endif
 
 public class CharacterMovement : MonoBehaviour
 {
@@ -138,6 +141,28 @@ public class CharacterMovement : MonoBehaviour
 
         m_wasGrounded = m_isGrounded;
 
+        if (!m_isGrounded && transform.position.y < -3)
+        {
+            if(healthCount < 1)
+            {
+                chrctrIsDead = true;
+                Debug.Log("You are drowning NOW :( ! Sorry, but SimonSays - YOU drown!!");
+                m_rigidBody.velocity = Vector3.zero;
+                m_rigidBody.isKinematic = true;
+                m_animator.gameObject.SetActive(false);
+                healthCount -= 1;
+                healthObj.text = "Health : " + healthCount;
+                gameOverPanel.SetActive(true);
+            }
+            else
+            {
+                healthCount -= 1;
+                healthObj.text = "Health : " + healthCount;
+                SceneManager.LoadScene("Zone-A-Screen");
+            }
+            
+        }
+
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -240,8 +265,9 @@ public class CharacterMovement : MonoBehaviour
         else if (other.gameObject.CompareTag("LethalObstacle"))
         {
             Debug.Log("You've reached the end of the zone! Goodbye!!");
-            UnityEditor.EditorApplication.isPlaying = false;
-            //Application.Quit();
+            #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+            #endif
         }
     }
 
