@@ -11,6 +11,7 @@ using UnityEngine.SceneManagement;
 public class Sentence
 {
     public string sentence;
+    static public List<string> words;
 
     [Header("leave empty if you want randomised")]
     public string desiredRandom;
@@ -27,7 +28,7 @@ public class Sentence
         {
             result = "";
 
-            List<string> words = new List<string>(Regex.Matches(sentence, "\\w+").OfType<Match>().Select(m => m.Value).ToArray());
+            words = new List<string>(Regex.Matches(sentence, "\\w+").OfType<Match>().Select(m => m.Value).ToArray());
             //UnityEngine.Debug.Log(words.Count);
             while (words.Count > 0)
             {

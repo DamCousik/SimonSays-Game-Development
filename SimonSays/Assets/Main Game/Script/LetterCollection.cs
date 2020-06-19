@@ -11,6 +11,7 @@ public class LetterCollection : MonoBehaviour
     public List<string> collectedLetters = new List<string>();
     public int countIncorrectLetters = 0;
     public int countCorrectLetters = 0;
+    public List<string> words;
     
     int wordLength = 0;
     bool isGameWon = true;
@@ -46,12 +47,15 @@ public class LetterCollection : MonoBehaviour
         charValueFrequencies.Add("Y", 1);
         charValueFrequencies.Add("Z", 1);
 
-
+        words = Sentence.words;
+        Debug.Log("sentence: "+words.ToString());
         charWordFrequencies.Add("F", 1);
         charWordFrequencies.Add("A", 1);
         charWordFrequencies.Add("U", 1);
         charWordFrequencies.Add("L", 1);
         charWordFrequencies.Add("T", 1);
+
+
 
         foreach (KeyValuePair<string, int> item in charWordFrequencies)
         {
