@@ -3,22 +3,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LetterCollection : MonoBehaviour
-{ 
+{
     public Dictionary<string, int> charValueFrequencies = new Dictionary<string, int>();
     public Dictionary<string, int> charWordFrequencies = new Dictionary<string, int>();
     public List<string> collectedLetters = new List<string>();
     public int countIncorrectLetters = 0;
     public int countCorrectLetters = 0;
-    
-    int wordLength = 0;
-    bool isGameWon = true;
+    public int healthCount = 3;
+    public Text healthObj;
 
+    int wordLength = 0;
+    bool isGameWon = false;
+
+    public DisplayLetters dispLet;
     public CharacterMovement charMove;
 
     void Start()
-    { 
+    {
         charValueFrequencies.Add("A", 1);
         charValueFrequencies.Add("B", 1);
         charValueFrequencies.Add("C", 1);
@@ -57,6 +61,16 @@ public class LetterCollection : MonoBehaviour
         {
             wordLength += item.Value;
         }
+    }
+
+    private IEnumerator WaitForSceneLoad()
+    {
+        yield return new WaitForSeconds(0.07f);
+
+        if (charMove.healthCount < 1)
+            SceneManager.LoadScene("StartGameScreen");
+        else
+            SceneManager.LoadScene("ArenaZone");
 
     }
 
@@ -69,131 +83,158 @@ public class LetterCollection : MonoBehaviour
                 case "A":
                     charValueFrequencies[other.gameObject.tag]--;
                     collectedLetters.Add(other.gameObject.tag);
+                    dispLet.DisplayCollectedLetters(other.gameObject.tag);
                     Destroy(other.gameObject);
                     break;
                 case "B":
                     charValueFrequencies[other.gameObject.tag]--;
                     collectedLetters.Add(other.gameObject.tag);
+                    dispLet.DisplayCollectedLetters(other.gameObject.tag);
                     Destroy(other.gameObject);
                     break;
                 case "C":
                     charValueFrequencies[other.gameObject.tag]--;
                     collectedLetters.Add(other.gameObject.tag);
+                    dispLet.DisplayCollectedLetters(other.gameObject.tag);
                     Destroy(other.gameObject);
                     break;
                 case "D":
                     charValueFrequencies[other.gameObject.tag]--;
                     collectedLetters.Add(other.gameObject.tag);
+                    dispLet.DisplayCollectedLetters(other.gameObject.tag);
                     Destroy(other.gameObject);
                     break;
                 case "E":
                     charValueFrequencies[other.gameObject.tag]--;
                     collectedLetters.Add(other.gameObject.tag);
+                    dispLet.DisplayCollectedLetters(other.gameObject.tag);
                     Destroy(other.gameObject);
                     break;
                 case "F":
                     charValueFrequencies[other.gameObject.tag]--;
                     collectedLetters.Add(other.gameObject.tag);
+                    dispLet.DisplayCollectedLetters(other.gameObject.tag);
                     Destroy(other.gameObject);
                     break;
                 case "G":
                     charValueFrequencies[other.gameObject.tag]--;
                     collectedLetters.Add(other.gameObject.tag);
+                    dispLet.DisplayCollectedLetters(other.gameObject.tag);
                     Destroy(other.gameObject);
                     break;
                 case "H":
                     charValueFrequencies[other.gameObject.tag]--;
                     collectedLetters.Add(other.gameObject.tag);
+                    dispLet.DisplayCollectedLetters(other.gameObject.tag);
                     Destroy(other.gameObject);
                     break;
                 case "I":
                     charValueFrequencies[other.gameObject.tag]--;
                     collectedLetters.Add(other.gameObject.tag);
+                    dispLet.DisplayCollectedLetters(other.gameObject.tag);
                     Destroy(other.gameObject);
                     break;
                 case "J":
-                    charValueFrequencies[other.gameObject.tag]--;                    
-                    collectedLetters.Add(other.gameObject.tag);                   
-                    Destroy(other.gameObject);                   
+                    charValueFrequencies[other.gameObject.tag]--;
+                    collectedLetters.Add(other.gameObject.tag);
+                    dispLet.DisplayCollectedLetters(other.gameObject.tag);
+                    Destroy(other.gameObject);
                     break;
                 case "K":
-                    charValueFrequencies[other.gameObject.tag]--;                   
-                    collectedLetters.Add(other.gameObject.tag);                    
-                    Destroy(other.gameObject);                    
+                    charValueFrequencies[other.gameObject.tag]--;
+                    collectedLetters.Add(other.gameObject.tag);
+                    dispLet.DisplayCollectedLetters(other.gameObject.tag);
+                    Destroy(other.gameObject);
                     break;
                 case "L":
-                    charValueFrequencies[other.gameObject.tag]--;                    
+                    charValueFrequencies[other.gameObject.tag]--;
                     collectedLetters.Add(other.gameObject.tag);
+                    dispLet.DisplayCollectedLetters(other.gameObject.tag);
                     Destroy(other.gameObject);
                     break;
                 case "M":
                     charValueFrequencies[other.gameObject.tag]--;
                     collectedLetters.Add(other.gameObject.tag);
+                    dispLet.DisplayCollectedLetters(other.gameObject.tag);
                     Destroy(other.gameObject);
                     break;
                 case "N":
                     charValueFrequencies[other.gameObject.tag]--;
                     collectedLetters.Add(other.gameObject.tag);
+                    dispLet.DisplayCollectedLetters(other.gameObject.tag);
                     Destroy(other.gameObject);
                     break;
                 case "O":
                     charValueFrequencies[other.gameObject.tag]--;
                     collectedLetters.Add(other.gameObject.tag);
+                    dispLet.DisplayCollectedLetters(other.gameObject.tag);
                     Destroy(other.gameObject);
                     break;
                 case "P":
                     charValueFrequencies[other.gameObject.tag]--;
                     collectedLetters.Add(other.gameObject.tag);
+                    dispLet.DisplayCollectedLetters(other.gameObject.tag);
                     Destroy(other.gameObject);
+
                     break;
                 case "Q":
                     charValueFrequencies[other.gameObject.tag]--;
                     collectedLetters.Add(other.gameObject.tag);
+                    dispLet.DisplayCollectedLetters(other.gameObject.tag);
                     Destroy(other.gameObject);
                     break;
                 case "R":
                     charValueFrequencies[other.gameObject.tag]--;
                     collectedLetters.Add(other.gameObject.tag);
+                    dispLet.DisplayCollectedLetters(other.gameObject.tag);
                     Destroy(other.gameObject);
                     break;
                 case "S":
                     charValueFrequencies[other.gameObject.tag]--;
                     collectedLetters.Add(other.gameObject.tag);
+                    dispLet.DisplayCollectedLetters(other.gameObject.tag);
                     Destroy(other.gameObject);
                     break;
                 case "T":
                     charValueFrequencies[other.gameObject.tag]--;
                     collectedLetters.Add(other.gameObject.tag);
+                    dispLet.DisplayCollectedLetters(other.gameObject.tag);
                     Destroy(other.gameObject);
                     break;
                 case "U":
                     charValueFrequencies[other.gameObject.tag]--;
                     collectedLetters.Add(other.gameObject.tag);
-                    Destroy(other.gameObject);                   
+                    dispLet.DisplayCollectedLetters(other.gameObject.tag);
+                    Destroy(other.gameObject);
                     break;
                 case "V":
                     charValueFrequencies[other.gameObject.tag]--;
                     collectedLetters.Add(other.gameObject.tag);
+                    dispLet.DisplayCollectedLetters(other.gameObject.tag);
                     Destroy(other.gameObject);
                     break;
                 case "W":
                     charValueFrequencies[other.gameObject.tag]--;
                     collectedLetters.Add(other.gameObject.tag);
+                    dispLet.DisplayCollectedLetters(other.gameObject.tag);
                     Destroy(other.gameObject);
                     break;
                 case "X":
                     charValueFrequencies[other.gameObject.tag]--;
                     collectedLetters.Add(other.gameObject.tag);
+                    dispLet.DisplayCollectedLetters(other.gameObject.tag);
                     Destroy(other.gameObject);
                     break;
                 case "Y":
                     charValueFrequencies[other.gameObject.tag]--;
                     collectedLetters.Add(other.gameObject.tag);
+                    dispLet.DisplayCollectedLetters(other.gameObject.tag);
                     Destroy(other.gameObject);
                     break;
                 case "Z":
                     charValueFrequencies[other.gameObject.tag]--;
                     collectedLetters.Add(other.gameObject.tag);
+                    dispLet.DisplayCollectedLetters(other.gameObject.tag);
                     Destroy(other.gameObject);
                     break;
 
@@ -201,27 +242,32 @@ public class LetterCollection : MonoBehaviour
                     break;
             }
 
-            if (!(charWordFrequencies.ContainsKey(other.gameObject.tag) && !(other.gameObject.tag.Equals("Obstacle")) || (charWordFrequencies[other.gameObject.tag] < 0)))
-            {
-                countIncorrectLetters += 1;
-            }
-            if (charWordFrequencies.ContainsKey(other.gameObject.tag))
+            if (charWordFrequencies.ContainsKey(other.gameObject.tag) && (charWordFrequencies[other.gameObject.tag] >= 0))
             {
                 charWordFrequencies[other.gameObject.tag]--;
                 countCorrectLetters += 1;
             }
 
-            if (countIncorrectLetters == 3)
+            else
             {
-                Debug.Log("You collected 3 incorrected letters! - YOU NEED TO START OVER!!");
-                SceneManager.LoadScene("ArenaZone");
+                if (!(other.gameObject.CompareTag("Obstacle")))
+                {
+                    Debug.Log("OOPS! You bumped into a wrong letter");
+                    countIncorrectLetters += 1;
+
+                    if (countIncorrectLetters == 3)
+                    {
+                        Debug.Log("You collected 3 incorrected letters! - YOU NEED TO START OVER!!");
+                        StartCoroutine(WaitForSceneLoad());
+                    }
+                }
             }
 
             if (countCorrectLetters == wordLength)
             {
-                for (int i = 0; i < collectedLetters.Count; i++)
+                for (int i = 0; i < charWordFrequencies.Count; i++)
                 {
-                    if (!(charWordFrequencies.ContainsKey(collectedLetters[i])))
+                    if (charWordFrequencies[other.gameObject.tag] < 0)
                     {
                         isGameWon = false;
                         break;
@@ -230,20 +276,19 @@ public class LetterCollection : MonoBehaviour
                 if(isGameWon)
                 {
                     Debug.Log("Congratulations! You've successfully spelt out the word - FAULT! SimonSays - YOU COMPLETED ZONE 2!!!");
-                    SceneManager.LoadScene("ArenaZone");
+                    StartCoroutine(WaitForSceneLoad());
                 }
                 else
                 {
                     Debug.Log("You've collected extra letters which are irrelevant to the word. Sorry, but SimonSays - YOU LOSE!!!");
-                    SceneManager.LoadScene("ArenaZone");
+                    StartCoroutine(WaitForSceneLoad());
                 }
-                
+
             }
         }
         catch(Exception)
         {
-            Debug.Log("OOPS! You bumped into a wrong letter");
+            Debug.Log("You have bumped into the wrong letter!");
         }
-
     }
 }

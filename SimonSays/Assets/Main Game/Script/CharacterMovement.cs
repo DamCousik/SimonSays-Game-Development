@@ -5,13 +5,14 @@ using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System;
 #if UNITY_EDITOR
-    using UnityEditor;
+using UnityEditor;
 #endif
 
 public class CharacterMovement : MonoBehaviour
 {
-    public float speed = 5.0f;
+    public float speed = 7.0f;
     public float height = 5.0f;
     public float plainLeftMax;
     public float plainRightMax = -1.52f;
@@ -21,10 +22,10 @@ public class CharacterMovement : MonoBehaviour
     private float m_currentV = 0;
     private float m_currentH = 0;
     private readonly float m_interpolation = 10;
-    public Text healthObj;
-    public int healthCount = 3;
     public GameObject gameOverPanel;
     public  bool chrctrIsDead = false;
+    public Text healthObj;
+    public int healthCount = 3;
 
     public void Initialize(GameObject character)
     {
@@ -33,7 +34,7 @@ public class CharacterMovement : MonoBehaviour
     }
 
     [SerializeField] private float m_jumpForce = 4;
-     
+
     [SerializeField] public Animator m_animator;
     [SerializeField] public Rigidbody m_rigidBody;
 
@@ -44,6 +45,13 @@ public class CharacterMovement : MonoBehaviour
 
     private bool m_isGrounded;
     private List<Collider> m_collisions = new List<Collider>();
+
+    private void Start()
+    {
+        #if UNITY_EDITOR
+           speed = 6.0f;
+        #endif
+    }
 
     void Awake()
     {
@@ -68,10 +76,11 @@ public class CharacterMovement : MonoBehaviour
                 right = false;
                 left = true;
             }
-            if (Input.GetKeyDown(KeyCode.UpArrow))
+            if (Input.GetKeyDown(KeyCode.UpArrow) || (Input.GetKey(KeyCode.Space)))
             {
-                m_rigidBody.velocity = Vector3.zero;
-                m_rigidBody.velocity = Vector3.up * height;
+                //m_rigidBody.velocity = Vector3.zero;
+                //m_rigidBody.velocity = Vector3.up * height;
+                JumpingAndLanding();
             }
             if (left == true)
             {
@@ -160,7 +169,7 @@ public class CharacterMovement : MonoBehaviour
                 healthObj.text = "Health : " + healthCount;
                 SceneManager.LoadScene("Zone-A-Screen");
             }
-            
+
         }
 
     }
@@ -224,6 +233,12 @@ public class CharacterMovement : MonoBehaviour
     {
         bool jumpCooldownOver = (Time.time - m_jumpTimeStamp) >= m_minJumpInterval;
 
+        if (jumpCooldownOver && m_isGrounded && Input.GetKey(KeyCode.UpArrow))
+        {
+            m_jumpTimeStamp = Time.time;
+            m_rigidBody.AddForce(Vector3.up * m_jumpForce, ForceMode.Impulse);
+        }
+
         if (jumpCooldownOver && m_isGrounded && Input.GetKey(KeyCode.Space))
         {
             m_jumpTimeStamp = Time.time;
@@ -243,32 +258,40 @@ public class CharacterMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Obstacle"))
+        try
         {
-            Debug.Log("You hit an obstacle - YOU LOSE A LIFE!!");
-            healthCount -= 1;
-            healthObj.text = "Health : " + healthCount;
-            //SceneManager.LoadScene("Zone-A-Screen");
-
-            if (healthCount < 1)
+            if (other.gameObject.tag == ("Obstacle"))
             {
-                chrctrIsDead = true;
-                Debug.Log("You are all out of lives! Sorry, but SimonSays - YOU DIE!!");
-                m_rigidBody.velocity = Vector3.zero;
-                m_rigidBody.isKinematic = true;
-                m_animator.gameObject.SetActive(false);
-                healthCount = 0;
+                Debug.Log("You hit an obstacle - YOU LOSE A LIFE!!");
+                healthCount -= 1;
                 healthObj.text = "Health : " + healthCount;
-                gameOverPanel.SetActive(true);
+
+                if (healthCount < 1)
+                {
+                    chrctrIsDead = true;
+                    Debug.Log("You are all out of lives! Sorry, but SimonSays - YOU DIE!!");
+                    m_rigidBody.velocity = Vector3.zero;
+                    m_rigidBody.isKinematic = true;
+                    m_animator.gameObject.SetActive(false);
+                    healthCount = 0;
+                    healthObj.text = "Health : " + healthCount;
+                    gameOverPanel.SetActive(true);
+                }
+            }
+            else if (other.gameObject.CompareTag("LethalObstacle"))
+            {
+                Debug.Log("You've reached the end of the zone! Goodbye!!");
+                #if UNITY_EDITOR
+                  UnityEditor.EditorApplication.isPlaying = false;
+                #endif
+                SceneManager.LoadScene("ArenaZone");
             }
         }
-        else if (other.gameObject.CompareTag("LethalObstacle"))
+        catch(Exception)
         {
-            Debug.Log("You've reached the end of the zone! Goodbye!!");
-            #if UNITY_EDITOR
-                UnityEditor.EditorApplication.isPlaying = false;
-            #endif
+            Debug.Log("Exception with Health!" + healthObj);
         }
+        
     }
 
     public void playAgainUI()
@@ -281,6 +304,3 @@ public class CharacterMovement : MonoBehaviour
         SceneManager.LoadScene("StartGameScreen");
     }
 }
-
-
-
