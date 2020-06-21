@@ -6,11 +6,17 @@
  public class ZoneOneClick : MonoBehaviour {
 
 
-     //public float rayLength;
-     //public LayerMask layermask;
+    //public float rayLength;
+    //public LayerMask layermask;
+    public GameObject firstZone;
+    public int val = 1;
 
+    void Start()
+    {
+        firstZone = GameObject.Find("zone1");
+    }
 
-     private void Update(){
+    private void Update(){
 
          if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject()){
              Debug.Log("Doing Ray test");
@@ -27,8 +33,6 @@
                  }
              }
          }
-
-
      }
  }
 

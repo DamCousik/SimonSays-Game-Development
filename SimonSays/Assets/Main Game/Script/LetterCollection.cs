@@ -20,6 +20,9 @@ public class LetterCollection : MonoBehaviour
 
     public DisplayLetters dispLet;
     public CharacterMovement charMove;
+    //public ClickZone zVal;
+    public GameObject zone;
+    public Material Blue;
 
     void Start()
     {
@@ -61,6 +64,8 @@ public class LetterCollection : MonoBehaviour
         {
             wordLength += item.Value;
         }
+
+        //zone = GameObject.FindGameObjectWithTag(ClickZone.zoneValue);
     }
 
     private IEnumerator WaitForSceneLoad()
@@ -71,7 +76,6 @@ public class LetterCollection : MonoBehaviour
             SceneManager.LoadScene("StartGameScreen");
         else
             SceneManager.LoadScene("ArenaZone");
-
     }
 
     private void OnTriggerEnter(Collider other)

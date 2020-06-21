@@ -5,7 +5,15 @@
  
  public class ZoneThreeClick : MonoBehaviour {
 
-     private void Update(){
+    public GameObject thirdZone;
+    public int val = 3;
+
+    void Start()
+    {
+        thirdZone = GameObject.Find("zone3");
+    }
+
+    private void Update(){
 
          if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject()){
              Debug.Log("Doing Ray test");
@@ -18,7 +26,7 @@
                  //Replace this with whatever logic you want to use to validate the objects you want to click on
                  if(hit.collider.gameObject.name == "zone3")
                  {
-                     SceneManager.LoadScene("Zone3Scene");
+                     SceneManager.LoadScene("Zone-A-Screen");
                  }
              }
          }

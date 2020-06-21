@@ -5,21 +5,27 @@ using UnityEngine;
 public class ShuffleZones : MonoBehaviour
 {
     public GameObject[] zones;
+    //private float timer = 0;
+    //private float timerMax = 3.0f;
 
-
-    void Start()
-    {
-        StartCoroutine(ExecuteAfterTime(2));
-    }
-
-    IEnumerator ExecuteAfterTime(float time)
-    {
-        yield return new WaitForSeconds(time);
+     
+    
+    void Start () {
+        
         Shuffle(zones);
+        //StartCoroutine(ExecuteAfterTime(0.2f));   
 
     }
 
+//     IEnumerator ExecuteAfterTime(float time)
+//  {
+//      yield return new WaitForSeconds(time);
+//      Shuffle(zones);
+
+//  }
+   
     void Shuffle (GameObject[] gameObjects) {
+        
         for (int i = 0; i < gameObjects.Length; i++) {
  
             // Find a random index
@@ -39,22 +45,9 @@ public class ShuffleZones : MonoBehaviour
                 // Swap the array item
               //  gameObjects[i] = gameObjects[destIndex];
             }
-        }
+        }      
     }
-
-
-    /*void Reset(GameObject[] gameObject)
-    {
-        
-        BoxCollider boxCollider = (BoxCollider)gameObject.AddComponent(typeof(BoxCollider));
-        boxCollider.center = Vector3.zero;
-
-    }*/
-    
 }
-
-
-
 
 
  

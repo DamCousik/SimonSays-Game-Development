@@ -5,7 +5,15 @@
  
  public class ZoneFourClick : MonoBehaviour {
 
-     private void Update(){
+    public GameObject fourthZone;
+    public int val = 4;
+
+    void Start()
+    {
+        fourthZone = GameObject.Find("zone4");
+    }
+
+    private void Update(){
 
          if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject()){
              Debug.Log("Doing Ray test");
@@ -18,7 +26,7 @@
                  //Replace this with whatever logic you want to use to validate the objects you want to click on
                  if(hit.collider.gameObject.name == "zone4")
                  {
-                     SceneManager.LoadScene("Zone4Scene");
+                     SceneManager.LoadScene("Zone-A-Screen");
                  }
              }
          }

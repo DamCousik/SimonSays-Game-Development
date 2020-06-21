@@ -5,7 +5,15 @@
  
  public class ZoneTwoClick : MonoBehaviour {
 
-     private void Update(){
+    public GameObject secondZone;
+    public int val = 2;
+
+    void Start()
+    {
+        secondZone = GameObject.Find("zone2");
+    }
+
+    private void Update(){
 
          if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject()){
              Debug.Log("Doing Ray test");
@@ -18,7 +26,7 @@
                  //Replace this with whatever logic you want to use to validate the objects you want to click on
                  if(hit.collider.gameObject.name == "zone2")
                  {
-                     SceneManager.LoadScene("Zone2Scene");
+                     SceneManager.LoadScene("Zone-A-Screen");
                  }
              }
          }

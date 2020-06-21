@@ -76,15 +76,8 @@
     <Compile Include="Assets\ParticleRibbon\Scripts\randomParticleRotation.cs" />
     <Compile Include="Assets\ParticleRibbon\Scripts\rotation.cs" />
     <Compile Include="Assets\Rotation\ClickZone.cs" />
+    <Compile Include="Assets\Rotation\DestroyWord.cs" />
     <Compile Include="Assets\Rotation\RotateArena.cs" />
-    <Compile Include="Assets\Rotation\SampleScenes\Menu\Scripts\MenuSceneLoader.cs" />
-    <Compile Include="Assets\Rotation\SampleScenes\Menu\Scripts\PauseMenu.cs" />
-    <Compile Include="Assets\Rotation\SampleScenes\Menu\Scripts\SceneAndURLLoader.cs" />
-    <Compile Include="Assets\Rotation\SampleScenes\Scripts\CameraSwitch.cs" />
-    <Compile Include="Assets\Rotation\SampleScenes\Scripts\LevelReset.cs" />
-    <Compile Include="Assets\Rotation\SampleScenes\Scripts\ParticleSceneControls.cs" />
-    <Compile Include="Assets\Rotation\SampleScenes\Scripts\PlaceTargetWithMouse.cs" />
-    <Compile Include="Assets\Rotation\SampleScenes\Scripts\SlowMoButton.cs" />
     <Compile Include="Assets\Rotation\ShuffleZones.cs" />
     <Compile Include="Assets\Rotation\ZoneFourClick.cs" />
     <Compile Include="Assets\Rotation\ZoneOneClick.cs" />
@@ -96,7 +89,6 @@
     <Compile Include="Assets\Test Game\Scripts\WaveFloor.cs" />
     <None Include="Assets\ParticleRibbon\readme_Simple_Particle_Ribbon.txt" />
     <None Include="Assets\Supercyan\Shaders\Legacy\CelShader.shader" />
-    <None Include="Assets\Rotation\SampleScenes\Shaders\Skybox-Procedural.shader" />
     <None Include="Assets\ParticleRibbon\Shaders\Particle Alpha Blend HDR.shader" />
     <None Include="Assets\Supercyan\Shaders\SupercyanShader.shader" />
     <None Include="Assets\Supercyan\Shaders\SupercyanShaderLighting.cginc" />
