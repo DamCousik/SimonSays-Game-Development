@@ -47,6 +47,8 @@ public class Sentence
 public class SentenceJumble : MonoBehaviour
 {
     public Sentence[] sentences;
+    public GameObject retryPanel;
+    public GameObject scenePanel;
 
     [Header("UI REFERENCE")]
     public WordObject prefab;
@@ -134,7 +136,7 @@ public class SentenceJumble : MonoBehaviour
     public void ShowScramble(int index)
     {
         wordObjects.Clear();
-        foreach(Transform child in container)
+        foreach (Transform child in container)
         {
             Destroy(child.gameObject);
         }
@@ -160,7 +162,7 @@ public class SentenceJumble : MonoBehaviour
         currentSentence = index;
     }
 
-    public void Swap (int indexA, int indexB)
+    public void Swap(int indexA, int indexB)
     {
         WordObject tmpA = wordObjects[indexA];
         wordObjects[indexA] = wordObjects[indexB];
@@ -174,14 +176,15 @@ public class SentenceJumble : MonoBehaviour
 
     public void Select(WordObject wordObject)
     {
-        if(firstSelected)
+        if (firstSelected)
         {
             Swap(firstSelected.index, wordObject.index);
 
             //Unselect
             firstSelected.Select();
             wordObject.Select();
-        } else
+        }
+        else
         {
             firstSelected = wordObject;
         }
@@ -222,9 +225,11 @@ public class SentenceJumble : MonoBehaviour
             //currentSentence++;
             //ShowScramble(currentSentence);
             SceneManager.LoadScene("ArenaZone");
-        } else
+        }
+        else
         {
-            SceneManager.LoadScene("WrongAns");
+            retryPanel.SetActive(true);
+            scenePanel.SetActive(false);
         }
     }
 }

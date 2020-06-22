@@ -20,7 +20,7 @@ public class ClickZone : MonoBehaviour
                 if (hit.collider.gameObject.name == "zone1")
                 {
                     zoneValue = "z1";
-                    SceneManager.LoadScene("Zone-B-Screen");
+                    SceneManager.LoadScene("Zone-A-Screen");
                 }
                 else if (hit.collider.gameObject.name == "zone2")
                 {
@@ -30,12 +30,12 @@ public class ClickZone : MonoBehaviour
                 else if (hit.collider.gameObject.name == "zone3")
                 {
                     zoneValue = "z3";
-                    SceneManager.LoadScene("Zone-B-Screen");
+                    SceneManager.LoadScene("Zone-A-Screen");
                 }
                 else if (hit.collider.gameObject.name == "zone4")
                 {
                     zoneValue = "z4";
-                    SceneManager.LoadScene("Zone-B-Screen");
+                    SceneManager.LoadScene("Zone-A-Screen");
                 }
                 else
                     Debug.Log("You've clicked a zone that doesn't belong to our world!!");

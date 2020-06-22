@@ -266,6 +266,11 @@ public class CharacterMovement : MonoBehaviour
                 healthCount -= 1;
                 healthObj.text = "Health : " + healthCount;
 
+                SphereCollider myCollider;
+                myCollider = other.gameObject.GetComponent<SphereCollider>();
+                print("Obstacle radius " + myCollider.radius);
+                transform.position = new Vector3(transform.position.x, transform.position.y, (transform.position.z - 2 * myCollider.radius));
+
                 if (healthCount < 1)
                 {
                     chrctrIsDead = true;
