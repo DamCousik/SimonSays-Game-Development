@@ -9,7 +9,7 @@ public class WordObject : MonoBehaviour
     public string word;
     public Text text;
     public Image image;
-    public RectTransform rectTransform;//Check
+    public RectTransform rectTransform;
     public int index;
 
     [Header("Appearance")]
