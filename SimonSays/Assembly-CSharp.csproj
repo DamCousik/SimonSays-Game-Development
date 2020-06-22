@@ -63,35 +63,29 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\JumbledWords\Scripts\ArenaEntry.cs" />
-    <Compile Include="Assets\JumbledWords\Scripts\SentenceJumble.cs" />
-    <Compile Include="Assets\JumbledWords\Scripts\WordObject.cs" />
-    <Compile Include="Assets\Main Game\CharacterTeamScripts\CharacterScript.cs" />
-    <Compile Include="Assets\Main Game\Script\CameraMove.cs" />
-    <Compile Include="Assets\Main Game\Script\CharacterMovement.cs" />
-    <Compile Include="Assets\Main Game\Script\DisplayLetters.cs" />
-    <Compile Include="Assets\Main Game\Script\LetterCollection.cs" />
-    <Compile Include="Assets\Main Game\Script\LetterPlacement.cs" />
-    <Compile Include="Assets\ParticleRibbon\Scripts\ReverseNormals.cs" />
-    <Compile Include="Assets\ParticleRibbon\Scripts\randomParticleRotation.cs" />
-    <Compile Include="Assets\ParticleRibbon\Scripts\rotation.cs" />
-    <Compile Include="Assets\Rotation\ClickZone.cs" />
-    <Compile Include="Assets\Rotation\DestroyWord.cs" />
-    <Compile Include="Assets\Rotation\RotateArena.cs" />
-    <Compile Include="Assets\Rotation\ShuffleZones.cs" />
-    <Compile Include="Assets\Rotation\ZoneFourClick.cs" />
-    <Compile Include="Assets\Rotation\ZoneOneClick.cs" />
-    <Compile Include="Assets\Rotation\ZoneThreeClick.cs" />
-    <Compile Include="Assets\Rotation\ZoneTwoClick.cs" />
-    <Compile Include="Assets\StartGame\Scripts\StartGameMenu.cs" />
-    <Compile Include="Assets\Test Game\Scripts\CamMovement.cs" />
-    <Compile Include="Assets\Test Game\Scripts\Path.cs" />
-    <Compile Include="Assets\Test Game\Scripts\WaveFloor.cs" />
-    <None Include="Assets\ParticleRibbon\readme_Simple_Particle_Ribbon.txt" />
-    <None Include="Assets\Supercyan\Shaders\Legacy\CelShader.shader" />
-    <None Include="Assets\ParticleRibbon\Shaders\Particle Alpha Blend HDR.shader" />
-    <None Include="Assets\Supercyan\Shaders\SupercyanShader.shader" />
-    <None Include="Assets\Supercyan\Shaders\SupercyanShaderLighting.cginc" />
+    <Compile Include="Assets\Scripts\ArenaEntry.cs" />
+    <Compile Include="Assets\Scripts\CameraMove.cs" />
+    <Compile Include="Assets\Scripts\CharacterMovement.cs" />
+    <Compile Include="Assets\Scripts\ClickZone.cs" />
+    <Compile Include="Assets\Scripts\DestroyWord.cs" />
+    <Compile Include="Assets\Scripts\DisplayLetters.cs" />
+    <Compile Include="Assets\Scripts\LetterCollection.cs" />
+    <Compile Include="Assets\Scripts\LetterPlacement.cs" />
+    <Compile Include="Assets\Scripts\RotateArena.cs" />
+    <Compile Include="Assets\Scripts\SentenceJumble.cs" />
+    <Compile Include="Assets\Scripts\ShuffleZones.cs" />
+    <Compile Include="Assets\Scripts\StartGameMenu.cs" />
+    <Compile Include="Assets\Scripts\WordObject.cs" />
+    <Compile Include="Assets\Scripts\ZoneFourClick.cs" />
+    <Compile Include="Assets\Scripts\ZoneOneClick.cs" />
+    <Compile Include="Assets\Scripts\ZoneThreeClick.cs" />
+    <Compile Include="Assets\Scripts\ZoneTwoClick.cs" />
+    <None Include="Assets\Zones\Zone B\Main Game\CactusPack\Readme.txt" />
+    <None Include="Assets\Character\Supercyan\Shaders\Legacy\CelShader.shader" />
+    <None Include="Assets\Zones\Zone B\Main Game\CactusPack\Shaders\Basic_Rimlight.shader" />
+    <None Include="Assets\Character\Supercyan\Shaders\SupercyanShader.shader" />
+    <None Include="Assets\Zones\Zone B\Main Game\CactusPack\Shaders\VertexBlend.shader" />
+    <None Include="Assets\Character\Supercyan\Shaders\SupercyanShaderLighting.cginc" />
     <Reference Include="UnityEngine">
       <HintPath>/Applications/Unity/Hub/Editor/2019.4.0f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
