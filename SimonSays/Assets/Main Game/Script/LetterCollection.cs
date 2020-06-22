@@ -300,7 +300,7 @@ public class LetterCollection : MonoBehaviour
                             panel2.gameObject.SetActive(true);
                             Debug.Log("You collected 3 incorrected letters! - YOU NEED TO START OVER!!");
                         StartCoroutine(stoptime());
-                        //StartCoroutine(WaitForSceneLoad());
+                        StartCoroutine(WaitForSceneLoad());
                        
                         }
                     }

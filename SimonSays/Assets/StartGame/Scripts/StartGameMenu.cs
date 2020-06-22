@@ -16,9 +16,16 @@ public class StartGameMenu : MonoBehaviour
         SceneManager.LoadScene("ArenaZone");
     }
 
+    public void instructionsUI() => SceneManager.LoadScene("InstructionScreen");
+
+    public void ReturnUI()
+    {
+        SceneManager.LoadScene("StartGameScreen");
+    }
     public void quitUI()
     {
         UnityEditor.EditorApplication.isPlaying = false;
         //Application.Quit();
     }
 }
+
