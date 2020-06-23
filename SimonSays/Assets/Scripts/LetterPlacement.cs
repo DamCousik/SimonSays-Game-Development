@@ -23,19 +23,16 @@ public class LetterPlacement : MonoBehaviour
                 letterCount += 1;
 
             }
-
         }
     }
 
     IEnumerator ObstacleDrop(GameObject letterSpawn)
     {
-        xPos = Random.Range(0, -2);
-        zPos = Random.Range(10, -330);
-        Debug.Log("xpos" + xPos);
-        Debug.Log("xzpos" + zPos);
+        xPos = Random.Range(1, -2);
+        zPos = Random.Range(0, -330);
         GameObject obj = Instantiate(letterSpawn, new Vector3(xPos, (float)0.6, zPos), Quaternion.identity);
         obj.transform.localScale = new Vector3((float)0.5, (float)0.5, (float)0.03);
-        yield return new WaitForSeconds(0.003f);
+        yield return new WaitForSeconds(0.005f);
 
     }
 }

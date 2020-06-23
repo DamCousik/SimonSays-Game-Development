@@ -11,9 +11,16 @@ using UnityEngine.SceneManagement;
 public class Sentence
 {
     public string sentence;
+    public List<string> words;
 
-    [Header("leave empty if you want randomised")]
+    [Header("Leave empty if you want randomised")]
     public string desiredRandom;
+
+    public List<string> ActualString()
+    {
+        words = new List<string>(Regex.Matches(sentence, "\\w+").OfType<Match>().Select(m => m.Value).ToArray());
+        return words;
+    }
 
     public string GetString()
     {
@@ -21,20 +28,23 @@ public class Sentence
         {
             return desiredRandom;
         }
+
         string result = sentence;
 
         while (result == sentence)
         {
             result = "";
-
-            List<string> words = new List<string>(Regex.Matches(sentence, "\\w+").OfType<Match>().Select(m => m.Value).ToArray());
+            words = new List<string>(Regex.Matches(sentence, "\\w+").OfType<Match>().Select(m => m.Value).ToArray());
             //UnityEngine.Debug.Log(words.Count);
+
             while (words.Count > 0)
             {
-                int indexWord = UnityEngine.Random.Range(0, words.Count - 1);
+                int indexWord = UnityEngine.Random.Range(0, words.Count);
                 result += words[indexWord];
-                result += " ";
-
+                if (words.Count > 1)
+                {
+                    result += " ";
+                }
                 words.RemoveAt(indexWord);
             }
         }
@@ -49,6 +59,7 @@ public class SentenceJumble : MonoBehaviour
     public Sentence[] sentences;
     public GameObject retryPanel;
     public GameObject scenePanel;
+    public static List<string> originalWords;
 
     [Header("UI REFERENCE")]
     public WordObject prefab;
@@ -60,9 +71,7 @@ public class SentenceJumble : MonoBehaviour
     WordObject firstSelected;
 
     public int currentSentence;
-
     public static SentenceJumble main;
-
     private float timer = 20f;
     private Text timerSeconds;
 
@@ -75,7 +84,6 @@ public class SentenceJumble : MonoBehaviour
     {
         main = this;
     }
-
 
     // Start is called before the first frame update
     void Start()
@@ -112,6 +120,7 @@ public class SentenceJumble : MonoBehaviour
         {
             center = (wordObjects.Count - 1) / 2;
         }
+
         for (int i = 0; i < wordObjects.Count; i++)
         {
             wordObjects[i].rectTransform.anchoredPosition
@@ -151,11 +160,14 @@ public class SentenceJumble : MonoBehaviour
         string wordString = sentences[index].GetString();
         string[] wordsInSentence = Regex.Matches(wordString, "\\w+").OfType<Match>().Select(m => m.Value).ToArray();
 
+        originalWords = sentences[index].ActualString();
+        //UnityEngine.Debug.Log("Sentences are");
+        //UnityEngine.Debug.Log(originalWords[0]);
+
         foreach (string w in wordsInSentence)
         {
             WordObject clone = Instantiate(prefab.gameObject).GetComponent<WordObject>();
             clone.transform.SetParent(container);
-
             wordObjects.Add(clone.Init(w));
         }
 
@@ -180,7 +192,6 @@ public class SentenceJumble : MonoBehaviour
         {
             Swap(firstSelected.index, wordObject.index);
 
-            //Unselect
             firstSelected.Select();
             wordObject.Select();
         }

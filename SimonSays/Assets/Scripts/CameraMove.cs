@@ -5,8 +5,10 @@ using System.Collections;
 public class CameraMove : MonoBehaviour {
 
 	public float moveSpeed = -7.0f;
-	public GameObject mainCamera;
+    private string system;
+    public GameObject mainCamera;
 	GameObject character;
+	private int waitTime;
 
 	void Start () {
 		mainCamera.transform.localPosition = new Vector3 ( 0, 0, 0 );
@@ -16,11 +18,23 @@ public class CameraMove : MonoBehaviour {
 		#if UNITY_EDITOR
 			moveSpeed = -6.0f;
 		#endif
+
+		system = SystemInfo.operatingSystem;
+		if (system.Contains("Windows"))
+			waitTime = 170;
+		else
+			waitTime = 85;
 	}
 
 	void FixedUpdate()
     {
-	    CharacterMovement tryM = character.GetComponent<CharacterMovement>();
+		waitTime--;
+		if (waitTime > 0)
+		{
+			return;
+		}
+
+		CharacterMovement tryM = character.GetComponent<CharacterMovement>();
 	    if (!tryM.chrctrIsDead)
 		{ 
 		    MoveObj();

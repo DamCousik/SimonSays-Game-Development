@@ -23,9 +23,15 @@ public class CharacterMovement : MonoBehaviour
     private float m_currentH = 0;
     private readonly float m_interpolation = 10;
     public GameObject gameOverPanel;
+    public GameObject panelHint;
     public  bool chrctrIsDead = false;
     public Text healthObj;
     public int healthCount = 3;
+    private int waitTime;
+    public GameObject panelObstacle;
+    public GameObject panelLethalObstacle;
+
+    public LetterCollection lc;
 
     public void Initialize(GameObject character)
     {
@@ -51,6 +57,7 @@ public class CharacterMovement : MonoBehaviour
         #if UNITY_EDITOR
            speed = 6.0f;
         #endif
+        waitTime = 210;
     }
 
     void Awake()
@@ -61,6 +68,14 @@ public class CharacterMovement : MonoBehaviour
 
     void Update()
     {
+        waitTime--;
+        if (waitTime > 0)
+        {
+            panelHint.SetActive(true); 
+            return;
+        }
+        panelHint.SetActive(false);
+
         transform.Translate(0, 0, speed * Time.deltaTime);
         Vector3 newRight = new Vector3(plainRightMax, transform.position.y, transform.position.z);
         Vector3 newLeft = new Vector3(plainLeftMax, transform.position.y, transform.position.z);
@@ -132,7 +147,13 @@ public class CharacterMovement : MonoBehaviour
     }
     void FixedUpdate()
     {
-
+        waitTime--;
+        if (waitTime > 0)
+        {
+            panelHint.SetActive(true);
+            return;
+        }
+        panelHint.SetActive(false);
         Transform camera = Camera.main.transform;
         Vector3 direction = camera.forward * m_currentV + camera.right * m_currentH;
 
@@ -161,6 +182,7 @@ public class CharacterMovement : MonoBehaviour
                 m_animator.gameObject.SetActive(false);
                 healthCount -= 1;
                 healthObj.text = "Health : " + healthCount;
+                panelObstacle.SetActive(false);
                 gameOverPanel.SetActive(true);
             }
             else
@@ -263,13 +285,16 @@ public class CharacterMovement : MonoBehaviour
             if (other.gameObject.tag == ("Obstacle"))
             {
                 Debug.Log("You hit an obstacle - YOU LOSE A LIFE!!");
+                panelObstacle.gameObject.SetActive(true);
+                StartCoroutine(StopTimeForObstacle());
                 healthCount -= 1;
                 healthObj.text = "Health : " + healthCount;
 
                 SphereCollider myCollider;
                 myCollider = other.gameObject.GetComponent<SphereCollider>();
-                print("Obstacle radius " + myCollider.radius);
-                transform.position = new Vector3(transform.position.x, transform.position.y, (transform.position.z - 2 * myCollider.radius));
+
+                if(myCollider)
+                    transform.position = new Vector3(transform.position.x, transform.position.y, (transform.position.z - 2 * myCollider.radius));
 
                 if (healthCount < 1)
                 {
@@ -280,15 +305,19 @@ public class CharacterMovement : MonoBehaviour
                     m_animator.gameObject.SetActive(false);
                     healthCount = 0;
                     healthObj.text = "Health : " + healthCount;
+                    lc.panelBeforeArenaZone.SetActive(false);
+                    lc.panelBeforeStartGame.SetActive(false);
+                    lc.panelWrongLetter.SetActive(false);
+                    panelObstacle.gameObject.SetActive(false);
                     gameOverPanel.SetActive(true);
                 }
             }
             else if (other.gameObject.CompareTag("LethalObstacle"))
             {
                 Debug.Log("You've reached the end of the zone! Goodbye!!");
-                #if UNITY_EDITOR
-                  UnityEditor.EditorApplication.isPlaying = false;
-                #endif
+                chrctrIsDead = true;
+                panelLethalObstacle.SetActive(true);
+                StartCoroutine(StopTimeForLethalObstacle());
                 SceneManager.LoadScene("ArenaZone");
             }
         }
@@ -297,6 +326,18 @@ public class CharacterMovement : MonoBehaviour
             Debug.Log("Exception with Health!" + healthObj);
         }
         
+    }
+
+    private IEnumerator StopTimeForLethalObstacle()
+    {
+        yield return new WaitForSeconds(10);
+        panelLethalObstacle.SetActive(false);
+    }
+
+    private IEnumerator StopTimeForObstacle()
+    {
+        yield return new WaitForSeconds(2);
+        panelObstacle.gameObject.SetActive(false);
     }
 
     public void playAgainUI()
