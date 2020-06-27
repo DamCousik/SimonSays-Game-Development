@@ -35,10 +35,9 @@ public class LetterCollection : MonoBehaviour
 
         foreach (char c in word)
         {
-            if (charWordFrequencies.ContainsKey(c.ToString()))
+            if (charWordFrequencies.ContainsKey(c.ToString().ToUpper()))
             {
                 charWordFrequencies[c.ToString().ToUpper()]++;
-
             }
             else
             {
