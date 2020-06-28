@@ -12,9 +12,9 @@ public class CharacterMovement : MonoBehaviour
 {
     public float speed = 7.0f;
     public float height = 5.0f;
-    public float plainLeftMax= 1.57f;
+    public float plainLeftMax = 1.57f;
     public float plainRightMax = -1.52f;
-    public float leftRightSpeed =3.0f ;
+    public float leftRightSpeed = 3.0f;
     bool left;
     bool right;
     private float m_currentV = 0;
@@ -22,14 +22,16 @@ public class CharacterMovement : MonoBehaviour
     private readonly float m_interpolation = 10;
     public GameObject gameOverPanel;
     public GameObject panelHint;
-    public  bool chrctrIsDead = false;
+    public bool chrctrIsDead = false;
     public Text healthObj;
     public int healthCount = 3;
-    private int waitTime;
     public GameObject panelObstacle;
     public GameObject panelLethalObstacle;
     public bool characterIsMoving = false;
     public LetterCollection lc;
+    public ParticleSystem ps;
+    bool started;
+
 
     public void Initialize(GameObject character)
     {
@@ -52,10 +54,10 @@ public class CharacterMovement : MonoBehaviour
 
     private void Start()
     {
-        #if UNITY_EDITOR
-           speed = 6.0f;
-        #endif
-        waitTime = 210;
+       #if UNITY_EDITOR
+        speed = 6.0f;
+       #endif
+      started = false;
     }
 
     void Awake()
@@ -63,14 +65,16 @@ public class CharacterMovement : MonoBehaviour
         if (!m_animator) { gameObject.GetComponent<Animator>(); }
         if (!m_rigidBody) { gameObject.GetComponent<Animator>(); }
     }
+    public void hintClick()
+    {
+        started = true;
+    }
 
     void Update()
     {
-       
-        waitTime--;
-        if (waitTime > 0)
+        if (!started)
         {
-            panelHint.SetActive(true); 
+            panelHint.SetActive(true);
             return;
         }
         if (lc.stop)
@@ -83,7 +87,7 @@ public class CharacterMovement : MonoBehaviour
         Vector3 newRight = new Vector3(plainRightMax, transform.position.y, transform.position.z);
         Vector3 newLeft = new Vector3(plainLeftMax, transform.position.y, transform.position.z);
         if (transform.position.x > 1.52f)
-            transform.position = new Vector3(1.52f,transform.position.y,transform.position.z);
+            transform.position = new Vector3(1.52f, transform.position.y, transform.position.z);
         if (transform.position.x < -1.52f)
             transform.position = new Vector3(-1.52f, transform.position.y, transform.position.z);
         if (Input.anyKey)
@@ -100,9 +104,7 @@ public class CharacterMovement : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.UpArrow) || (Input.GetKey(KeyCode.Space)))
             {
-                //m_rigidBody.velocity = Vector3.zero;
-                //m_rigidBody.velocity = Vector3.up * height;
-                JumpingAndLanding();
+                JumpingAndLanding(false);
             }
             if (left == true)
             {
@@ -135,8 +137,9 @@ public class CharacterMovement : MonoBehaviour
             }
             if (TWOfinger)
             {
-                m_rigidBody.velocity = Vector3.zero;
-                m_rigidBody.velocity = Vector3.up * height;
+                //m_rigidBody.velocity = Vector3.zero;
+                //m_rigidBody.velocity = Vector3.up * height;
+                JumpingAndLanding(true);
             }
             if (left == true)
             {
@@ -153,18 +156,17 @@ public class CharacterMovement : MonoBehaviour
 
     }
     void FixedUpdate()
-    {
-        waitTime--;
-        if (waitTime > 0)
+    { 
+        if (!started)
         {
             panelHint.SetActive(true);
             return;
         }
-        panelHint.SetActive(false);
-        if(lc.stop)
+        if (lc.stop)
         {
             return;
         }
+        panelHint.SetActive(false);
         Transform camera = Camera.main.transform;
         Vector3 direction = camera.forward * m_currentV + camera.right * m_currentH;
 
@@ -178,13 +180,13 @@ public class CharacterMovement : MonoBehaviour
         m_animator.SetFloat("MoveSpeed", direction.magnitude);
         m_animator.SetBool("Grounded", m_isGrounded);
 
-        JumpingAndLanding();
+        JumpingAndLanding(false);
 
         m_wasGrounded = m_isGrounded;
 
         if (!m_isGrounded && transform.position.y < -3)
         {
-            if(healthCount < 1)
+            if (healthCount < 1)
             {
                 chrctrIsDead = true;
                 Debug.Log("You are drowning NOW :( ! Sorry, but SimonSays - YOU drown!!");
@@ -262,10 +264,16 @@ public class CharacterMovement : MonoBehaviour
         if (m_collisions.Count == 0) { m_isGrounded = false; }
     }
 
-    private void JumpingAndLanding()
+    private void JumpingAndLanding(bool mobile)
     {
+       
         bool jumpCooldownOver = (Time.time - m_jumpTimeStamp) >= m_minJumpInterval;
 
+        if (mobile && jumpCooldownOver && m_isGrounded )
+        {
+            m_jumpTimeStamp = Time.time;
+            m_rigidBody.AddForce(Vector3.up * m_jumpForce, ForceMode.Impulse);
+        }
         if (jumpCooldownOver && m_isGrounded && Input.GetKey(KeyCode.UpArrow))
         {
             m_jumpTimeStamp = Time.time;
@@ -300,11 +308,11 @@ public class CharacterMovement : MonoBehaviour
                 StartCoroutine(StopTimeForObstacle());
                 healthCount -= 1;
                 healthObj.text = "Health : " + healthCount;
-
+                ps.Play();
+                StartCoroutine(ChangeSize());        
                 SphereCollider myCollider;
                 myCollider = other.gameObject.GetComponent<SphereCollider>();
-
-                if(myCollider)
+                if (myCollider)
                     transform.position = new Vector3(transform.position.x, transform.position.y, (transform.position.z - 2 * myCollider.radius));
 
                 if (healthCount < 1)
@@ -333,11 +341,11 @@ public class CharacterMovement : MonoBehaviour
                 SceneManager.LoadScene("ArenaZone");
             }
         }
-        catch(Exception)
+        catch (Exception)
         {
             Debug.Log("Exception with Health!" + healthObj);
         }
-        
+
     }
 
     private IEnumerator StopTimeForLethalObstacle()
@@ -351,6 +359,15 @@ public class CharacterMovement : MonoBehaviour
         yield return new WaitForSeconds(2);
         panelObstacle.gameObject.SetActive(false);
     }
+    public IEnumerator ChangeSize()
+    {
+        Vector3 add = new Vector3(1, 3.5f, 1);
+        transform.localScale = add;
+        yield return new WaitForSeconds(0.1f); 
+        ps.Stop();
+        transform.localScale = new Vector3(1,1.3f,1);
+    }
+
 
     public void playAgainUI()
     {
