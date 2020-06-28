@@ -8,7 +8,6 @@ public class CameraMove : MonoBehaviour {
     private string system;
     public GameObject mainCamera;
 	GameObject character;
-	private int waitTime;
 
 	void Start () {
 		mainCamera.transform.localPosition = new Vector3 ( 0, 0, 0 );
