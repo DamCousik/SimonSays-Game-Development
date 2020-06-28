@@ -6,50 +6,120 @@ using UnityEngine.SceneManagement;
 
 public class ClickZone : MonoBehaviour
 {
-    public static string zoneValue;
+    GameObject zoneValue;
     public static string zoneTag;
     public static int wordNum;
-    public static int zoneNum;
+    //public GameObject[] zones;
+    //public GameObject zoneDone;
+    public GameObject zoneOneCompleted;
+    public GameObject zoneTwoCompleted;
+    public GameObject zoneThreeCompleted;
+    public GameObject zoneFourCompleted;
 
-    private void Update()
+    public GameObject zoneOneWord;
+    public GameObject zoneTwoWord;
+    public GameObject zoneThreeWord;
+    public GameObject zoneFourWord;
+
+
+    private void Awake()
     {
-        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+        zoneOneWord = GameObject.Find("z1Word");
+        zoneTwoWord = GameObject.Find("z2Word");
+        zoneThreeWord = GameObject.Find("z3Word");
+        zoneFourWord = GameObject.Find("z4Word");
+    }
+    private void Update()
         {
-            Debug.Log("Doing Ray test");
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+            if(LetterCollection.zoneState.Count > 0)
             {
-                zoneTag = hit.collider.gameObject.tag;
-                //UnityEngine.Debug.Log("zoneTag");
-                // Do not change the tag name, if you change, make sure to send zone number (n-1) to obtain letters to form nth word
-                wordNum = zoneTag[1] - '0' - 1;
-                //UnityEngine.Debug.Log(wordNum);
+                foreach (KeyValuePair<GameObject, bool> kvp in LetterCollection.zoneState)
+                {
+                //Debug.Log(" Key = " + kvp.Key);
+                //Debug.Log(" Value = " + kvp.Value);
 
-                Debug.Log("Hit Somthing" + hit.transform.tag);
-                if (hit.collider.gameObject.name == "zone1")
-                {
-                    zoneValue = "z1";
-                    SceneManager.LoadScene("Zone-A-Screen");
+                    if (kvp.Key.CompareTag("z1"))
+                    {
+                        if (kvp.Value == true)
+                        {
+                            zoneOneCompleted.gameObject.SetActive(true);
+                            Destroy(zoneOneWord);
+                        }   
+                    }
+                    else if (kvp.Key.CompareTag("z2"))
+                    {
+                        if (kvp.Value == true)
+                        {
+                            zoneTwoCompleted.gameObject.SetActive(true);
+                            Destroy(zoneTwoWord);
+                        }
+                    }
+                    else if (kvp.Key.CompareTag("z3"))
+                    {
+                        if (kvp.Value == true)
+                        {
+                            zoneThreeCompleted.gameObject.SetActive(true);
+                            Destroy(zoneThreeWord);
+                        }
+                    }
+                    else if (kvp.Key.CompareTag("z4"))
+                    {
+                        if (kvp.Value == true)
+                        {
+                            zoneFourCompleted.gameObject.SetActive(true);
+                            Destroy(zoneFourWord);
+                        }
+                    }
                 }
-                else if (hit.collider.gameObject.name == "zone2")
+                     //if (kvp.Value == true)
+                     //{
+                     //       zoneOneCompleted.gameObject.SetActive(true);
+                            
+                     //       //kvp.Key.GetComponent<MeshRenderer>().material.color = Color.green;
+                     //       //kvp.Key.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.red);
+                     //       //DontDestroyOnLoad(kvp.Key);
+                     //       //Debug.Log("Color is successfully changed!! ---- " + kvp.Key.GetComponent<MeshRenderer>().material.color);
+                     //}
+                    
+            }
+            
+
+            if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
                 {
-                    zoneValue = "z2";
-                    SceneManager.LoadScene("Zone-B-Screen");
+                    Debug.Log("Doing Ray test");
+                    RaycastHit hit;
+                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+                    {
+                        zoneTag = hit.collider.gameObject.tag;
+                        DontDestroyOnLoad(hit.collider.gameObject);
+
+                        wordNum = zoneTag[1] - '0' - 1;
+
+                        Debug.Log("Hit Somthing" + hit.transform.tag);
+                        if (hit.collider.gameObject.name == "zone1")
+                        {
+                            zoneValue = hit.collider.gameObject;
+                            SceneManager.LoadScene("Zone-A-Screen");
+                        }
+                        else if (hit.collider.gameObject.name == "zone2")
+                        {
+                            zoneValue = hit.collider.gameObject;
+                            SceneManager.LoadScene("Zone-B-Screen");
+                        }
+                        else if (hit.collider.gameObject.name == "zone3")
+                        {
+                            zoneValue = hit.collider.gameObject;
+                            SceneManager.LoadScene("Zone-C-Screen");
+                        }
+                        else if (hit.collider.gameObject.name == "zone4")
+                        {
+                            zoneValue = hit.collider.gameObject;
+                            SceneManager.LoadScene("Zone-D-Screen");
+                        }
+                        else
+                            Debug.Log("You've clicked a zone that doesn't belong to our world!!");
+                    }
                 }
-                else if (hit.collider.gameObject.name == "zone3")
-                {
-                    zoneValue = "z3";
-                    SceneManager.LoadScene("Zone-C-Screen");
-                }
-                else if (hit.collider.gameObject.name == "zone4")
-                {
-                    zoneValue = "z4";
-                    SceneManager.LoadScene("Zone-D-Screen");
-                }
-                else
-                    Debug.Log("You've clicked a zone that doesn't belong to our world!!");
             }
         }
-    }
-}
