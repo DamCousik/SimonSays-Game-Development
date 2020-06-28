@@ -54,10 +54,10 @@ public class CharacterMovement : MonoBehaviour
 
     private void Start()
     {
-       #if UNITY_EDITOR
+        #if UNITY_EDITOR
         speed = 6.0f;
-       #endif
-      started = false;
+        #endif
+        started = false;
     }
 
     void Awake()
@@ -108,46 +108,48 @@ public class CharacterMovement : MonoBehaviour
             }
             if (left == true)
             {
-                transform.position = Vector3.LerpUnclamped(transform.position, newLeft, 3 * leftRightSpeed * Time.deltaTime);
+                float checkMin = Mathf.Min(transform.position.x + 1, 1);
+                transform.position = new Vector3(checkMin, transform.position.y, transform.position.z);
+                //transform.position = Vector3.LerpUnclamped(transform.position, newLeft, 3 * leftRightSpeed * Time.deltaTime);
                 left = false;
             }
             if (right == true)
             {
-                transform.position = Vector3.LerpUnclamped(transform.position, newRight, 3 * leftRightSpeed * Time.deltaTime);
+                float checkMax = Mathf.Max(transform.position.x - 1, -1);
+                transform.position = new Vector3(checkMax, transform.position.y, transform.position.z);
+                //transform.position = Vector3.LerpUnclamped(transform.position, newRight, 3 * leftRightSpeed * Time.deltaTime);
                 right = false;
             }
         }
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
-            bool TWOfinger = Input.touches.Length > 1;
-            if (!TWOfinger)
+            //bool TWOfinger = Input.touches.Length > 1;
+            if (touch.position.magnitude > Screen.width / 2)
             {
-
-                if (touch.position.magnitude > Screen.width / 2)
-                {
-                    right = true;
-                    left = false;
-                }
-                if (touch.position.magnitude < Screen.width / 2)
-                {
-                    right = false;
-                    left = true;
-                }
+                right = true;
+                left = false;
             }
-            if (TWOfinger)
+            if (touch.position.magnitude < Screen.width / 2)
             {
-                //m_rigidBody.velocity = Vector3.zero;
-                //m_rigidBody.velocity = Vector3.up * height;
+                right = false;
+                left = true;
+            }
+            if (touch.deltaPosition.y > 50.0f)
+            {
                 JumpingAndLanding(true);
             }
             if (left == true)
             {
+                //float checkMin = Mathf.Min(transform.position.x + 1, 1);
+                //transform.position = new Vector3(checkMin, transform.position.y, transform.position.z);
                 transform.position = Vector3.LerpUnclamped(transform.position, newLeft, leftRightSpeed * Time.deltaTime);
                 left = false;
             }
             if (right == true)
             {
+                //float checkMax = Mathf.Max(transform.position.x - 1, -1);
+                //transform.position = new Vector3(checkMax, transform.position.y, transform.position.z);
                 transform.position = Vector3.LerpUnclamped(transform.position, newRight, leftRightSpeed * Time.deltaTime);
                 right = false;
             }
@@ -156,7 +158,7 @@ public class CharacterMovement : MonoBehaviour
 
     }
     void FixedUpdate()
-    { 
+    {
         if (!started)
         {
             panelHint.SetActive(true);
@@ -266,10 +268,10 @@ public class CharacterMovement : MonoBehaviour
 
     private void JumpingAndLanding(bool mobile)
     {
-       
+
         bool jumpCooldownOver = (Time.time - m_jumpTimeStamp) >= m_minJumpInterval;
 
-        if (mobile && jumpCooldownOver && m_isGrounded )
+        if (mobile && jumpCooldownOver && m_isGrounded)
         {
             m_jumpTimeStamp = Time.time;
             m_rigidBody.AddForce(Vector3.up * m_jumpForce, ForceMode.Impulse);
@@ -309,7 +311,7 @@ public class CharacterMovement : MonoBehaviour
                 healthCount -= 1;
                 healthObj.text = "Health : " + healthCount;
                 ps.Play();
-                StartCoroutine(ChangeSize());        
+                StartCoroutine(ChangeSize());
                 SphereCollider myCollider;
                 myCollider = other.gameObject.GetComponent<SphereCollider>();
                 if (myCollider)
@@ -363,9 +365,9 @@ public class CharacterMovement : MonoBehaviour
     {
         Vector3 add = new Vector3(1, 3.5f, 1);
         transform.localScale = add;
-        yield return new WaitForSeconds(0.1f); 
+        yield return new WaitForSeconds(0.1f);
         ps.Stop();
-        transform.localScale = new Vector3(1,1.3f,1);
+        transform.localScale = new Vector3(1, 1.3f, 1);
     }
 
 
