@@ -446,7 +446,7 @@ GameObject:
   - component: {fileID: 257395164}
   - component: {fileID: 257395163}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Retry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -556,22 +556,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sentences:
-  - sentence: The Dark Knight Rises
+  - sentence: The Lion King
     words: []
     desiredRandom: 
-  - sentence: Lord Of The Rings
+  - sentence: The Dark Night
     words: []
     desiredRandom: 
-  - sentence: Beauty And The Beast
+  - sentence: Made Of Honor
     words: []
     desiredRandom: 
-  - sentence: Back To The Future
+  - sentence: Deep Blue Sea
     words: []
     desiredRandom: 
-  - sentence: The Wizard Of Oz
+  - sentence: Pride And Prejudice
     words: []
     desiredRandom: 
   - sentence: A Few Good Men
+    words: []
+    desiredRandom: 
+  - sentence: Just Go With It
     words: []
     desiredRandom: 
   - sentence: The Sound Of Music
@@ -580,25 +583,37 @@ MonoBehaviour:
   - sentence: The Hills Have Eyes
     words: []
     desiredRandom: 
-  - sentence: Just Go With It
-    words: []
-    desiredRandom: 
   - sentence: Thirty Going On Thirteen
     words: []
     desiredRandom: 
-  - sentence: The Devil Wears Prada
+  - sentence: The Silence Of The Lambs
     words: []
     desiredRandom: 
-  - sentence: Clash Of The Titans
+  - sentence: The Cabin In The Woods
     words: []
     desiredRandom: 
-  - sentence: The Best Of Me
+  - sentence: As Good As It Gets
     words: []
     desiredRandom: 
-  - sentence: Fifty Shades Of Grey
+  - sentence: The Fault In Our Stars
+    words: []
+    desiredRandom: 
+  - sentence: Call Me By Your Name
+    words: []
+    desiredRandom: 
+  - sentence: Agent Cody Banks
+    words: []
+    desiredRandom: 
+  - sentence: Hansel And Gretel
     words: []
     desiredRandom: 
   - sentence: Now You See Me
+    words: []
+    desiredRandom: 
+  - sentence: Beauty And The Beast
+    words: []
+    desiredRandom: 
+  - sentence: The Wolf Of Wall Street
     words: []
     desiredRandom: 
   retryPanel: {fileID: 234253863}
@@ -634,17 +649,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 472253492}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6125, y: 0.32486, z: 1}
+  m_LocalScale: {x: 0.60493827, y: 0.35601878, z: 1}
   m_Children:
   - {fileID: 558010473}
-  m_Father: {fileID: 801591343}
-  m_RootOrder: 4
+  m_Father: {fileID: 1064620021}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -90.5}
+  m_AnchoredPosition: {x: 0.98765427, y: 622.2523}
   m_SizeDelta: {x: 1024, y: 395.5569}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &472253494
@@ -696,7 +711,7 @@ GameObject:
   - component: {fileID: 558010475}
   - component: {fileID: 558010474}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Swap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -774,7 +789,7 @@ GameObject:
   - component: {fileID: 619003355}
   - component: {fileID: 619003354}
   m_Layer: 5
-  m_Name: Text
+  m_Name: WrongAns
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -966,7 +981,7 @@ RectTransform:
   m_Children:
   - {fileID: 1275294464}
   m_Father: {fileID: 1064620021}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -1158,7 +1173,6 @@ RectTransform:
   - {fileID: 861127213}
   - {fileID: 234253864}
   - {fileID: 1064620021}
-  - {fileID: 472253493}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1270,6 +1284,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.0125, y: 0.91248, z: 1}
   m_Children:
+  - {fileID: 472253493}
   - {fileID: 760241539}
   - {fileID: 1784098122}
   m_Father: {fileID: 801591343}
@@ -1329,7 +1344,7 @@ GameObject:
   - component: {fileID: 1120048145}
   - component: {fileID: 1120048144}
   m_Layer: 5
-  m_Name: Text
+  m_Name: TestText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1490,7 +1505,7 @@ GameObject:
   - component: {fileID: 1275294466}
   - component: {fileID: 1275294465}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Continue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1652,7 +1667,7 @@ RectTransform:
   m_LocalScale: {x: 2.3341627, y: 4.277964, z: 1}
   m_Children: []
   m_Father: {fileID: 1064620021}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}

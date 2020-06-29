@@ -34,7 +34,7 @@ public class Sentence
         while (result == sentence)
         {
             result = "";
-            words = new List<string>(Regex.Matches(sentence, "\\w+").OfType<Match>().Select(m => m.Value).ToArray());
+            words = ActualString();
             //UnityEngine.Debug.Log(words.Count);
 
             while (words.Count > 0)
@@ -67,7 +67,6 @@ public class SentenceJumble : MonoBehaviour
     public Transform container;
     public float space;
     public float lerpSpeed = 5;
-    private float waitTime;
 
     List<WordObject> wordObjects = new List<WordObject>();
     WordObject firstSelected;
@@ -93,21 +92,11 @@ public class SentenceJumble : MonoBehaviour
         ShowScramble();
         //ShowScramble(currentSentence);
         timerSeconds = GameObject.Find("Timer").GetComponent<Text>();
-        waitTime = 150;
     }
 
     // Update is called once per frame
     void Update()
     {
-        waitTime--;
-        if(waitTime>0)
-        {
-            introPanel.SetActive(true);
-            scenePanel.SetActive(false);
-            return;
-        }
-        introPanel.SetActive(false);
-        scenePanel.SetActive(true);
         RepositionObject();
         timer -= Time.deltaTime;
         timerSeconds.text = timer.ToString("0");
@@ -148,7 +137,105 @@ public class SentenceJumble : MonoBehaviour
     /// </summary>
     public void ShowScramble()
     {
-        ShowScramble(UnityEngine.Random.Range(0, sentences.Length));
+        string difficulty = LevelDifficulty.difficulty;
+        int level = LevelDifficulty.level;
+        UnityEngine.Debug.Log("Difficulty");
+        UnityEngine.Debug.Log(difficulty);
+
+        //ShowScramble(UnityEngine.Random.Range(0, sentences.Length));
+
+        if (difficulty == "Easy")
+        {
+            if (level == 1)
+            {
+                ShowScramble(0);
+            }
+            else if (level == 2)
+            {
+                ShowScramble(1);
+            }
+            else if (level == 3)
+            {
+                ShowScramble(2);
+            }
+            else if (level == 4)
+            {
+                ShowScramble(3);
+            }
+            else if (level == 5)
+            {
+                ShowScramble(4);
+            }
+        }
+        else if (difficulty == "Medium")
+        {
+            if (level == 1)
+            {
+                ShowScramble(5);
+            }
+            else if (level == 2)
+            {
+                ShowScramble(6);
+            }
+            else if (level == 3)
+            {
+                ShowScramble(7);
+            }
+            else if (level == 4)
+            {
+                ShowScramble(8);
+            }
+            else if (level == 5)
+            {
+                ShowScramble(9);
+            }
+        }
+        else if (difficulty == "Hard")
+        {
+            if (level == 1)
+            {
+                ShowScramble(10);
+            }
+            else if (level == 2)
+            {
+                ShowScramble(11);
+            }
+            else if (level == 3)
+            {
+                ShowScramble(12);
+            }
+            else if (level == 4)
+            {
+                ShowScramble(13);
+            }
+            else if (level == 5)
+            {
+                ShowScramble(14);
+            }
+        }
+        else if (difficulty == "Extreme")
+        {
+            if (level == 1)
+            {
+                ShowScramble(15);
+            }
+            else if (level == 2)
+            {
+                ShowScramble(16);
+            }
+            else if (level == 3)
+            {
+                ShowScramble(17);
+            }
+            else if (level == 4)
+            {
+                ShowScramble(18);
+            }
+            else if (level == 5)
+            {
+                ShowScramble(19);
+            }
+        }
     }
 
     /// <summary>
