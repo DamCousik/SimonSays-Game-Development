@@ -15,22 +15,80 @@ public class ClickZone : MonoBehaviour
     public GameObject zoneTwoCompleted;
     public GameObject zoneThreeCompleted;
     public GameObject zoneFourCompleted;
+    //
+    public GameObject zoneFiveCompleted;
+
+    //
+    public GameObject zoneOne;
+    public GameObject zoneTwo;
+    public GameObject zoneThree;
+    public GameObject zoneFour;
+    public GameObject zoneFive;
+
+    //
+
+
+
+
+
 
     public GameObject zoneOneWord;
     public GameObject zoneTwoWord;
     public GameObject zoneThreeWord;
     public GameObject zoneFourWord;
+    //
+    public GameObject zoneFiveWord;
 
 
-    private void Awake()
+    // private void Awake()
+    // {
+    //     zoneOneWord = GameObject.Find("z1Word");
+    //     zoneTwoWord = GameObject.Find("z2Word");
+    //     zoneThreeWord = GameObject.Find("z3Word");
+    //     zoneFourWord = GameObject.Find("z4Word");
+    //     //
+    //     zoneFiveWord = GameObject.Find("z5Word");
+
+    // }
+
+    public void Start()
     {
-        zoneOneWord = GameObject.Find("z1Word");
-        zoneTwoWord = GameObject.Find("z2Word");
-        zoneThreeWord = GameObject.Find("z3Word");
-        zoneFourWord = GameObject.Find("z4Word");
+        if(Sentence.wordCount == 4)  
+            {
+                zoneFour.SetActive(true);
+                zoneFourWord.gameObject.SetActive(true);
+                
+            }
+
+            if(Sentence.wordCount == 5)  
+            {
+                zoneFour.SetActive(true);
+                zoneFive.SetActive(true);
+                zoneFourWord.gameObject.SetActive(true);
+                zoneFiveWord.gameObject.SetActive(true);
+            }
+
     }
+
+
     private void Update()
         {
+            // if(Sentence.wordCount == 4)  
+            // {
+            //     zoneFour.SetActive(true);
+            //     zoneFourWord.gameObject.SetActive(true);
+                
+            // }
+
+            // if(Sentence.wordCount == 5)  
+            // {
+            //     zoneFour.SetActive(true);
+            //     zoneFive.SetActive(true);
+            //     zoneFourWord.gameObject.SetActive(true);
+            //     zoneFiveWord.gameObject.SetActive(true);
+            // }
+
+
             if(LetterCollection.zoneState.Count > 0)
             {
                 foreach (KeyValuePair<GameObject, bool> kvp in LetterCollection.zoneState)
@@ -70,6 +128,18 @@ public class ClickZone : MonoBehaviour
                             Destroy(zoneFourWord);
                         }
                     }
+                    //
+                    else if (kvp.Key.CompareTag("z5"))
+                    {
+                        if (kvp.Value == true)
+                        {
+                            zoneFiveCompleted.gameObject.SetActive(true);
+                            Destroy(zoneFiveWord);
+                        }
+                    }
+                    //
+
+
                 }
                      //if (kvp.Value == true)
                      //{
@@ -117,6 +187,15 @@ public class ClickZone : MonoBehaviour
                             zoneValue = hit.collider.gameObject;
                             SceneManager.LoadScene("Zone-D-Screen");
                         }
+                        //
+                        else if (hit.collider.gameObject.name == "zone5")
+                        {
+                            zoneValue = hit.collider.gameObject;
+                            SceneManager.LoadScene("Zone-A-Screen");
+                            //A for now
+                        }
+                        //
+
                         else
                             Debug.Log("You've clicked a zone that doesn't belong to our world!!");
                     }
