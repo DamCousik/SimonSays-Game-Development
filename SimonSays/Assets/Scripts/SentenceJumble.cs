@@ -90,7 +90,8 @@ public class SentenceJumble : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ShowScramble(currentSentence);
+        ShowScramble();
+        //ShowScramble(currentSentence);
         timerSeconds = GameObject.Find("Timer").GetComponent<Text>();
         waitTime = 150;
     }
@@ -145,10 +146,10 @@ public class SentenceJumble : MonoBehaviour
     /// <summary>
     /// Show a random sentence on the screen
     /// </summary>
-    //public void ShowScramble()
-    //{
-    //    ShowScramble(UnityEngine.Random.Range(0, sentences.Length - 1));
-    //}
+    public void ShowScramble()
+    {
+        ShowScramble(UnityEngine.Random.Range(0, sentences.Length));
+    }
 
     /// <summary>
     /// Show sentence from collection with desired index
