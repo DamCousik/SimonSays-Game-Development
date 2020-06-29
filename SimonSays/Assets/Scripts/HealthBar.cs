@@ -6,11 +6,17 @@ using UnityEngine.UIElements;
 
 public class HealthBar : MonoBehaviour
 {
-    //public Panel panel;
- 
+    public Scrollbar hb;
+
+    private void Start()
+    {
+        hb.size = 1;
+        hb.targetGraphic.color = Color.green;
+    }
     void Update()
     {
         Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
-        
+        hb.transform.position = pos;
+            
     }
 }
