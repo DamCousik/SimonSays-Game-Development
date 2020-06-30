@@ -14,11 +14,6 @@ public class StartGameMenu : MonoBehaviour
         SceneManager.LoadScene("Difficulty");
     }
 
-    public void continueUI()
-    {
-        SceneManager.LoadScene("ArenaZone");
-    }
-
     public void instructionsUI() => SceneManager.LoadScene("InstructionScreen");
 
     public void ReturnUI()
