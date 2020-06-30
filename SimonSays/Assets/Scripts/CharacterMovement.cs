@@ -26,11 +26,13 @@ public class CharacterMovement : MonoBehaviour
     public Text healthObj;
     public int healthCount = 3;
     public GameObject panelObstacle;
+    public GameObject panelpause;
     public GameObject panelLethalObstacle;
     public bool characterIsMoving = false;
     public LetterCollection lc;
     public ParticleSystem ps;
     bool started;
+
     public Scrollbar hb;
     bool avoidHint = false;
     float myPos=0;
@@ -69,11 +71,32 @@ public class CharacterMovement : MonoBehaviour
         if (!m_animator) { gameObject.GetComponent<Animator>(); }
         if (!m_rigidBody) { gameObject.GetComponent<Animator>(); }
     }
+    
     public void hintClick()
     {
         started = true;
         avoidHint = true;
     }
+
+    public void resumeOnClick() 
+    {
+        Debug.Log("Resume Button : Resume False");
+        panelpause.SetActive(false);
+        lc.stop = false;
+        Debug.Log("Resume Button : Resume True");
+    }
+
+    public void pauseZone() 
+    {
+        Debug.Log("Paused Clicked");
+        panelpause.SetActive(true);
+        lc.stop = true;
+        m_rigidBody.velocity = Vector3.zero;
+        characterIsMoving = false;
+        Debug.Log("Paused Clicked : Resume set to false");
+
+    }
+
     void Update()
     {
         if (!started)
@@ -81,6 +104,7 @@ public class CharacterMovement : MonoBehaviour
             panelHint.SetActive(true);
             return;
         }
+
         if (lc.stop)
         {
             return;
@@ -225,6 +249,10 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
+    
+
+
+
     private void OnCollisionEnter(Collision collision)
     {
         ContactPoint[] contactPoints = collision.contacts;
@@ -343,7 +371,7 @@ public class CharacterMovement : MonoBehaviour
 
                 if (healthCount < 1)
                 {
-                    hb.size = 0;
+                    hb.gameObject.SetActive(false);
                     chrctrIsDead = true;
                     Debug.Log("You are all out of lives! Sorry, but SimonSays - YOU DIE!!");
                     m_rigidBody.velocity = Vector3.zero;

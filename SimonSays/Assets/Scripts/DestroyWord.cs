@@ -15,7 +15,7 @@ public class DestroyWord : MonoBehaviour
         
     // }
     
-    public float time = 1; //Seconds to read the text
+    public float time = 2; //Seconds to read the text
     
      IEnumerator Start ()
      {

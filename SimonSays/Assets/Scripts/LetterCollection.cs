@@ -8,6 +8,8 @@ using UnityEngine.UI;
 public class LetterCollection : MonoBehaviour
 {
     public Dictionary<string, int> charWordFrequencies = new Dictionary<string, int>();
+    public static Dictionary<GameObject, bool> zoneState = new Dictionary<GameObject, bool>();
+
     public List<string> collectedLetters = new List<string>();
     public int countIncorrectLetters = 0;
     public int countCorrectLetters = 0;
@@ -19,10 +21,9 @@ public class LetterCollection : MonoBehaviour
     public bool stop = false;
 
     public static GameObject zone;
-    public Material Blue;
 
     int wordLength = 0;
-    private bool isGameWon = false;
+    public static bool isGameWon = false;
     string word;
 
     public DisplayLetters dispLet;
@@ -51,7 +52,6 @@ public class LetterCollection : MonoBehaviour
         }
 
         UnityEngine.Debug.Log("ClickZone.zoneTag : ---- : " + ClickZone.zoneTag);
-        //UnityEngine.Debug.Log(ClickZone.zoneTag);
         zone = GameObject.FindWithTag(ClickZone.zoneTag);
         UnityEngine.Debug.Log("zone : ---- : " + zone);
         UnityEngine.Debug.Log("---------");
@@ -273,15 +273,9 @@ public class LetterCollection : MonoBehaviour
                 Debug.Log("Congratulations! You've successfully spelt out the word correctly! SimonSays - YOU COMPLETED THIS ZONE!!!");
                 StartCoroutine(StopTime());
                 StartCoroutine(WaitForSceneLoad());
-                UnityEngine.Debug.Log("COLOR CHANGE - B4");
-                UnityEngine.Debug.Log(zone.GetComponent<MeshRenderer>().material);
-                zone.GetComponent<MeshRenderer>().material.color = Color.green;
 
-                UnityEngine.Debug.Log("COLOR CHANGE - AFTER");
-                zone.GetComponent<Renderer>().enabled = true;
-
-
-
+                zoneState.Add(zone, isGameWon);
+     
                 //else
                 //{
                 //    panelExtraLetters.SetActive(true);
