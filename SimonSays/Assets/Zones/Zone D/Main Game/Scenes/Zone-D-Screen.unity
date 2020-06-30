@@ -1849,6 +1849,10 @@ MonoBehaviour:
   - {fileID: 734012016}
   - {fileID: 922132431}
   - {fileID: 468978617}
+  newLetterPlacements: []
+  letterDistList: []
+  newExtraLetterList: []
+  letterPlacementResult: []
   letterCount: 0
 --- !u!54 &540465781
 Rigidbody:
@@ -2971,12 +2975,12 @@ PrefabInstance:
     - target: {fileID: 3001551357497553302, guid: e59f549a0f52b410cba6e804a98459df,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -11.296875
+      value: -12
       objectReference: {fileID: 0}
     - target: {fileID: 3001551357497553302, guid: e59f549a0f52b410cba6e804a98459df,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -287
+      value: -285
       objectReference: {fileID: 0}
     - target: {fileID: 3001551357497553302, guid: e59f549a0f52b410cba6e804a98459df,
         type: 3}
