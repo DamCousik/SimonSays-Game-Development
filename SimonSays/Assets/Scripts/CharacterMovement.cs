@@ -354,11 +354,11 @@ public class CharacterMovement : MonoBehaviour
                 if(healthCount==2)
                 {
                     hb.size = 0.6f;
-                    hb.targetGraphic.color = Color.red;
+                    hb.targetGraphic.color = Color.yellow;
                 }
                 if (healthCount == 1)
                 {
-                    hb.size = 0.3f;
+                    hb.size = 0.2f;
                     hb.targetGraphic.color = Color.red;
                 }                  
                 healthObj.text = "Health : " + healthCount;
