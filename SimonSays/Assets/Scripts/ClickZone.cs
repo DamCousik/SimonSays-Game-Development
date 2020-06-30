@@ -9,62 +9,87 @@ public class ClickZone : MonoBehaviour
     GameObject zoneValue;
     public static string zoneTag;
     public static int wordNum;
-    //public GameObject[] zones;
-    //public GameObject zoneDone;
+    
+    //For 3 and 5 zones
     public GameObject zoneOneCompleted;
     public GameObject zoneTwoCompleted;
     public GameObject zoneThreeCompleted;
     public GameObject zoneFourCompleted;
-    //
     public GameObject zoneFiveCompleted;
 
-    //
     public GameObject zoneOne;
     public GameObject zoneTwo;
     public GameObject zoneThree;
     public GameObject zoneFour;
     public GameObject zoneFive;
 
-    //
-
-
-
-
-
-
     public GameObject zoneOneWord;
     public GameObject zoneTwoWord;
     public GameObject zoneThreeWord;
     public GameObject zoneFourWord;
-    //
     public GameObject zoneFiveWord;
 
+    /////
+    //For 4 zones
 
-    // private void Awake()
-    // {
-    //     zoneOneWord = GameObject.Find("z1Word");
-    //     zoneTwoWord = GameObject.Find("z2Word");
-    //     zoneThreeWord = GameObject.Find("z3Word");
-    //     zoneFourWord = GameObject.Find("z4Word");
-    //     //
-    //     zoneFiveWord = GameObject.Find("z5Word");
+    public GameObject zoneOneCompletedFour;
+    public GameObject zoneTwoCompletedFour;
+    public GameObject zoneThreeCompletedFour;
+    public GameObject zoneFourCompletedFour;
 
-    // }
+    public GameObject zoneOneFour;
+    public GameObject zoneTwoFour;
+    public GameObject zoneThreeFour;
+    public GameObject zoneFourFour;
+
+    public GameObject zoneOneWordFour;
+    public GameObject zoneTwoWordFour;
+    public GameObject zoneThreeWordFour;
+    public GameObject zoneFourWordFour;
+
+  
+
 
     public void Start()
     {
-        if(Sentence.wordCount == 4)  
+        if(Sentence.wordCount == 3)  
             {
-                zoneFour.SetActive(true);
-                zoneFourWord.gameObject.SetActive(true);
+                zoneOne.SetActive(true);
+                zoneOneWord.gameObject.SetActive(true);
+                zoneTwo.SetActive(true);
+                zoneTwoWord.gameObject.SetActive(true);
+                zoneThree.SetActive(true);
+                zoneThreeWord.gameObject.SetActive(true);
                 
+                
+            }
+
+            if(Sentence.wordCount == 4) 
+            {
+                zoneOneFour.SetActive(true);
+                zoneOneWordFour.gameObject.SetActive(true);
+                zoneTwoFour.SetActive(true);
+                zoneTwoWordFour.gameObject.SetActive(true);
+                zoneThreeFour.SetActive(true);
+                zoneThreeWordFour.gameObject.SetActive(true);
+                zoneFourFour.SetActive(true);
+                zoneFourWordFour.gameObject.SetActive(true);
+
+
+
             }
 
             if(Sentence.wordCount == 5)  
             {
+                zoneOne.SetActive(true);
+                zoneOneWord.gameObject.SetActive(true);
+                zoneTwo.SetActive(true);
+                zoneTwoWord.gameObject.SetActive(true);
+                zoneThree.SetActive(true);
+                zoneThreeWord.gameObject.SetActive(true);
                 zoneFour.SetActive(true);
-                zoneFive.SetActive(true);
                 zoneFourWord.gameObject.SetActive(true);
+                zoneFive.SetActive(true);
                 zoneFiveWord.gameObject.SetActive(true);
             }
 
@@ -73,23 +98,10 @@ public class ClickZone : MonoBehaviour
 
     private void Update()
         {
-            // if(Sentence.wordCount == 4)  
-            // {
-            //     zoneFour.SetActive(true);
-            //     zoneFourWord.gameObject.SetActive(true);
-                
-            // }
+            if(Sentence.wordCount == 3 || Sentence.wordCount == 5)
+            {
 
-            // if(Sentence.wordCount == 5)  
-            // {
-            //     zoneFour.SetActive(true);
-            //     zoneFive.SetActive(true);
-            //     zoneFourWord.gameObject.SetActive(true);
-            //     zoneFiveWord.gameObject.SetActive(true);
-            // }
-
-
-            if(LetterCollection.zoneState.Count > 0)
+             if(LetterCollection.zoneState.Count > 0)
             {
                 foreach (KeyValuePair<GameObject, bool> kvp in LetterCollection.zoneState)
                 {
@@ -141,18 +153,59 @@ public class ClickZone : MonoBehaviour
 
 
                 }
-                     //if (kvp.Value == true)
-                     //{
-                     //       zoneOneCompleted.gameObject.SetActive(true);
-                            
-                     //       //kvp.Key.GetComponent<MeshRenderer>().material.color = Color.green;
-                     //       //kvp.Key.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.red);
-                     //       //DontDestroyOnLoad(kvp.Key);
-                     //       //Debug.Log("Color is successfully changed!! ---- " + kvp.Key.GetComponent<MeshRenderer>().material.color);
-                     //}
                     
             }
-            
+            }
+
+            if(Sentence.wordCount == 4)
+            {
+
+             if(LetterCollection.zoneState.Count > 0)
+            {
+                foreach (KeyValuePair<GameObject, bool> kvp in LetterCollection.zoneState)
+                {
+                //Debug.Log(" Key = " + kvp.Key);
+                //Debug.Log(" Value = " + kvp.Value);
+
+                    if (kvp.Key.CompareTag("z1"))
+                    {
+                        if (kvp.Value == true)
+                        {
+                            zoneOneCompletedFour.gameObject.SetActive(true);
+                            Destroy(zoneOneWord);
+                        }   
+                    }
+                    else if (kvp.Key.CompareTag("z2"))
+                    {
+                        if (kvp.Value == true)
+                        {
+                            zoneTwoCompletedFour.gameObject.SetActive(true);
+                            Destroy(zoneTwoWord);
+                        }
+                    }
+                    else if (kvp.Key.CompareTag("z3"))
+                    {
+                        if (kvp.Value == true)
+                        {
+                            zoneThreeCompletedFour.gameObject.SetActive(true);
+                            Destroy(zoneThreeWord);
+                        }
+                    }
+                    else if (kvp.Key.CompareTag("z4"))
+                    {
+                        if (kvp.Value == true)
+                        {
+                            zoneFourCompletedFour.gameObject.SetActive(true);
+                            Destroy(zoneFourWord);
+                        }
+                    }
+
+
+                }
+                    
+            }
+            }
+
 
             if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
                 {
@@ -166,29 +219,28 @@ public class ClickZone : MonoBehaviour
 
                         wordNum = zoneTag[1] - '0' - 1;
 
-                        Debug.Log("Hit Somthing" + hit.transform.tag);
-                        if (hit.collider.gameObject.name == "zone1")
+                        if (hit.collider.gameObject.tag == "z1")
                         {
                             zoneValue = hit.collider.gameObject;
                             SceneManager.LoadScene("Zone-A-Screen");
                         }
-                        else if (hit.collider.gameObject.name == "zone2")
+                        else if (hit.collider.gameObject.tag == "z2")
                         {
                             zoneValue = hit.collider.gameObject;
                             SceneManager.LoadScene("Zone-B-Screen");
                         }
-                        else if (hit.collider.gameObject.name == "zone3")
+                        else if (hit.collider.gameObject.tag == "z3")
                         {
                             zoneValue = hit.collider.gameObject;
                             SceneManager.LoadScene("Zone-C-Screen");
                         }
-                        else if (hit.collider.gameObject.name == "zone4")
+                        else if (hit.collider.gameObject.tag == "z4")
                         {
                             zoneValue = hit.collider.gameObject;
                             SceneManager.LoadScene("Zone-D-Screen");
                         }
                         //
-                        else if (hit.collider.gameObject.name == "zone5")
+                        else if (hit.collider.gameObject.tag == "z5")
                         {
                             zoneValue = hit.collider.gameObject;
                             SceneManager.LoadScene("Zone-A-Screen");
