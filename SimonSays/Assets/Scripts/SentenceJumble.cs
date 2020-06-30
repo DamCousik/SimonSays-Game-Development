@@ -12,6 +12,7 @@ public class Sentence
 {
     public string sentence;
     public List<string> words;
+    public static int wordCount;
 
     [Header("Leave empty if you want randomised")]
     public string desiredRandom;
@@ -19,6 +20,7 @@ public class Sentence
     public List<string> ActualString()
     {
         words = new List<string>(Regex.Matches(sentence, "\\w+").OfType<Match>().Select(m => m.Value).ToArray());
+        wordCount = words.Count;
         return words;
     }
 
