@@ -371,7 +371,7 @@ public class CharacterMovement : MonoBehaviour
 
                 if (healthCount < 1)
                 {
-                    hb.size = 0;
+                    hb.gameObject.SetActive(false);
                     chrctrIsDead = true;
                     Debug.Log("You are all out of lives! Sorry, but SimonSays - YOU DIE!!");
                     m_rigidBody.velocity = Vector3.zero;
