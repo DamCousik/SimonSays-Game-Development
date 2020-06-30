@@ -23,8 +23,7 @@ public class LetterPlacement : MonoBehaviour
     int totalLetters;
     int letterSpacing;
     int correctLetterCount;
-    int incorrectLetterCount;
-    string zoneWord = (SentenceJumble.originalWords[ClickZone.wordNum]).ToUpper();
+    readonly string zoneWord = (SentenceJumble.originalWords[ClickZone.wordNum]).ToUpper();
 
     void Start()
     {
@@ -58,30 +57,26 @@ public class LetterPlacement : MonoBehaviour
         if (LevelDifficulty.difficulty.Equals("Easy"))
         {
             totalLetters = 60;
-            letterSpacing = 10;
+            letterSpacing = 6;
             correctLetterCount = 2;
-            incorrectLetterCount = 1;
         }
         else if(LevelDifficulty.difficulty.Equals("Medium"))
         {
-            totalLetters = 70;
-            letterSpacing = 8;
+            totalLetters = 90;
+            letterSpacing = 4;
             correctLetterCount = 2;
-            incorrectLetterCount = 2;
         }
         else if(LevelDifficulty.difficulty.Equals("Hard"))
         {
-            totalLetters = 80;
-            letterSpacing = 6;
+            totalLetters = 120;
+            letterSpacing = 3;
             correctLetterCount = 2;
-            incorrectLetterCount = 3;
         }
         else if (LevelDifficulty.difficulty.Equals("Extreme"))
         {
-            totalLetters = 90;
-            letterSpacing = 4;
+            totalLetters = 170;
+            letterSpacing = 2;
             correctLetterCount = 3;
-            incorrectLetterCount = 4;
         }
 
         LetterPlacementForLevel(totalLetters, letterSpacing, correctLetterCount, zoneWord);
@@ -103,7 +98,7 @@ public class LetterPlacement : MonoBehaviour
     {
         try
         {
-           //int remainingLetters = 0;
+           int difference = 0;
 
             for (int i = 0; i < correctLetterCount; i++)
             {
@@ -129,17 +124,14 @@ public class LetterPlacement : MonoBehaviour
             //remainingLetters = totalLetters - (zoneWord.Length * correctLetterCount);
             //Debug.Log("Remaining letters = " + remainingLetters);
 
-
-            while(newLetterPlacements.Count > 0)
+            while(newLetterPlacements.Count <= totalLetters)
             {
-                for (int k = 0; k < newExtraLetterList.Count; k++)
-                {
-                    newLetterPlacements.Add(newExtraLetterList[k]);
-                    if (newLetterPlacements.Count >= totalLetters)
-                        break;
-                }
+               newLetterPlacements.AddRange(newExtraLetterList);
             }
-            
+
+            difference = newLetterPlacements.Count - totalLetters;
+            newLetterPlacements.RemoveRange(totalLetters, difference);
+
             letterPlacementResult = newLetterPlacements.OrderBy(x => Guid.NewGuid()).ToList();
 
             foreach (GameObject gobj in newExtraLetterList)
