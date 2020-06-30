@@ -11,7 +11,7 @@ public class StartGameMenu : MonoBehaviour
 {
     public void newGameUI()
     {
-        SceneManager.LoadScene("Unjumble");
+        SceneManager.LoadScene("Difficulty");
     }
 
     public void continueUI()

@@ -15,8 +15,8 @@ public class CharacterMovement : MonoBehaviour
     public float plainLeftMax = 1.57f;
     public float plainRightMax = -1.52f;
     public float leftRightSpeed = 3.0f;
-    bool left;
-    bool right;
+    bool left=false;
+    bool right=false;
     private float m_currentV = 0;
     private float m_currentH = 0;
     private readonly float m_interpolation = 10;
@@ -32,8 +32,12 @@ public class CharacterMovement : MonoBehaviour
     public LetterCollection lc;
     public ParticleSystem ps;
     bool started;
-    
 
+    public Scrollbar hb;
+    bool avoidHint = false;
+    float myPos=0;
+    float touchMagnitude;
+    float touchBx,touchBy,touchEx,touchEy;
 
     public void Initialize(GameObject character)
     {
@@ -56,10 +60,10 @@ public class CharacterMovement : MonoBehaviour
 
     private void Start()
     {
-       #if UNITY_EDITOR
+        #if UNITY_EDITOR
         speed = 6.0f;
-       #endif
-      started = false;
+        #endif
+        started = false;
     }
 
     void Awake()
@@ -71,6 +75,7 @@ public class CharacterMovement : MonoBehaviour
     public void hintClick()
     {
         started = true;
+        avoidHint = true;
     }
 
     public void resumeOnClick() 
@@ -131,55 +136,73 @@ public class CharacterMovement : MonoBehaviour
             }
             if (left == true)
             {
-                transform.position = Vector3.LerpUnclamped(transform.position, newLeft, 3 * leftRightSpeed * Time.deltaTime);
+                float checkMin = Mathf.Min(transform.position.x + 1, 1);
+                transform.position = new Vector3(checkMin, transform.position.y, transform.position.z);
                 left = false;
             }
             if (right == true)
             {
-                transform.position = Vector3.LerpUnclamped(transform.position, newRight, 3 * leftRightSpeed * Time.deltaTime);
+                float checkMax = Mathf.Max(transform.position.x - 1, -1);
+                transform.position = new Vector3(checkMax, transform.position.y, transform.position.z);
                 right = false;
             }
         }
         if (Input.touchCount > 0)
         {
-            Touch touch = Input.GetTouch(0);
-            bool TWOfinger = Input.touches.Length > 1;
-            if (!TWOfinger)
+            if (avoidHint)
             {
-
-                if (touch.position.magnitude > Screen.width / 2)
+                avoidHint = false;
+                return;
+            }
+            print("right val before:"+ right);
+            print("left val before:" + left);
+            Touch touch = Input.GetTouch(0);
+            if (touch.phase == TouchPhase.Began)
+            {
+                touchMagnitude = touch.position.magnitude;
+                touchBy=touch.position.y;
+                touchBx = touch.position.x;
+                return;
+            }
+            if (touch.phase == TouchPhase.Ended)
+            {
+                touchEy = touch.position.y;
+                touchEx = touch.position.x;
+                if (touchEx - touchBx > 100)
                 {
                     right = true;
                     left = false;
+                    print("right true");
                 }
-                if (touch.position.magnitude < Screen.width / 2)
+                if (touchBx - touchEx > 100)
                 {
                     right = false;
                     left = true;
+                    print("Left true");
+                }
+                if (Mathf.Abs(touchEy-touchBy) > 200)
+                {               
+                    JumpingAndLanding(true);
+                }
+                if (left == true)
+                {
+                    float checkMin = Mathf.Min(myPos + 1, 1);
+                    transform.position = new Vector3(checkMin, transform.position.y, transform.position.z);
+                    myPos = checkMin;
+                    left = false;
+                }
+                if (right == true)
+                {
+                    float checkMax = Mathf.Max(myPos - 1, -1);
+                    transform.position = new Vector3(checkMax, transform.position.y, transform.position.z);
+                    myPos = checkMax;
+                    right = false;
                 }
             }
-            if (TWOfinger)
-            {
-                //m_rigidBody.velocity = Vector3.zero;
-                //m_rigidBody.velocity = Vector3.up * height;
-                JumpingAndLanding(true);
-            }
-            if (left == true)
-            {
-                transform.position = Vector3.LerpUnclamped(transform.position, newLeft, leftRightSpeed * Time.deltaTime);
-                left = false;
-            }
-            if (right == true)
-            {
-                transform.position = Vector3.LerpUnclamped(transform.position, newRight, leftRightSpeed * Time.deltaTime);
-                right = false;
-            }
-
         }
-
     }
     void FixedUpdate()
-    { 
+    {
         if (!started)
         {
             panelHint.SetActive(true);
@@ -190,23 +213,19 @@ public class CharacterMovement : MonoBehaviour
             return;
         }
         panelHint.SetActive(false);
+        characterIsMoving = true;
+        //Animation
         Transform camera = Camera.main.transform;
         Vector3 direction = camera.forward * m_currentV + camera.right * m_currentH;
-
         m_currentV = Mathf.Lerp(m_currentV, 1, Time.deltaTime * m_interpolation);
         m_currentH = Mathf.Lerp(m_currentH, 1, Time.deltaTime * m_interpolation);
-
         float directionLength = direction.magnitude;
         direction.y = 0;
         direction = direction.normalized * directionLength;
-
         m_animator.SetFloat("MoveSpeed", direction.magnitude);
         m_animator.SetBool("Grounded", m_isGrounded);
-
-        JumpingAndLanding(false);
-
         m_wasGrounded = m_isGrounded;
-
+        //Drowning handling
         if (!m_isGrounded && transform.position.y < -3)
         {
             if (healthCount < 1)
@@ -227,9 +246,7 @@ public class CharacterMovement : MonoBehaviour
                 healthObj.text = "Health : " + healthCount;
                 SceneManager.LoadScene("ArenaZone");
             }
-
         }
-
     }
 
     
@@ -293,10 +310,10 @@ public class CharacterMovement : MonoBehaviour
 
     private void JumpingAndLanding(bool mobile)
     {
-       
+
         bool jumpCooldownOver = (Time.time - m_jumpTimeStamp) >= m_minJumpInterval;
 
-        if (mobile && jumpCooldownOver && m_isGrounded )
+        if (mobile && jumpCooldownOver && m_isGrounded)
         {
             m_jumpTimeStamp = Time.time;
             m_rigidBody.AddForce(Vector3.up * m_jumpForce, ForceMode.Impulse);
@@ -334,9 +351,19 @@ public class CharacterMovement : MonoBehaviour
                 panelObstacle.gameObject.SetActive(true);
                 StartCoroutine(StopTimeForObstacle());
                 healthCount -= 1;
+                if(healthCount==2)
+                {
+                    hb.size = 0.6f;
+                    hb.targetGraphic.color = Color.red;
+                }
+                if (healthCount == 1)
+                {
+                    hb.size = 0.3f;
+                    hb.targetGraphic.color = Color.red;
+                }                  
                 healthObj.text = "Health : " + healthCount;
                 ps.Play();
-                StartCoroutine(ChangeSize());        
+                StartCoroutine(ChangeSize());
                 SphereCollider myCollider;
                 myCollider = other.gameObject.GetComponent<SphereCollider>();
                 if (myCollider)
@@ -344,6 +371,7 @@ public class CharacterMovement : MonoBehaviour
 
                 if (healthCount < 1)
                 {
+                    hb.size = 0;
                     chrctrIsDead = true;
                     Debug.Log("You are all out of lives! Sorry, but SimonSays - YOU DIE!!");
                     m_rigidBody.velocity = Vector3.zero;
@@ -390,17 +418,14 @@ public class CharacterMovement : MonoBehaviour
     {
         Vector3 add = new Vector3(1, 3.5f, 1);
         transform.localScale = add;
-        yield return new WaitForSeconds(0.1f); 
+        yield return new WaitForSeconds(0.1f);
         ps.Stop();
-        transform.localScale = new Vector3(1,1.3f,1);
+        transform.localScale = new Vector3(1, 1.3f, 1);
     }
-
-
     public void playAgainUI()
     {
         SceneManager.LoadScene("ArenaZone");
     }
-
     public void mainMenuUI()
     {
         SceneManager.LoadScene("StartGameScreen");
