@@ -436,7 +436,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Oops! You bumped into a wrong letter!
+  m_Text: Wrong letter!
 --- !u!222 &10512875
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3892,16 +3892,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 646185364}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1952853103}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 56.5, y: -24.191}
+  m_AnchoredPosition: {x: 26.6, y: -0.3}
   m_SizeDelta: {x: 23.382378, y: 27.577759}
   m_Pivot: {x: 0.5, y: -0.5145898}
 --- !u!114 &646185366
@@ -5703,7 +5703,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 0.6901961, g: 0.6901961, b: 0.6901961, a: 0}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -6123,7 +6123,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Oops! You bumped into an Obstacle!
+  m_Text: Obstacle!
 --- !u!222 &1058693366
 CanvasRenderer:
   m_ObjectHideFlags: 0
