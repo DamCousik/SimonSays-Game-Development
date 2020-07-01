@@ -3901,9 +3901,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -69.77, y: 3.7889}
+  m_AnchoredPosition: {x: 56.5, y: -24.191}
   m_SizeDelta: {x: 23.382378, y: 27.577759}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: -0.5145898}
 --- !u!114 &646185366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4181,8 +4181,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: You have collected 3 incorrect letters. Simon Says, you will be deported
-    to the Arena!
+  m_Text: Collected 3 incorrect letters! YOU LOSE!
 --- !u!222 &653190574
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4621,10 +4620,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'You have to collect the first word in the correct sequence!
+  m_Text: 'Collect 1st Word of Movie
 
-    Click
-    to start!'
+    Click here to start!'
 --- !u!222 &742919631
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5578,7 +5576,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Congratulations! You have successfully completed the zone!
+  m_Text: Congratulations! This ZONE is Completed!
 --- !u!222 &928712975
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7372,7 +7370,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: You could not complete Zone!
+  m_Text: Zone ends! You lose!
 --- !u!222 &1256841585
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9231,7 +9229,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Game over! \nYou are all out of lives! Simon says, you must start over!"
+  m_Text: "Game over! \nTry Again!\n"
 --- !u!222 &1665503622
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10429,13 +10427,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1918475764}
-  m_LocalRotation: {x: 0.7071068, y: 0.7071068, z: -0, w: 0}
-  m_LocalPosition: {x: 0.05, y: 1.2, z: 0.28999996}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.4, y: 0.26, z: 0.28999996}
   m_LocalScale: {x: 0.3846154, y: 0.3, z: 0.49999988}
   m_Children: []
   m_Father: {fileID: 1647209589}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1918475766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10713,7 +10711,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1952853102}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -10721,11 +10719,11 @@ RectTransform:
   - {fileID: 161685260}
   m_Father: {fileID: 1982216068}
   m_RootOrder: 13
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -432, y: -374}
-  m_SizeDelta: {x: 120, y: 20}
+  m_SizeDelta: {x: 80, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1952853104
 MonoBehaviour:
