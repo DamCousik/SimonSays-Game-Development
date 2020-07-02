@@ -62,6 +62,7 @@ public class SentenceJumble : MonoBehaviour
     public GameObject retryPanel;
     public GameObject scenePanel;
     public GameObject introPanel;
+    public GameObject wordsPanel;
     public GameObject word3Hint;
     public GameObject word4Hint;
     public GameObject word5Hint;
@@ -364,6 +365,7 @@ public class SentenceJumble : MonoBehaviour
         {
             retryPanel.SetActive(true);
             scenePanel.SetActive(false);
+            wordsPanel.SetActive(false);
         }
     }
 }
