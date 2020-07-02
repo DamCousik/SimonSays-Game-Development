@@ -8,36 +8,38 @@ using System;
 using UnityEditor;
 #endif
 
-public class CharacterMovement : MonoBehaviour
+public class DemoCharacter : MonoBehaviour
 {
     public float speed = 7.0f;
     public float height = 5.0f;
     public float plainLeftMax = 1.57f;
     public float plainRightMax = -1.52f;
     public float leftRightSpeed = 3.0f;
-    bool left=false;
-    bool right=false;
+    bool left = false;
+    bool right = false;
     private float m_currentV = 0;
     private float m_currentH = 0;
     private readonly float m_interpolation = 10;
-    public GameObject gameOverPanel;
-    public GameObject panelHint;
     public bool chrctrIsDead = false;
-    public Text healthObj;
     public int healthCount = 3;
-    public GameObject panelObstacle;
-    public GameObject panelpause;
-    public GameObject panelLethalObstacle;
     public bool characterIsMoving = false;
-    public LetterCollection lc;
     public ParticleSystem ps;
     bool started;
+    bool stop = false;
     public Scrollbar hb;
     bool avoidHint = false;
-    float myPos=0;
+    float myPos = 0;
     float touchMagnitude;
-    float touchBx,touchBy,touchEx,touchEy;
-
+    float touchBx, touchBy, touchEx, touchEy;
+    public GameObject panelHint;
+    public GameObject CorrectPanel;
+    public GameObject IncorrectPanel;
+    public GameObject PanelCorrectLetter;
+    public GameObject PanelWrongLetter;
+    public GameObject Congratulations;
+    public GameObject MissLetter;
+    public GameObject PanelObstacle;
+    public GameObject PanelLethalObstacle;
     public void Initialize(GameObject character)
     {
         m_animator = character.GetComponent<Animator>();
@@ -59,43 +61,21 @@ public class CharacterMovement : MonoBehaviour
 
     private void Start()
     {
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         speed = 6.0f;
-        #endif
+#endif
         started = false;
     }
-
     void Awake()
     {
         if (!m_animator) { gameObject.GetComponent<Animator>(); }
         if (!m_rigidBody) { gameObject.GetComponent<Animator>(); }
     }
-    
     public void hintClick()
     {
         started = true;
         avoidHint = true;
     }
-
-    public void resumeOnClick() 
-    {
-        Debug.Log("Resume Button : Resume False");
-        panelpause.SetActive(false);
-        lc.stop = false;
-        Debug.Log("Resume Button : Resume True");
-    }
-
-    public void pauseZone() 
-    {
-        Debug.Log("Paused Clicked");
-        panelpause.SetActive(true);
-        lc.stop = true;
-        m_rigidBody.velocity = Vector3.zero;
-        characterIsMoving = false;
-        Debug.Log("Paused Clicked : Resume set to false");
-
-    }
-
     void Update()
     {
         if (!started)
@@ -104,7 +84,7 @@ public class CharacterMovement : MonoBehaviour
             return;
         }
 
-        if (lc.stop)
+        if (stop)
         {
             return;
         }
@@ -151,13 +131,13 @@ public class CharacterMovement : MonoBehaviour
                 avoidHint = false;
                 return;
             }
-            print("right val before:"+ right);
+            print("right val before:" + right);
             print("left val before:" + left);
             Touch touch = Input.GetTouch(0);
             if (touch.phase == TouchPhase.Began)
             {
                 touchMagnitude = touch.position.magnitude;
-                touchBy=touch.position.y;
+                touchBy = touch.position.y;
                 touchBx = touch.position.x;
                 return;
             }
@@ -177,8 +157,8 @@ public class CharacterMovement : MonoBehaviour
                     left = true;
                     print("Left true");
                 }
-                if (Mathf.Abs(touchEy-touchBy) > 200)
-                {               
+                if (Mathf.Abs(touchEy - touchBy) > 200)
+                {
                     JumpingAndLanding(true);
                 }
                 if (left == true)
@@ -205,7 +185,7 @@ public class CharacterMovement : MonoBehaviour
             panelHint.SetActive(true);
             return;
         }
-        if (lc.stop)
+        if (stop)
         {
             return;
         }
@@ -225,24 +205,7 @@ public class CharacterMovement : MonoBehaviour
         //Drowning handling
         if (!m_isGrounded && transform.position.y < -3)
         {
-            if (healthCount < 1)
-            {
-                chrctrIsDead = true;
-                Debug.Log("You are drowning NOW :( ! Sorry, but SimonSays - YOU drown!!");
-                m_rigidBody.velocity = Vector3.zero;
-                m_rigidBody.isKinematic = true;
-                m_animator.gameObject.SetActive(false);
-                healthCount -= 1;
-                healthObj.text = "Health : " + healthCount;
-                panelObstacle.SetActive(false);
-                gameOverPanel.SetActive(true);
-            }
-            else
-            {
-                healthCount -= 1;
-                healthObj.text = "Health : " + healthCount;
-                SceneManager.LoadScene("ArenaZone");
-            }
+
         }
     }
     private void OnCollisionEnter(Collision collision)
@@ -332,78 +295,28 @@ public class CharacterMovement : MonoBehaviour
             m_animator.SetTrigger("Jump");
         }
     }
-
     private void OnTriggerEnter(Collider other)
     {
-        try
+        if (other.gameObject.tag == ("Obstacle"))
         {
-            if (other.gameObject.tag == ("Obstacle"))
+            Debug.Log("You hit an obstacle - YOU LOSE A LIFE!!");
+            //panelObstacle.gameObject.SetActive(true);
+            //StartCoroutine(StopTimeForObstacle());
+            healthCount -= 1;
+            if (healthCount == 2)
             {
-                Debug.Log("You hit an obstacle - YOU LOSE A LIFE!!");
-                panelObstacle.gameObject.SetActive(true);
-                StartCoroutine(StopTimeForObstacle());
-                healthCount -= 1;
-                if(healthCount==2)
-                {
-                    hb.size = 0.6f;
-                    hb.targetGraphic.color = Color.yellow;
-                }
-                if (healthCount == 1)
-                {
-                    hb.size = 0.2f;
-                    hb.targetGraphic.color = Color.red;
-                }                  
-                healthObj.text = "Health : " + healthCount;
-                ps.Play();
-                StartCoroutine(ChangeSize());
-                SphereCollider myCollider;
-                myCollider = other.gameObject.GetComponent<SphereCollider>();
-                if (myCollider)
-                    transform.position = new Vector3(transform.position.x, transform.position.y, (transform.position.z - 2 * myCollider.radius));
-
-                if (healthCount < 1)
-                {
-                    hb.gameObject.SetActive(false);
-                    chrctrIsDead = true;
-                    Debug.Log("You are all out of lives! Sorry, but SimonSays - YOU DIE!!");
-                    m_rigidBody.velocity = Vector3.zero;
-                    m_rigidBody.isKinematic = true;
-                    m_animator.gameObject.SetActive(false);
-                    healthCount = 0;
-                    healthObj.text = "Health : " + healthCount;
-                    lc.panelBeforeArenaZone.SetActive(false);
-                    lc.panelBeforeStartGame.SetActive(false);
-                    lc.panelWrongLetter.SetActive(false);
-                    lc.panelExtraLetters.SetActive(false);
-                    panelObstacle.gameObject.SetActive(false);
-                    gameOverPanel.SetActive(true);
-                }
+                hb.size = 0.6f;
+                hb.targetGraphic.color = Color.yellow;
             }
-            else if (other.gameObject.CompareTag("LethalObstacle"))
+            if (healthCount == 1)
             {
-                Debug.Log("You've reached the end of the zone! Goodbye!!");
-                chrctrIsDead = true;
-                panelLethalObstacle.SetActive(true);
-                lc.stop = true;
+                hb.size = 0.2f;
+                hb.targetGraphic.color = Color.red;
             }
+            ps.Play();
+            StartCoroutine(ChangeSize());
         }
-        catch (Exception)
-        {
-            Debug.Log("Exception with Health!" + healthObj);
-        }
-
-    }
-
-    private IEnumerator StopTimeForLethalObstacle()
-    {
-        yield return new WaitForSeconds(10);
-        panelLethalObstacle.SetActive(false);
-    }
-
-    private IEnumerator StopTimeForObstacle()
-    {
-        yield return new WaitForSeconds(2);
-        panelObstacle.gameObject.SetActive(false);
+       
     }
     public IEnumerator ChangeSize()
     {
@@ -412,36 +325,5 @@ public class CharacterMovement : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         ps.Stop();
         transform.localScale = new Vector3(1, 1.3f, 1);
-    }
-    public void playAgainUI()
-    {
-        SceneManager.LoadScene("ArenaZone");
-    }
-    public void playAgainLethal()
-    {
-        if (ClickZone.zoneTag == "z1")
-        {
-            SceneManager.LoadScene("Zone-A-Screen");
-        }
-        else if (ClickZone.zoneTag == "z2")
-        {
-            SceneManager.LoadScene("Zone-B-Screen");
-        }
-        else if (ClickZone.zoneTag == "z3")
-        {
-            SceneManager.LoadScene("Zone-C-Screen");
-        }
-        else if (ClickZone.zoneTag == "z4")
-        {
-            SceneManager.LoadScene("Zone-D-Screen");
-        }
-        else if (ClickZone.zoneTag == "z5")
-        {
-            SceneManager.LoadScene("Zone-A-Screen");
-        }
-    }
-    public void mainMenuUI()
-    {
-        SceneManager.LoadScene("StartGameScreen");
     }
 }
