@@ -19,7 +19,6 @@ public class LetterPlacement : MonoBehaviour
     //string level = "Hard";
 
     public int letterCount = 0;
-    int difference = 0;
     int totalLetters;
     int letterSpacing;
     int correctLetterCount;

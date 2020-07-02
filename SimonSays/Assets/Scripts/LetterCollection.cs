@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class LetterCollection : MonoBehaviour
 {
-    public Dictionary<string, int> charWordFrequencies = new Dictionary<string, int>();
+    public static Dictionary<string, int> charWordFrequencies = new Dictionary<string, int>();
     public static Dictionary<GameObject, bool> zoneState = new Dictionary<GameObject, bool>();
 
     public List<string> collectedLetters = new List<string>();
@@ -15,16 +15,14 @@ public class LetterCollection : MonoBehaviour
     public int countCorrectLetters = 0;
     public GameObject panelWrongLetter;
     public GameObject panelBeforeArenaZone;
-    public GameObject panelBeforeStartGame;
     public GameObject panelGameWon;
-    public GameObject panelExtraLetters;
     public bool stop = false;
 
     public static GameObject zone;
 
     int wordLength = 0;
     public static bool isGameWon = false;
-    string word;
+    public static string word;
 
     public DisplayLetters dispLet;
     public CharacterMovement charMove;
@@ -33,6 +31,8 @@ public class LetterCollection : MonoBehaviour
     {
         word = SentenceJumble.originalWords[ClickZone.wordNum]; // Obtained from the arena
         UnityEngine.Debug.Log(word.ToUpper());
+
+        dispLet.wordButtons(word);
 
         foreach (char c in word)
         {
@@ -275,19 +275,6 @@ public class LetterCollection : MonoBehaviour
                 StartCoroutine(WaitForSceneLoad());
 
                 zoneState.Add(zone, isGameWon);
-     
-                //else
-                //{
-                //    panelExtraLetters.SetActive(true);
-                //    charMove.chrctrIsDead = true;
-                //    charMove.m_rigidBody.velocity = Vector3.zero;
-                //    charMove.m_rigidBody.isKinematic = true;
-                //    charMove.m_animator.gameObject.SetActive(false);
-                //    Debug.Log("You've collected extra letters which are irrelevant to the word. Sorry, but SimonSays - YOU LOSE!!!");
-                //    StartCoroutine(StopTime());
-                //    StartCoroutine(WaitForSceneLoad());
-                //}
-
             }
         }
         catch (Exception)

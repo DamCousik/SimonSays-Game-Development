@@ -23,7 +23,6 @@ public class CharacterMovement : MonoBehaviour
     public GameObject gameOverPanel;
     public GameObject panelHint;
     public bool chrctrIsDead = false;
-    public Text healthObj;
     public int healthCount = 3;
     public GameObject panelObstacle;
     public GameObject panelpause;
@@ -236,21 +235,16 @@ public class CharacterMovement : MonoBehaviour
                 m_rigidBody.isKinematic = true;
                 m_animator.gameObject.SetActive(false);
                 healthCount -= 1;
-                healthObj.text = "Health : " + healthCount;
                 panelObstacle.SetActive(false);
                 gameOverPanel.SetActive(true);
             }
             else
             {
                 healthCount -= 1;
-                healthObj.text = "Health : " + healthCount;
                 SceneManager.LoadScene("ArenaZone");
             }
         }
     }
-
-    
-
 
 
     private void OnCollisionEnter(Collision collision)
@@ -361,7 +355,6 @@ public class CharacterMovement : MonoBehaviour
                     hb.size = 0.2f;
                     hb.targetGraphic.color = Color.red;
                 }                  
-                healthObj.text = "Health : " + healthCount;
                 ps.Play();
                 StartCoroutine(ChangeSize());
                 SphereCollider myCollider;
@@ -378,11 +371,8 @@ public class CharacterMovement : MonoBehaviour
                     m_rigidBody.isKinematic = true;
                     m_animator.gameObject.SetActive(false);
                     healthCount = 0;
-                    healthObj.text = "Health : " + healthCount;
                     lc.panelBeforeArenaZone.SetActive(false);
-                    lc.panelBeforeStartGame.SetActive(false);
                     lc.panelWrongLetter.SetActive(false);
-                    lc.panelExtraLetters.SetActive(false);
                     panelObstacle.gameObject.SetActive(false);
                     gameOverPanel.SetActive(true);
                 }
@@ -398,7 +388,7 @@ public class CharacterMovement : MonoBehaviour
         }
         catch (Exception)
         {
-            Debug.Log("Exception with Health!" + healthObj);
+            Debug.Log("Exception with Health!");
         }
 
     }
