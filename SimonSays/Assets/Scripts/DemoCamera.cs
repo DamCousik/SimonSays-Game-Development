@@ -5,7 +5,7 @@ using System.Collections;
 public class DemoCamera : MonoBehaviour
 {
 
-	public float moveSpeed = -7.0f;
+	public float moveSpeed = -5.0f;
 	private string system;
 	public GameObject mainCamera;
 	GameObject character;
@@ -16,9 +16,9 @@ public class DemoCamera : MonoBehaviour
 		mainCamera.transform.localRotation = Quaternion.Euler(18, 180, 0);
 		character = GameObject.Find("MaleFreeSimpleMovement1");
 
-#if UNITY_EDITOR
-		moveSpeed = -6.0f;
-#endif
+       #if UNITY_EDITOR
+		moveSpeed = -5.0f;
+       #endif
 	}
 
 	void FixedUpdate()
@@ -26,8 +26,7 @@ public class DemoCamera : MonoBehaviour
 
 		DemoCharacter demo = character.GetComponent<DemoCharacter>();
 		if (!demo.chrctrIsDead && demo.characterIsMoving)
-		{
-			print("character Moving");
+		{ 
 			MoveObj();
 		}
 	}

@@ -394,12 +394,6 @@ public class CharacterMovement : MonoBehaviour
 
     }
 
-    private IEnumerator StopTimeForLethalObstacle()
-    {
-        yield return new WaitForSeconds(10);
-        panelLethalObstacle.SetActive(false);
-    }
-
     private IEnumerator StopTimeForObstacle()
     {
         yield return new WaitForSeconds(2);

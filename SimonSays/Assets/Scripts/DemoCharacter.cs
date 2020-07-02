@@ -10,7 +10,7 @@ using UnityEditor;
 
 public class DemoCharacter : MonoBehaviour
 {
-    public float speed = 7.0f;
+    public float speed = 5.0f;
     public float height = 5.0f;
     public float plainLeftMax = 1.57f;
     public float plainRightMax = -1.52f;
@@ -40,6 +40,13 @@ public class DemoCharacter : MonoBehaviour
     public GameObject MissLetter;
     public GameObject PanelObstacle;
     public GameObject PanelLethalObstacle;
+    public GameObject Incorrect3;
+    public GameObject OutOfLives;
+    public GameObject Display;
+    string collected;
+    int countWrong = 0;
+    int displayHint = 5;
+    float Timer;
     public void Initialize(GameObject character)
     {
         m_animator = character.GetComponent<Animator>();
@@ -47,23 +54,19 @@ public class DemoCharacter : MonoBehaviour
     }
 
     [SerializeField] private float m_jumpForce = 4;
-
     [SerializeField] public Animator m_animator;
     [SerializeField] public Rigidbody m_rigidBody;
-
     private bool m_wasGrounded;
-
     private float m_jumpTimeStamp = 0;
     private float m_minJumpInterval = 0.25f;
-
     private bool m_isGrounded;
     private List<Collider> m_collisions = new List<Collider>();
 
     private void Start()
     {
-#if UNITY_EDITOR
-        speed = 6.0f;
-#endif
+     #if UNITY_EDITOR
+        speed = 5.0f;
+     #endif
         started = false;
     }
     void Awake()
@@ -83,13 +86,12 @@ public class DemoCharacter : MonoBehaviour
             panelHint.SetActive(true);
             return;
         }
-
         if (stop)
         {
             return;
         }
         characterIsMoving = true;
-        panelHint.SetActive(false);
+        panelHint.SetActive(false);    
         transform.Translate(0, 0, speed * Time.deltaTime);
         if (transform.position.x > 1.52f)
             transform.position = new Vector3(1.52f, transform.position.y, transform.position.z);
@@ -179,7 +181,7 @@ public class DemoCharacter : MonoBehaviour
         }
     }
     void FixedUpdate()
-    {
+    {     
         if (!started)
         {
             panelHint.SetActive(true);
@@ -191,6 +193,12 @@ public class DemoCharacter : MonoBehaviour
         }
         panelHint.SetActive(false);
         characterIsMoving = true;
+        Timer += Time.deltaTime;
+        if (displayHint > 0 && Timer>2)
+        {
+            displayHints();
+            displayHint--;
+        }
         //Animation
         Transform camera = Camera.main.transform;
         Vector3 direction = camera.forward * m_currentV + camera.right * m_currentH;
@@ -202,11 +210,6 @@ public class DemoCharacter : MonoBehaviour
         m_animator.SetFloat("MoveSpeed", direction.magnitude);
         m_animator.SetBool("Grounded", m_isGrounded);
         m_wasGrounded = m_isGrounded;
-        //Drowning handling
-        if (!m_isGrounded && transform.position.y < -3)
-        {
-
-        }
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -297,12 +300,23 @@ public class DemoCharacter : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.tag == ("LethalObstacle"))
+        {
+            PanelLethalObstacle.SetActive(true);
+            hb.gameObject.SetActive(false);
+            chrctrIsDead = true;
+            m_rigidBody.velocity = Vector3.zero;
+            m_rigidBody.isKinematic = true;
+            m_animator.gameObject.SetActive(false);
+        }
         if (other.gameObject.tag == ("Obstacle"))
         {
             Debug.Log("You hit an obstacle - YOU LOSE A LIFE!!");
-            //panelObstacle.gameObject.SetActive(true);
-            //StartCoroutine(StopTimeForObstacle());
+            PanelObstacle.gameObject.SetActive(true);
+            StartCoroutine(StopTimeForObstacle());
             healthCount -= 1;
+            ps.Play();
+            StartCoroutine(ChangeSize());
             if (healthCount == 2)
             {
                 hb.size = 0.6f;
@@ -313,10 +327,88 @@ public class DemoCharacter : MonoBehaviour
                 hb.size = 0.2f;
                 hb.targetGraphic.color = Color.red;
             }
-            ps.Play();
-            StartCoroutine(ChangeSize());
+            if(healthCount<1)
+            {
+                hb.gameObject.SetActive(false);
+                chrctrIsDead = true;
+                m_rigidBody.velocity = Vector3.zero;
+                m_rigidBody.isKinematic = true;
+                m_animator.gameObject.SetActive(false);
+                OutOfLives.SetActive(true);
+            }
+           
         }
-       
+        if (other.gameObject.tag == ("J")|| other.gameObject.tag == ("A")|| other.gameObject.tag == ("W")|| other.gameObject.tag == ("S"))
+        {
+            PanelCorrectLetter.gameObject.SetActive(true);
+            StartCoroutine(StopTimeForObstacle());
+            collected = collected +other.gameObject.tag;
+            print(collected);
+            Destroy(other.gameObject);
+            if(other.gameObject.tag == ("J"))
+                CorrectPanel.gameObject.transform.Find("J").gameObject.SetActive(true);
+            if (other.gameObject.tag == ("A"))
+                CorrectPanel.gameObject.transform.Find("A").gameObject.SetActive(true);
+            if (other.gameObject.tag == ("W"))
+                CorrectPanel.gameObject.transform.Find("W").gameObject.SetActive(true);
+            if (other.gameObject.tag == ("S"))
+                CorrectPanel.gameObject.transform.Find("S").gameObject.SetActive(true);
+            if (collected.Contains("J") && collected.Contains("A") && collected.Contains("W") && collected.Contains("S"))
+            {
+                stop = true;
+                characterIsMoving = false;
+                Congratulations.gameObject.SetActive(true);
+            }
+        }
+        if (other.gameObject.tag == ("B") || other.gameObject.tag == ("C") || other.gameObject.tag == ("L") || other.gameObject.tag == ("G"))
+        {
+            countWrong++;
+            PanelWrongLetter.gameObject.SetActive(true);
+            StartCoroutine(StopTimeForObstacle());
+            Destroy(other.gameObject);
+            if (other.gameObject.tag == ("B"))
+                IncorrectPanel.gameObject.transform.Find("B").gameObject.SetActive(true);
+            if (other.gameObject.tag == ("C"))
+                IncorrectPanel.gameObject.transform.Find("C").gameObject.SetActive(true);
+            if (other.gameObject.tag == ("L"))
+                IncorrectPanel.gameObject.transform.Find("L").gameObject.SetActive(true);
+            if (other.gameObject.tag == ("G"))
+                IncorrectPanel.gameObject.transform.Find("G").gameObject.SetActive(true);
+            if(countWrong==3)
+            {
+                Incorrect3.SetActive(true);
+                stop = true;
+                characterIsMoving = false;
+            }
+        }
+    }
+    public void displayHints()
+    {
+        stop = true;
+        m_rigidBody.velocity = Vector3.zero;
+        characterIsMoving = false;
+        Display.SetActive(true);
+        if(displayHint==5)
+        {
+            Display.transform.Find("Text").GetComponent<Text>().text = "To Move Right: Swipe Right or click -->";
+            Timer -= 1;
+        }
+        if (displayHint == 4 || displayHint==3)
+        {
+            Display.transform.Find("Text").GetComponent<Text>().text = "To Move Left: Swipe Left or click <--";
+            Timer -= 1;
+        }
+        if (displayHint == 2)
+        {
+            Display.transform.Find("Text").GetComponent<Text>().text = "To Jump: Swip Up or Press Space or Up arrow";
+            Timer -= 2;
+        }
+        if (displayHint == 1)
+        {
+            Display.transform.Find("Text").GetComponent<Text>().text = "Avoid Wrong letters by jumping or moving Left/Right";
+            //Timer -= 2;
+        }
+        StartCoroutine(StopTime());
     }
     public IEnumerator ChangeSize()
     {
@@ -325,5 +417,27 @@ public class DemoCharacter : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         ps.Stop();
         transform.localScale = new Vector3(1, 1.3f, 1);
+    }
+    public void playAgain()
+    {
+        SceneManager.LoadScene("Demo");
+    }
+    public void chooseDifficulty()
+    {
+        SceneManager.LoadScene("Difficulty");
+    }
+    private IEnumerator StopTime()
+    {
+        yield return new WaitForSeconds(3);
+        Display.SetActive(false);
+        stop = false;
+        characterIsMoving = true;
+    }
+    private IEnumerator StopTimeForObstacle()
+    {
+        yield return new WaitForSeconds(0.5f);
+        PanelObstacle.gameObject.SetActive(false);
+        PanelCorrectLetter.gameObject.SetActive(false);
+        PanelWrongLetter.gameObject.SetActive(false);
     }
 }
