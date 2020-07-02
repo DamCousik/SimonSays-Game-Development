@@ -14,6 +14,7 @@ public class DisplayLetters : MonoBehaviour
     GameObject button;
     bool state = false;
     string newLetter;
+    int index = 0;
 
     public void DisplayCollectedLetters(string letterValue)
     {
@@ -21,7 +22,14 @@ public class DisplayLetters : MonoBehaviour
         {
             if(c.Key.Equals(letterValue))
             {
-                btn[newLetter.IndexOf(letterValue)].transform.GetChild(0).GetComponent<Text>().text = " " + letterValue;
+                if(!string.IsNullOrEmpty(btn[newLetter.IndexOf(letterValue)].transform.GetChild(0).GetComponent<Text>().text))
+                {
+                    index = newLetter.IndexOf(letterValue) + 1;
+                    btn[newLetter.IndexOf(letterValue, index)].transform.GetChild(0).GetComponent<Text>().text = " " + letterValue;
+                }
+                else
+                    btn[newLetter.IndexOf(letterValue)].transform.GetChild(0).GetComponent<Text>().text = " " + letterValue;
+
                 state = true;
             }
         }
