@@ -2,8 +2,9 @@
  using System.Collections;
  using UnityEngine.EventSystems;
  using UnityEngine.SceneManagement;
- 
- public class ZoneTwoClick : MonoBehaviour {
+
+public class ZoneTwoClick : MonoBehaviour
+{
 
     public GameObject secondZone;
     public int val = 2;
