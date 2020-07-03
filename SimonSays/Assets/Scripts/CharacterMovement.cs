@@ -111,8 +111,6 @@ public class CharacterMovement : MonoBehaviour
         characterIsMoving = true;
         panelHint.SetActive(false);
         transform.Translate(0, 0, speed * Time.deltaTime);
-        Vector3 newRight = new Vector3(plainRightMax, transform.position.y, transform.position.z);
-        Vector3 newLeft = new Vector3(plainLeftMax, transform.position.y, transform.position.z);
         if (transform.position.x > 1.52f)
             transform.position = new Vector3(1.52f, transform.position.y, transform.position.z);
         if (transform.position.x < -1.52f)
@@ -394,12 +392,6 @@ public class CharacterMovement : MonoBehaviour
             Debug.Log("Exception with Health!" + healthObj);
         }
 
-    }
-
-    private IEnumerator StopTimeForLethalObstacle()
-    {
-        yield return new WaitForSeconds(10);
-        panelLethalObstacle.SetActive(false);
     }
 
     private IEnumerator StopTimeForObstacle()

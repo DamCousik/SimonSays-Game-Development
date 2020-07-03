@@ -20,6 +20,10 @@ public class StartGameMenu : MonoBehaviour
     {
         SceneManager.LoadScene("StartGameScreen");
     }
+    public void demoLevel()
+    {
+        SceneManager.LoadScene("Demo");
+    }
     public void quitUI()
     {
         #if UNITY_EDITOR
