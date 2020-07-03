@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System;
+using TMPro;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -43,10 +44,13 @@ public class DemoCharacter : MonoBehaviour
     public GameObject Incorrect3;
     public GameObject OutOfLives;
     public GameObject Display;
-    string collected;
+    string collected="";
     int countWrong = 0;
-    int displayHint = 5;
+    int displayHint = 4;
     float Timer;
+    bool x=false;
+    bool waitingForRight = false, waitingForLeft=false, waitingForUp=false;
+
     public void Initialize(GameObject character)
     {
         m_animator = character.GetComponent<Animator>();
@@ -81,53 +85,60 @@ public class DemoCharacter : MonoBehaviour
     }
     void Update()
     {
+        int keyOrTouch = 0;
         if (!started)
         {
             panelHint.SetActive(true);
             return;
         }
-        if (stop)
-        {
-            return;
-        }
-        characterIsMoving = true;
-        panelHint.SetActive(false);    
-        transform.Translate(0, 0, speed * Time.deltaTime);
-        if (transform.position.x > 1.52f)
-            transform.position = new Vector3(1.52f, transform.position.y, transform.position.z);
-        if (transform.position.x < -1.52f)
-            transform.position = new Vector3(-1.52f, transform.position.y, transform.position.z);
         if (Input.anyKey)
         {
+            keyOrTouch = 1;
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
                 right = true;
-                left = false;
+                left = false;              
+                if(x && waitingForRight)
+                {
+                    print("From right");
+                    Display.SetActive(false);
+                    stop = false;
+                    characterIsMoving = true;
+                    displayHint--;
+                }
+                waitingForRight = false;
             }
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 right = false;
-                left = true;
+                left = true;              
+                if (x && waitingForLeft)
+                {
+                    print("From left");
+                    Display.SetActive(false);
+                    stop = false;
+                    characterIsMoving = true;
+                    displayHint--;
+                }
+                waitingForLeft = false;
             }
             if (Input.GetKeyDown(KeyCode.UpArrow) || (Input.GetKey(KeyCode.Space)))
             {
+                if (x && waitingForUp)
+                {
+                    print("From Up");
+                    Display.SetActive(false);
+                    stop = false;
+                    characterIsMoving = true;
+                    displayHint--;
+                }
                 JumpingAndLanding(false);
-            }
-            if (left == true)
-            {
-                float checkMin = Mathf.Min(transform.position.x + 1, 1);
-                transform.position = new Vector3(checkMin, transform.position.y, transform.position.z);
-                left = false;
-            }
-            if (right == true)
-            {
-                float checkMax = Mathf.Max(transform.position.x - 1, -1);
-                transform.position = new Vector3(checkMax, transform.position.y, transform.position.z);
-                right = false;
+                waitingForUp = false;
             }
         }
         if (Input.touchCount > 0)
         {
+            keyOrTouch = 2;
             if (avoidHint)
             {
                 avoidHint = false;
@@ -151,18 +162,71 @@ public class DemoCharacter : MonoBehaviour
                 {
                     right = true;
                     left = false;
-                    print("right true");
+                    if (x && waitingForRight)
+                    {
+                        print("From right");
+                        Display.SetActive(false);
+                        stop = false;
+                        characterIsMoving = true;
+                        displayHint--;
+                    }
+                    waitingForRight = false;
                 }
                 if (touchBx - touchEx > 100)
                 {
                     right = false;
                     left = true;
-                    print("Left true");
+                    if (x && waitingForLeft)
+                    {
+                        print("From left");
+                        Display.SetActive(false);
+                        stop = false;
+                        characterIsMoving = true;
+                        displayHint--;
+                    }
+                    waitingForLeft = false;
                 }
                 if (Mathf.Abs(touchEy - touchBy) > 200)
                 {
+                    if (x && waitingForUp)
+                    {
+                        print("From Up");
+                        Display.SetActive(false);
+                        stop = false;
+                        characterIsMoving = true;
+                        displayHint--;
+                    }
                     JumpingAndLanding(true);
+                    waitingForUp = false;
                 }
+            }
+        }
+        if (stop)
+        {
+            right = false;
+            left = false;
+            return;
+        }
+        characterIsMoving = true;
+        panelHint.SetActive(false);    
+        transform.Translate(0, 0, speed * Time.deltaTime);
+        if(keyOrTouch==1)
+        { 
+            if (left == true)
+            {
+                float checkMin = Mathf.Min(transform.position.x + 1, 1);
+                transform.position = new Vector3(checkMin, transform.position.y, transform.position.z);
+                left = false;
+            }
+            if (right == true)
+            {
+                float checkMax = Mathf.Max(transform.position.x - 1, -1);
+                transform.position = new Vector3(checkMax, transform.position.y, transform.position.z);
+                right = false;
+            }
+        }
+        if(keyOrTouch==2)
+        {
                 if (left == true)
                 {
                     float checkMin = Mathf.Min(myPos + 1, 1);
@@ -177,7 +241,7 @@ public class DemoCharacter : MonoBehaviour
                     myPos = checkMax;
                     right = false;
                 }
-            }
+            
         }
     }
     void FixedUpdate()
@@ -196,8 +260,7 @@ public class DemoCharacter : MonoBehaviour
         Timer += Time.deltaTime;
         if (displayHint > 0 && Timer>2)
         {
-            displayHints();
-            displayHint--;
+            displayHints();          
         }
         //Animation
         Transform camera = Camera.main.transform;
@@ -341,9 +404,20 @@ public class DemoCharacter : MonoBehaviour
         if (other.gameObject.tag == ("J")|| other.gameObject.tag == ("A")|| other.gameObject.tag == ("W")|| other.gameObject.tag == ("S"))
         {
             PanelCorrectLetter.gameObject.SetActive(true);
-            StartCoroutine(StopTimeForObstacle());
+            stop = true;
+            characterIsMoving = false;          
             collected = collected +other.gameObject.tag;
-            print(collected);
+            StartCoroutine(StopTimeForObstacle());
+            if (collected.Contains("J") && collected.Contains("A") && collected.Contains("W") && collected.Contains("S"))
+            {
+                hb.gameObject.SetActive(false);
+                chrctrIsDead = true;
+                stop = true;
+                m_rigidBody.velocity = Vector3.zero;
+                m_rigidBody.isKinematic = true;
+                m_animator.gameObject.SetActive(false);
+                Congratulations.gameObject.SetActive(true);
+            }           
             Destroy(other.gameObject);
             if(other.gameObject.tag == ("J"))
                 CorrectPanel.gameObject.transform.Find("J").gameObject.SetActive(true);
@@ -353,17 +427,14 @@ public class DemoCharacter : MonoBehaviour
                 CorrectPanel.gameObject.transform.Find("W").gameObject.SetActive(true);
             if (other.gameObject.tag == ("S"))
                 CorrectPanel.gameObject.transform.Find("S").gameObject.SetActive(true);
-            if (collected.Contains("J") && collected.Contains("A") && collected.Contains("W") && collected.Contains("S"))
-            {
-                stop = true;
-                characterIsMoving = false;
-                Congratulations.gameObject.SetActive(true);
-            }
+           
         }
         if (other.gameObject.tag == ("B") || other.gameObject.tag == ("C") || other.gameObject.tag == ("L") || other.gameObject.tag == ("G"))
         {
             countWrong++;
             PanelWrongLetter.gameObject.SetActive(true);
+            stop = true;
+            characterIsMoving = false;
             StartCoroutine(StopTimeForObstacle());
             Destroy(other.gameObject);
             if (other.gameObject.tag == ("B"))
@@ -381,34 +452,84 @@ public class DemoCharacter : MonoBehaviour
                 characterIsMoving = false;
             }
         }
+        if(other.gameObject.tag==("Test") && collected=="")
+        {
+            MissLetter.SetActive(true);
+            hb.gameObject.SetActive(false);
+            chrctrIsDead = true;
+            stop = true;
+            characterIsMoving = false;
+            m_rigidBody.velocity = Vector3.zero;
+            m_rigidBody.isKinematic = true;
+            m_animator.gameObject.SetActive(false);
+        }
+        if (other.gameObject.tag == ("WTest") && !collected.Contains("W"))
+        {
+            MissLetter.SetActive(true);
+            hb.gameObject.SetActive(false);
+            chrctrIsDead = true;
+            stop = true;
+            m_rigidBody.velocity = Vector3.zero;
+            m_rigidBody.isKinematic = true;
+            m_animator.gameObject.SetActive(false);
+            characterIsMoving = false;
+        }
+        if (other.gameObject.tag == ("ATest") && !collected.Contains("A"))
+        {
+            MissLetter.SetActive(true);
+            hb.gameObject.SetActive(false);
+            chrctrIsDead = true;
+            stop = true;
+            m_rigidBody.velocity = Vector3.zero;
+            m_rigidBody.isKinematic = true;
+            m_animator.gameObject.SetActive(false);
+            characterIsMoving = false;
+        }
+        if (other.gameObject.tag == ("STest") && !collected.Contains("S"))
+        {
+            MissLetter.SetActive(true);
+            hb.gameObject.SetActive(false);
+            chrctrIsDead = true;
+            stop = true;
+            m_rigidBody.velocity = Vector3.zero;
+            m_rigidBody.isKinematic = true;
+            m_animator.gameObject.SetActive(false);
+            characterIsMoving = false;
+        }
     }
     public void displayHints()
     {
+        Display.transform.Find("Right").GetComponent<Image>().gameObject.SetActive(false);
+        Display.transform.Find("Left").GetComponent<Image>().gameObject.SetActive(false);
+        Display.transform.Find("Up").GetComponent<Image>().gameObject.SetActive(false);
         stop = true;
         m_rigidBody.velocity = Vector3.zero;
         characterIsMoving = false;
         Display.SetActive(true);
-        if(displayHint==5)
+        if(displayHint==4)
         {
-            Display.transform.Find("Text").GetComponent<Text>().text = "To Move Right: Swipe Right or click -->";
+            Display.transform.Find("Text").GetComponent<Text>().text = "To Move Right: Swipe Right or click ";
+            Display.transform.Find("Right").GetComponent<Image>().gameObject.SetActive(true);
             Timer -= 1;
+            waitingForRight = true;
+            x = true;
         }
-        if (displayHint == 4 || displayHint==3)
+        if (displayHint == 2 || displayHint==3)
         {
-            Display.transform.Find("Text").GetComponent<Text>().text = "To Move Left: Swipe Left or click <--";
+            Display.transform.Find("Text").GetComponent<Text>().text = "To Move Left: Swipe Left or click ";       
+            Display.transform.Find("Left").GetComponent<Image>().gameObject.SetActive(true);
             Timer -= 1;
-        }
-        if (displayHint == 2)
-        {
-            Display.transform.Find("Text").GetComponent<Text>().text = "To Jump: Swip Up or Press Space or Up arrow";
-            Timer -= 2;
+            waitingForLeft = true;
+            x = true;
         }
         if (displayHint == 1)
         {
-            Display.transform.Find("Text").GetComponent<Text>().text = "Avoid Wrong letters by jumping or moving Left/Right";
-            //Timer -= 2;
+            Display.transform.Find("Text").GetComponent<Text>().text = "To Jump: Swip Up or ";
+            Timer -= 2;
+            Display.transform.Find("Up").GetComponent<Image>().gameObject.SetActive(true);
+            waitingForUp = true;
+            x = true;
         }
-        StartCoroutine(StopTime());
     }
     public IEnumerator ChangeSize()
     {
@@ -426,18 +547,13 @@ public class DemoCharacter : MonoBehaviour
     {
         SceneManager.LoadScene("Difficulty");
     }
-    private IEnumerator StopTime()
-    {
-        yield return new WaitForSeconds(3);
-        Display.SetActive(false);
-        stop = false;
-        characterIsMoving = true;
-    }
     private IEnumerator StopTimeForObstacle()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(3);
         PanelObstacle.gameObject.SetActive(false);
         PanelCorrectLetter.gameObject.SetActive(false);
         PanelWrongLetter.gameObject.SetActive(false);
+        stop = false;
+        characterIsMoving = true;
     }
 }

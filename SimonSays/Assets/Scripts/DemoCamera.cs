@@ -23,7 +23,6 @@ public class DemoCamera : MonoBehaviour
 
 	void FixedUpdate()
 	{
-
 		DemoCharacter demo = character.GetComponent<DemoCharacter>();
 		if (!demo.chrctrIsDead && demo.characterIsMoving)
 		{ 
