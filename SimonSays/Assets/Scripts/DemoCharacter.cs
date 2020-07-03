@@ -435,7 +435,7 @@ public class DemoCharacter : MonoBehaviour
     }
     private IEnumerator StopTimeForObstacle()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1);
         PanelObstacle.gameObject.SetActive(false);
         PanelCorrectLetter.gameObject.SetActive(false);
         PanelWrongLetter.gameObject.SetActive(false);
