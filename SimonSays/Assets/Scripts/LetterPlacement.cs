@@ -6,22 +6,27 @@ using UnityEngine;
 
 public class LetterPlacement : MonoBehaviour
 {
-    int letterSpawn;
-    private int xPos;
+    public int letterSpawn;
+    public int xPos;
     private float zPos = 0;
     public GameObject[] letterDistribution;
+    public GameObject[] toughLetterDistribution;
     public List<GameObject> newLetterPlacements = new List<GameObject>();
+    public List<GameObject> toughLetterPlacements = new List<GameObject>();
     IEnumerable <GameObject> extraLetterList;
+    IEnumerable <GameObject> toughLetterList;
     public List<GameObject> letterDistList = new List<GameObject>();
+    public List<GameObject> toughLetterPlt = new List<GameObject>();
     public List<GameObject> newExtraLetterList = new List<GameObject>();
+    public List<GameObject> newToughLetterList = new List<GameObject>();
     public List<GameObject> letterPlacementResult = new List<GameObject>();
     public Dictionary<string, int> wordAndIndexPairs = new Dictionary<string, int>();
-    //string level = "Hard";
-
+    public GameObject playerObj;
+ 
     public int letterCount = 0;
-    int totalLetters;
-    int letterSpacing;
-    int correctLetterCount;
+    public int totalLetters;
+    public int letterSpacing;
+    public int correctLetterCount;
     readonly string zoneWord = (SentenceJumble.originalWords[ClickZone.wordNum]).ToUpper();
 
     void Start()
@@ -97,7 +102,7 @@ public class LetterPlacement : MonoBehaviour
     {
         try
         {
-           int difference = 0;
+            int difference = 0;
 
             for (int i = 0; i < correctLetterCount; i++)
             {
@@ -107,7 +112,17 @@ public class LetterPlacement : MonoBehaviour
                     Debug.Log("Letter 2 : " + wordAndIndexPairs[zoneWord[j].ToString()]);
                     Debug.Log("Letter 3 : " + letterDistribution[wordAndIndexPairs[zoneWord[j].ToString()]]);
                     newLetterPlacements.Add(letterDistribution[wordAndIndexPairs[zoneWord[j].ToString()]]);
+                    toughLetterPlacements.Add(toughLetterDistribution[wordAndIndexPairs[zoneWord[j].ToString()]]);
                 }
+            }
+
+            toughLetterPlt = toughLetterDistribution.OfType<GameObject>().ToList();
+            toughLetterList = toughLetterPlt.Except(toughLetterPlacements);
+            newToughLetterList = toughLetterList.OrderBy(x => Guid.NewGuid()).ToList();
+
+            foreach (GameObject gobj in newToughLetterList)
+            {
+                Debug.Log("TOUGH Letter Placement list at the start = " + gobj);
             }
 
             foreach (GameObject gobj in newLetterPlacements)
@@ -120,41 +135,25 @@ public class LetterPlacement : MonoBehaviour
             newExtraLetterList = extraLetterList.OrderBy(x => Guid.NewGuid()).ToList();
             Debug.Log("Extralist count = " + newExtraLetterList.Count);
 
-            //remainingLetters = totalLetters - (zoneWord.Length * correctLetterCount);
-            //Debug.Log("Remaining letters = " + remainingLetters);
-
-            while(newLetterPlacements.Count <= totalLetters)
+            while (newLetterPlacements.Count <= totalLetters)
             {
-               newLetterPlacements.AddRange(newExtraLetterList);
+                newLetterPlacements.AddRange(newExtraLetterList);
             }
 
             difference = newLetterPlacements.Count - totalLetters;
             newLetterPlacements.RemoveRange(totalLetters, difference);
 
             letterPlacementResult = newLetterPlacements.OrderBy(x => Guid.NewGuid()).ToList();
-
-            foreach (GameObject gobj in newExtraLetterList)
-            {
-                Debug.Log("new Extra Placement list = " + gobj);
-            }
-
-            foreach (GameObject gobj in letterPlacementResult)
-            {
-                Debug.Log("new Letter Placement result at the end = " + gobj);
-            }
-
-            Debug.Log("Total letters: " + totalLetters);
-            Debug.Log("New Letter Placement Count: " + newLetterPlacements.Count);
+            Debug.Log("Total Letter Count = " + totalLetters);
 
             for (int i = 0; i < letterPlacementResult.Count; i++)
             {
                 StartCoroutine(ObstacleDrop(letterPlacementResult[i], letterSpacing));
             }
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             Debug.Log(e);
         }
-        
     }
 }

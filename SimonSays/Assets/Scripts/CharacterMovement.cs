@@ -108,6 +108,7 @@ public class CharacterMovement : MonoBehaviour
         {
             return;
         }
+
         characterIsMoving = true;
         panelHint.SetActive(false);
         transform.Translate(0, 0, speed * Time.deltaTime);
@@ -207,10 +208,12 @@ public class CharacterMovement : MonoBehaviour
             panelHint.SetActive(true);
             return;
         }
+
         if (lc.stop)
         {
             return;
         }
+
         panelHint.SetActive(false);
         characterIsMoving = true;
         //Animation

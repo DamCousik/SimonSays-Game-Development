@@ -12,19 +12,20 @@ public class DisplayLetters : MonoBehaviour
     public GameObject correctWordPanel;
     private GameObject[] btn;
     GameObject button;
-    bool state = false;
     string newLetter;
     int index = 0;
+    public float newLetterCount = 0;
 
     public void DisplayCollectedLetters(string letterValue)
     {
-        foreach(KeyValuePair<string,int> c in LetterCollection.charWordFrequencies)
+        bool state = false;
+        foreach (KeyValuePair<string,int> c in LetterCollection.charWordFrequencies)
         {
-            if(c.Key.Equals(letterValue))
+            if((c.Key.Equals(letterValue)) && (c.Value > 0))
             {
                 if(!string.IsNullOrEmpty(btn[newLetter.IndexOf(letterValue)].transform.GetChild(0).GetComponent<Text>().text))
                 {
-                    index = newLetter.IndexOf(letterValue) + 1;
+                    index = (newLetter.IndexOf(letterValue)) + 1;
                     btn[newLetter.IndexOf(letterValue, index)].transform.GetChild(0).GetComponent<Text>().text = " " + letterValue;
                 }
                 else
@@ -33,7 +34,7 @@ public class DisplayLetters : MonoBehaviour
                 state = true;
             }
         }
-
+        
         if (state == false)
         {
             IncorrectLetters.SetActive(true);
@@ -45,7 +46,7 @@ public class DisplayLetters : MonoBehaviour
         }
     }
 
-    public void wordButtons(string word)
+    public void WordButtons(string word)
     {
         newLetter = word.ToUpper();
         for(int i = 0; i < word.Length-1; i++)
