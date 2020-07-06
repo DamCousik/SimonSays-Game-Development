@@ -255,23 +255,22 @@ public class LetterCollection : MonoBehaviour
 
             if (countIncorrectLetters == 3)
             {
-                if(IncorrectLetterChoices.tgState)
+                if (IncorrectLetterChoices.tgState)
                 {
                     tgButton.SetActive(false);
                     arenaButton.SetActive(false);
                     arenaButtonClone.SetActive(true);
                 }
-                else if(IncorrectLetterChoices.arenaEntry)
+                else if (IncorrectLetterChoices.arenaEntry)
                 {
                     tgButton.SetActive(true);
                     arenaButton.SetActive(true);
                     arenaButtonClone.SetActive(false);
                 }
-
-                panelBeforeArenaZone.SetActive(true);
-                panelWrongLetter.SetActive(false);
                 charMove.characterIsMoving = false;
                 stop = true;
+                panelBeforeArenaZone.SetActive(true);
+                panelWrongLetter.SetActive(false);
                 Debug.Log("You collected 3 incorrected letters! - YOU NEED TO START OVER!!");
             }
 
@@ -279,10 +278,10 @@ public class LetterCollection : MonoBehaviour
             {
                 isGameWon = true;
                 stop = true;
-                panelGameWon.SetActive(true);
                 charMove.chrctrIsDead = true;
                 charMove.m_rigidBody.velocity = Vector3.zero;
                 charMove.m_rigidBody.isKinematic = true;
+                panelGameWon.SetActive(true);
                 Debug.Log("Congratulations! You've successfully spelt out the word correctly! SimonSays - YOU COMPLETED THIS ZONE!!!");
                 StartCoroutine(StopTime());
                 StartCoroutine(WaitForSceneLoad());
