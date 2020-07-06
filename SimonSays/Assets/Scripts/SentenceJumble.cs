@@ -359,6 +359,8 @@ public class SentenceJumble : MonoBehaviour
                 scenePanel.SetActive(false);
                 yield return new WaitForSeconds(3);
             }
+            //clearing dictionary
+            LetterCollection.zoneState.Clear();
             SceneManager.LoadScene("ArenaZone");
         }
         else
