@@ -389,18 +389,18 @@ public class ClickZone : MonoBehaviour
                         else if (hit.collider.gameObject.tag == "z3")
                         {
                             zoneValue = hit.collider.gameObject;
-                            SceneManager.LoadScene("Zone-C-Screen");
+                            SceneManager.LoadScene("Zone-E-Screen");
                         }
                         else if (hit.collider.gameObject.tag == "z4")
                         {
                             zoneValue = hit.collider.gameObject;
-                            SceneManager.LoadScene("Zone-D-Screen");
+                            SceneManager.LoadScene("Zone-F-Screen");
                         }
                         //
                         else if (hit.collider.gameObject.tag == "z5")
                         {
                             zoneValue = hit.collider.gameObject;
-                            SceneManager.LoadScene("Zone-A-Screen");
+                            SceneManager.LoadScene("Zone-G-Screen");
                             //A for now
                         }
                         //
