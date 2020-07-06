@@ -62,6 +62,10 @@ public class SentenceJumble : MonoBehaviour
     public GameObject retryPanel;
     public GameObject scenePanel;
     public GameObject introPanel;
+    public GameObject wordsPanel;
+    public GameObject word3Hint;
+    public GameObject word4Hint;
+    public GameObject word5Hint;
     public static List<string> originalWords;
 
     [Header("UI REFERENCE")]
@@ -337,12 +341,31 @@ public class SentenceJumble : MonoBehaviour
         {
             //currentSentence++;
             //ShowScramble(currentSentence);
+            if (originalWords.Count == 3)
+            {
+                word3Hint.SetActive(true);
+                scenePanel.SetActive(false);
+                yield return new WaitForSeconds(2);
+            }
+            else if (originalWords.Count == 4)
+            {
+                word4Hint.SetActive(true);
+                scenePanel.SetActive(false);
+                yield return new WaitForSeconds(2);
+            }
+            else if (originalWords.Count == 5)
+            {
+                word5Hint.SetActive(true);
+                scenePanel.SetActive(false);
+                yield return new WaitForSeconds(3);
+            }
             SceneManager.LoadScene("ArenaZone");
         }
         else
         {
             retryPanel.SetActive(true);
             scenePanel.SetActive(false);
+            wordsPanel.SetActive(false);
         }
     }
 }

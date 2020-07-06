@@ -26,8 +26,8 @@ public class CameraMove : MonoBehaviour {
 		{ 
 		    MoveObj();
 	    }
-        
-    }
+	
+	}
 
     void MoveObj()
     {

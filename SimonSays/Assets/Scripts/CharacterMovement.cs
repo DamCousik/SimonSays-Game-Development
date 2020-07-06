@@ -31,7 +31,6 @@ public class CharacterMovement : MonoBehaviour
     public LetterCollection lc;
     public ParticleSystem ps;
     bool started;
-
     public Scrollbar hb;
     bool avoidHint = false;
     float myPos=0;
@@ -112,8 +111,6 @@ public class CharacterMovement : MonoBehaviour
         characterIsMoving = true;
         panelHint.SetActive(false);
         transform.Translate(0, 0, speed * Time.deltaTime);
-        Vector3 newRight = new Vector3(plainRightMax, transform.position.y, transform.position.z);
-        Vector3 newLeft = new Vector3(plainLeftMax, transform.position.y, transform.position.z);
         if (transform.position.x > 1.52f)
             transform.position = new Vector3(1.52f, transform.position.y, transform.position.z);
         if (transform.position.x < -1.52f)
@@ -248,8 +245,6 @@ public class CharacterMovement : MonoBehaviour
             }
         }
     }
-
-
     private void OnCollisionEnter(Collision collision)
     {
         ContactPoint[] contactPoints = collision.contacts;
@@ -385,8 +380,7 @@ public class CharacterMovement : MonoBehaviour
                 Debug.Log("You've reached the end of the zone! Goodbye!!");
                 chrctrIsDead = true;
                 panelLethalObstacle.SetActive(true);
-                StartCoroutine(StopTimeForLethalObstacle());
-                SceneManager.LoadScene("ArenaZone");
+                lc.stop = true;
             }
         }
         catch (Exception)
@@ -394,12 +388,6 @@ public class CharacterMovement : MonoBehaviour
             Debug.Log("Exception with Health!");
         }
 
-    }
-
-    private IEnumerator StopTimeForLethalObstacle()
-    {
-        yield return new WaitForSeconds(10);
-        panelLethalObstacle.SetActive(false);
     }
 
     private IEnumerator StopTimeForObstacle()
@@ -418,6 +406,29 @@ public class CharacterMovement : MonoBehaviour
     public void playAgainUI()
     {
         SceneManager.LoadScene("ArenaZone");
+    }
+    public void playAgainLethal()
+    {
+        if (ClickZone.zoneTag == "z1")
+        {
+            SceneManager.LoadScene("Zone-A-Screen");
+        }
+        else if (ClickZone.zoneTag == "z2")
+        {
+            SceneManager.LoadScene("Zone-B-Screen");
+        }
+        else if (ClickZone.zoneTag == "z3")
+        {
+            SceneManager.LoadScene("Zone-C-Screen");
+        }
+        else if (ClickZone.zoneTag == "z4")
+        {
+            SceneManager.LoadScene("Zone-D-Screen");
+        }
+        else if (ClickZone.zoneTag == "z5")
+        {
+            SceneManager.LoadScene("Zone-A-Screen");
+        }
     }
     public void mainMenuUI()
     {
