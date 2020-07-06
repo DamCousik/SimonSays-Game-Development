@@ -5,18 +5,58 @@ using UnityEngine.UI;
 
 public class DisplayLetters : MonoBehaviour
 {
-    public GameObject CollectedLetters;
-    public GameObject Panel;
+    public GameObject IncorrectLetters;
+    public GameObject inCorrectWordPanel;
+
+    public GameObject correctLetters;
+    public GameObject correctWordPanel;
+    private GameObject[] btn;
+    GameObject button;
+    string newLetter;
+    int index = 0;
+    public float newLetterCount = 0;
 
     public void DisplayCollectedLetters(string letterValue)
     {
-        Debug.Log("Inside DisplayCollectedLettersa method");
-        CollectedLetters.SetActive(true);
-        Debug.Log("Looping over collected letters : " + letterValue);
-        GameObject button = (GameObject)Instantiate(CollectedLetters);
-        button.transform.SetParent(Panel.transform,false);
-        button.transform.localScale = new Vector3(1.5f, 1.3f, 1.5f);
-        button.transform.GetChild(0).GetComponent<Text>().text = letterValue;
-        CollectedLetters.SetActive(false);
+        bool state = false;
+        foreach (KeyValuePair<string,int> c in LetterCollection.charWordFrequencies)
+        {
+            if((c.Key.Equals(letterValue)) && (c.Value > 0))
+            {
+                if(!string.IsNullOrEmpty(btn[newLetter.IndexOf(letterValue)].transform.GetChild(0).GetComponent<Text>().text))
+                {
+                    index = (newLetter.IndexOf(letterValue)) + 1;
+                    btn[newLetter.IndexOf(letterValue, index)].transform.GetChild(0).GetComponent<Text>().text = " " + letterValue;
+                }
+                else
+                    btn[newLetter.IndexOf(letterValue)].transform.GetChild(0).GetComponent<Text>().text = " " + letterValue;
+
+                state = true;
+            }
+        }
+        
+        if (state == false)
+        {
+            IncorrectLetters.SetActive(true);
+            button = (GameObject)Instantiate(IncorrectLetters);
+            button.transform.SetParent(inCorrectWordPanel.transform, false);
+            button.transform.localScale = new Vector3(1.5f, 1.3f, 1.5f);
+            button.transform.GetChild(0).GetComponent<Text>().text = letterValue;
+            IncorrectLetters.SetActive(false);
+        }
+    }
+
+    public void WordButtons(string word)
+    {
+        newLetter = word.ToUpper();
+        for(int i = 0; i < word.Length-1; i++)
+        {
+            correctLetters.SetActive(true);
+            button = (GameObject)Instantiate(correctLetters);
+            button.transform.SetParent(correctWordPanel.transform, false);
+            button.transform.localScale = new Vector3(1.5f, 1.3f, 1.5f);
+        }
+
+        btn = GameObject.FindGameObjectsWithTag("correctColLetter");
     }
 }

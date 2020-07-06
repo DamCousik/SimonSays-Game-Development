@@ -13,7 +13,7 @@ public class ShuffleZones : MonoBehaviour
     void Start()
     {
 
-        Shuffle(zones);
+        //Shuffle(zones);
         //StartCoroutine(ExecuteAfterTime(0.2f));   
 
     }

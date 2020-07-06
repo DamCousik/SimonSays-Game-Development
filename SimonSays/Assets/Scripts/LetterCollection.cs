@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class LetterCollection : MonoBehaviour
 {
-    public Dictionary<string, int> charWordFrequencies = new Dictionary<string, int>();
+    public static Dictionary<string, int> charWordFrequencies = new Dictionary<string, int>();
     public static Dictionary<GameObject, bool> zoneState = new Dictionary<GameObject, bool>();
 
     public List<string> collectedLetters = new List<string>();
@@ -15,16 +15,18 @@ public class LetterCollection : MonoBehaviour
     public int countCorrectLetters = 0;
     public GameObject panelWrongLetter;
     public GameObject panelBeforeArenaZone;
-    public GameObject panelBeforeStartGame;
+    public GameObject tgButton;
+    public GameObject arenaButton;
+    public GameObject arenaButtonClone;
     public GameObject panelGameWon;
-    public GameObject panelExtraLetters;
     public bool stop = false;
+    public bool panelState = false;
 
     public static GameObject zone;
 
     int wordLength = 0;
     public static bool isGameWon = false;
-    string word;
+    public static string word;
 
     public DisplayLetters dispLet;
     public CharacterMovement charMove;
@@ -33,6 +35,8 @@ public class LetterCollection : MonoBehaviour
     {
         word = SentenceJumble.originalWords[ClickZone.wordNum]; // Obtained from the arena
         UnityEngine.Debug.Log(word.ToUpper());
+
+        dispLet.WordButtons(word);
 
         foreach (char c in word)
         {
@@ -78,11 +82,10 @@ public class LetterCollection : MonoBehaviour
         panelGameWon.gameObject.SetActive(false);
     }
 
-    private IEnumerator StopTimeForWrongLetter()
+    public IEnumerator StopTimeForWrongLetter()
     {
         yield return new WaitForSeconds(10);
-        panelWrongLetter.gameObject.SetActive(false);
-        panelBeforeArenaZone.gameObject.SetActive(false);
+        panelWrongLetter.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -252,14 +255,24 @@ public class LetterCollection : MonoBehaviour
 
             if (countIncorrectLetters == 3)
             {
+                if(IncorrectLetterChoices.tgState)
+                {
+                    tgButton.SetActive(false);
+                    arenaButton.SetActive(false);
+                    arenaButtonClone.SetActive(true);
+                }
+                else if(IncorrectLetterChoices.arenaEntry)
+                {
+                    tgButton.SetActive(true);
+                    arenaButton.SetActive(true);
+                    arenaButtonClone.SetActive(false);
+                }
+
                 panelBeforeArenaZone.SetActive(true);
-                charMove.chrctrIsDead = true;
-                charMove.m_rigidBody.velocity = Vector3.zero;
-                charMove.m_rigidBody.isKinematic = true;
+                panelWrongLetter.SetActive(false);
+                charMove.characterIsMoving = false;
                 stop = true;
                 Debug.Log("You collected 3 incorrected letters! - YOU NEED TO START OVER!!");
-                StartCoroutine(StopTimeForWrongLetter());
-                StartCoroutine(WaitForSceneLoad());
             }
 
             if ((countCorrectLetters == wordLength) && (countIncorrectLetters < 3))
@@ -275,19 +288,6 @@ public class LetterCollection : MonoBehaviour
                 StartCoroutine(WaitForSceneLoad());
 
                 zoneState.Add(zone, isGameWon);
-     
-                //else
-                //{
-                //    panelExtraLetters.SetActive(true);
-                //    charMove.chrctrIsDead = true;
-                //    charMove.m_rigidBody.velocity = Vector3.zero;
-                //    charMove.m_rigidBody.isKinematic = true;
-                //    charMove.m_animator.gameObject.SetActive(false);
-                //    Debug.Log("You've collected extra letters which are irrelevant to the word. Sorry, but SimonSays - YOU LOSE!!!");
-                //    StartCoroutine(StopTime());
-                //    StartCoroutine(WaitForSceneLoad());
-                //}
-
             }
         }
         catch (Exception)
