@@ -409,23 +409,23 @@ public class CharacterMovement : MonoBehaviour
     }
     public void playAgainLethal()
     {
-        if (ClickZone.zoneTag == "z1")
+        if (ClickZone.zoneTag == "Zone1")
         {
             SceneManager.LoadScene("Zone-A-Screen");
         }
-        else if (ClickZone.zoneTag == "z2")
+        else if (ClickZone.zoneTag == "Zone2")
         {
             SceneManager.LoadScene("Zone-B-Screen");
         }
-        else if (ClickZone.zoneTag == "z3")
+        else if (ClickZone.zoneTag == "Zone3")
         {
             SceneManager.LoadScene("Zone-C-Screen");
         }
-        else if (ClickZone.zoneTag == "z4")
+        else if (ClickZone.zoneTag == "Zone4")
         {
             SceneManager.LoadScene("Zone-D-Screen");
         }
-        else if (ClickZone.zoneTag == "z5")
+        else if (ClickZone.zoneTag == "Zone5")
         {
             SceneManager.LoadScene("Zone-A-Screen");
         }

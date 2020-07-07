@@ -54,8 +54,10 @@ public class LetterCollection : MonoBehaviour
         {
             wordLength += item.Value;
         }
+        Debug.Log("Word Length: "+wordLength);
 
         UnityEngine.Debug.Log("ClickZone.zoneTag : ---- : " + ClickZone.zoneTag);
+        GameObject.Find("ZoneNumber").GetComponentInChildren<Text>().text = ClickZone.zoneTag;
         // zone = GameObject.FindWithTag(ClickZone.zoneTag);
         // UnityEngine.Debug.Log("zone : ---- : " + zone);
         // UnityEngine.Debug.Log("---------");
