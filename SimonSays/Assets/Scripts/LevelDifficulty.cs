@@ -20,4 +20,14 @@ public class LevelDifficulty : MonoBehaviour
         level = int.Parse(EventSystem.current.currentSelectedGameObject.name);
         SceneManager.LoadScene("Unjumble");
     }
+
+    public void MenuUI()
+    {
+        SceneManager.LoadScene("StartGameScreen");
+    }
+
+    public void diffUI()
+    {
+        SceneManager.LoadScene("Difficulty");
+    }
 }
