@@ -8,8 +8,8 @@ using UnityEngine.UI;
 public class LetterCollection : MonoBehaviour
 {
     public static Dictionary<string, int> charWordFrequencies = new Dictionary<string, int>();
-    public static Dictionary<GameObject, bool> zoneState = new Dictionary<GameObject, bool>();
-
+    public static Dictionary<string, bool> zoneState = new Dictionary<string, bool>();
+    
     public List<string> collectedLetters = new List<string>();
     public int countIncorrectLetters = 0;
     public int countCorrectLetters = 0;
@@ -22,7 +22,7 @@ public class LetterCollection : MonoBehaviour
     public bool stop = false;
     public bool panelState = false;
 
-    public static GameObject zone;
+    //public static GameObject zone;
 
     int wordLength = 0;
     public static bool isGameWon = false;
@@ -56,10 +56,12 @@ public class LetterCollection : MonoBehaviour
         }
 
         UnityEngine.Debug.Log("ClickZone.zoneTag : ---- : " + ClickZone.zoneTag);
-        zone = GameObject.FindWithTag(ClickZone.zoneTag);
-        UnityEngine.Debug.Log("zone : ---- : " + zone);
-        UnityEngine.Debug.Log("---------");
-        UnityEngine.Debug.Log(zone);
+        // zone = GameObject.FindWithTag(ClickZone.zoneTag);
+        // UnityEngine.Debug.Log("zone : ---- : " + zone);
+        // UnityEngine.Debug.Log("---------");
+        // UnityEngine.Debug.Log(zone);
+        //Destroy(GameObject.FindWithTag(ClickZone.zoneTag));
+
     }
 
     private IEnumerator WaitForSceneLoad()
@@ -287,7 +289,21 @@ public class LetterCollection : MonoBehaviour
                 StartCoroutine(StopTime());
                 StartCoroutine(WaitForSceneLoad());
 
-                zoneState.Add(zone, isGameWon);
+                zoneState.Add(ClickZone.zoneTag, isGameWon);
+                //added ClickZone.zoneTag to Dictionary
+     
+                //else
+                //{
+                //    panelExtraLetters.SetActive(true);
+                //    charMove.chrctrIsDead = true;
+                //    charMove.m_rigidBody.velocity = Vector3.zero;
+                //    charMove.m_rigidBody.isKinematic = true;
+                //    charMove.m_animator.gameObject.SetActive(false);
+                //    Debug.Log("You've collected extra letters which are irrelevant to the word. Sorry, but SimonSays - YOU LOSE!!!");
+                //    StartCoroutine(StopTime());
+                //    StartCoroutine(WaitForSceneLoad());
+                //}
+
             }
         }
         catch (Exception)
