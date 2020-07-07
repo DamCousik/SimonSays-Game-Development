@@ -241,6 +241,7 @@ public class LetterCollection : MonoBehaviour
             else if (charWordFrequencies.ContainsKey(other.gameObject.tag) && (charWordFrequencies[other.gameObject.tag] <= 0))
             {
                 countIncorrectLetters += 1;
+                Debug.Log("1) ---- OOPS! You bumped into a wrong letter " + other.gameObject.tag);
             }
 
             else
@@ -250,8 +251,8 @@ public class LetterCollection : MonoBehaviour
                     panelWrongLetter.gameObject.SetActive(true);
                     StartCoroutine(StopTimeForWrongLetter());
 
-                    Debug.Log("OOPS! You bumped into a wrong letter");
                     countIncorrectLetters += 1;
+                    Debug.Log("2) ---- OOPS! You bumped into a wrong letter " + other.gameObject.tag);
                 }
             }
 
@@ -273,7 +274,7 @@ public class LetterCollection : MonoBehaviour
                 stop = true;
                 panelBeforeArenaZone.SetActive(true);
                 panelWrongLetter.SetActive(false);
-                Debug.Log("You collected 3 incorrected letters! - YOU NEED TO START OVER!!");
+                Debug.Log("You collected 3 incorrected letters! - YOU NEED TO START OVER!! " + other.gameObject.tag);
             }
 
             if ((countCorrectLetters == wordLength) && (countIncorrectLetters < 3))
@@ -304,7 +305,7 @@ public class LetterCollection : MonoBehaviour
                 //}
 
             }
-        }
+         }
         catch (Exception)
         {
             Debug.Log("You have bumped into the wrong letter!");

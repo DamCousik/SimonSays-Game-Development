@@ -22,7 +22,8 @@ public class LetterPlacement : MonoBehaviour
     public List<GameObject> letterPlacementResult = new List<GameObject>();
     public Dictionary<string, int> wordAndIndexPairs = new Dictionary<string, int>();
     public GameObject playerObj;
- 
+    public GameObject[] avoidOtherLetters = new GameObject[0];
+
     public int letterCount = 0;
     public int totalLetters;
     public int letterSpacing;
@@ -60,25 +61,25 @@ public class LetterPlacement : MonoBehaviour
 
         if (LevelDifficulty.difficulty.Equals("Easy"))
         {
-            totalLetters = 60;
+            totalLetters = 40;
             letterSpacing = 6;
             correctLetterCount = 2;
         }
         else if(LevelDifficulty.difficulty.Equals("Medium"))
         {
-            totalLetters = 90;
+            totalLetters = 65;
             letterSpacing = 4;
             correctLetterCount = 2;
         }
         else if(LevelDifficulty.difficulty.Equals("Hard"))
         {
-            totalLetters = 120;
+            totalLetters = 80;
             letterSpacing = 3;
             correctLetterCount = 2;
         }
         else if (LevelDifficulty.difficulty.Equals("Extreme"))
         {
-            totalLetters = 170;
+            totalLetters = 95;
             letterSpacing = 2;
             correctLetterCount = 3;
         }
@@ -88,14 +89,69 @@ public class LetterPlacement : MonoBehaviour
 
     IEnumerator ObstacleDrop(GameObject letterSpawn, int spacing)
     {
-        xPos = UnityEngine.Random.Range(1, -2);
-        zPos -= spacing;
-        
-        GameObject obj = Instantiate(letterSpawn, new Vector3(xPos, (float)0.6, zPos), Quaternion.identity);
-        
-        obj.transform.localScale = new Vector3((float)0.5, (float)0.5, (float)0.03);
-        yield return new WaitForSeconds(0.005f);
+        Vector3 position = Vector3.zero;
+        bool validPosition = false;
 
+        while (!validPosition)
+        {
+            xPos = UnityEngine.Random.Range(1, -2);
+
+            if (zPos < -345)
+                zPos = 0;
+
+            zPos -= spacing;
+            position = new Vector3(xPos, (float)0.6, zPos);
+            validPosition = true;
+
+            Collider[] colliders = Physics.OverlapSphere(position, (spacing/3));
+
+            foreach (Collider col in colliders)
+            {
+                switch ((col.tag))
+                {
+                    case "Obstacle":
+                    case "A":
+                    case "B":
+                    case "C":
+                    case "D":
+                    case "E":
+                    case "F":
+                    case "G":
+                    case "H":
+                    case "I":
+                    case "J":
+                    case "K":
+                    case "L":
+                    case "M":
+                    case "N":
+                    case "O":
+                    case "P":
+                    case "Q":
+                    case "R":
+                    case "S":
+                    case "T":
+                    case "U":
+                    case "V":
+                    case "W":
+                    case "X":
+                    case "Y":
+                    case "Z":
+                        validPosition = false;
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+
+            if (validPosition)
+            {
+                GameObject obj = Instantiate(letterSpawn, position, Quaternion.identity);
+                obj.transform.localScale = new Vector3((float)0.5, (float)0.5, (float)0.03);
+            }
+
+            yield return new WaitForSeconds(0.005f);
+        }
     }
 
     void LetterPlacementForLevel(int totalLetters, int letterSpacing, int correctLetterCount, string zoneWord)
