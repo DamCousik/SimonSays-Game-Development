@@ -143,15 +143,15 @@ public class LetterPlacement : MonoBehaviour
                         break;
                 }
             }
-
-            if (validPosition)
-            {
-                GameObject obj = Instantiate(letterSpawn, position, Quaternion.identity);
-                obj.transform.localScale = new Vector3((float)0.5, (float)0.5, (float)0.03);
-            }
-
-            yield return new WaitForSeconds(0.005f);
         }
+
+        if (validPosition)
+        {
+            GameObject obj = Instantiate(letterSpawn, position, Quaternion.identity);
+            obj.transform.localScale = new Vector3((float)0.5, (float)0.5, (float)0.03);
+        }
+
+        yield return new WaitForSeconds(0.005f);
     }
 
     void LetterPlacementForLevel(int totalLetters, int letterSpacing, int correctLetterCount, string zoneWord)
