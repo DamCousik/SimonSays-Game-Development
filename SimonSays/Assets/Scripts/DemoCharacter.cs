@@ -419,15 +419,15 @@ public class DemoCharacter : MonoBehaviour
                 Congratulations.gameObject.SetActive(true);
             }           
             Destroy(other.gameObject);
-            if(other.gameObject.tag == ("J"))
-                CorrectPanel.gameObject.transform.Find("J").gameObject.SetActive(true);
+            if (other.gameObject.tag == ("J"))
+                CorrectPanel.gameObject.transform.Find("J").transform.Find("Text").GetComponent<Text>().text = "J";
             if (other.gameObject.tag == ("A"))
-                CorrectPanel.gameObject.transform.Find("A").gameObject.SetActive(true);
+                CorrectPanel.gameObject.transform.Find("A").transform.Find("Text").GetComponent<Text>().text = "A"; 
             if (other.gameObject.tag == ("W"))
-                CorrectPanel.gameObject.transform.Find("W").gameObject.SetActive(true);
+                CorrectPanel.gameObject.transform.Find("W").transform.Find("Text").GetComponent<Text>().text = "W"; 
             if (other.gameObject.tag == ("S"))
-                CorrectPanel.gameObject.transform.Find("S").gameObject.SetActive(true);
-           
+                CorrectPanel.gameObject.transform.Find("S").transform.Find("Text").GetComponent<Text>().text = "S";
+
         }
         if (other.gameObject.tag == ("B") || other.gameObject.tag == ("C") || other.gameObject.tag == ("L") || other.gameObject.tag == ("G"))
         {

@@ -22,7 +22,7 @@ public class StartGameMenu : MonoBehaviour
     }
     public void demoLevel()
     {
-        SceneManager.LoadScene("Demo");
+        SceneManager.LoadScene("DemoJumble");
     }
     public void quitUI()
     {
