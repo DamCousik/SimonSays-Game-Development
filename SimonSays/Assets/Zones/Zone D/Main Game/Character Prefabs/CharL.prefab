@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3451408390041405598}
   - component: {fileID: 3451408390041405585}
   - component: {fileID: 3451408390041405584}
-  - component: {fileID: 3451408390041405587}
   m_Layer: 0
   m_Name: CharL
   m_TagString: Untagged
@@ -26,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3451408390041405586}
-  m_LocalRotation: {x: 0.9659258, y: 0, z: 0, w: 0.2588191}
+  m_LocalRotation: {x: 0.9657384, y: 0.0050987946, z: -0.019028958, w: 0.25876883}
   m_LocalPosition: {x: 1, y: 1, z: -105}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.01}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 30, y: -180, z: -180}
+  m_LocalEulerAnglesHint: {x: 30.000002, y: -177.742, z: -179.99998}
 --- !u!33 &3451408390041405585
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -59,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e5057b9f4c6c34d1798d9a7ab6ebc8b5, type: 2}
+  - {fileID: 2100000, guid: 66b919bfc2c6f467fb833a40d927d1eb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -80,16 +79,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &3451408390041405587
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3451408390041405586}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}

@@ -419,15 +419,15 @@ public class CharacterMovement : MonoBehaviour
         }
         else if (ClickZone.zoneTag == "Zone 3")
         {
-            SceneManager.LoadScene("Zone-C-Screen");
+            SceneManager.LoadScene("Zone-E-Screen");
         }
         else if (ClickZone.zoneTag == "Zone 4")
         {
-            SceneManager.LoadScene("Zone-D-Screen");
+            SceneManager.LoadScene("Zone-F-Screen");
         }
         else if (ClickZone.zoneTag == "Zone 5")
         {
-            SceneManager.LoadScene("Zone-H-Screen");
+            SceneManager.LoadScene("Zone-G-Screen");
         }
     }
     public void mainMenuUI()
