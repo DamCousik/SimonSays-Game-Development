@@ -56,6 +56,7 @@ public class LetterCollection : MonoBehaviour
         }
 
         UnityEngine.Debug.Log("ClickZone.zoneTag : ---- : " + ClickZone.zoneTag);
+        GameObject.Find("ZoneNumber").GetComponentInChildren<Text>().text = ClickZone.zoneTag;
         // zone = GameObject.FindWithTag(ClickZone.zoneTag);
         // UnityEngine.Debug.Log("zone : ---- : " + zone);
         // UnityEngine.Debug.Log("---------");
@@ -241,6 +242,7 @@ public class LetterCollection : MonoBehaviour
             else if (charWordFrequencies.ContainsKey(other.gameObject.tag) && (charWordFrequencies[other.gameObject.tag] <= 0))
             {
                 countIncorrectLetters += 1;
+                Debug.Log("1) ---- OOPS! You bumped into a wrong letter " + other.gameObject.tag);
             }
 
             else
@@ -250,41 +252,40 @@ public class LetterCollection : MonoBehaviour
                     panelWrongLetter.gameObject.SetActive(true);
                     StartCoroutine(StopTimeForWrongLetter());
 
-                    Debug.Log("OOPS! You bumped into a wrong letter");
                     countIncorrectLetters += 1;
+                    Debug.Log("2) ---- OOPS! You bumped into a wrong letter " + other.gameObject.tag);
                 }
             }
 
             if (countIncorrectLetters == 3)
             {
-                if(IncorrectLetterChoices.tgState)
+                if (IncorrectLetterChoices.tgState)
                 {
                     tgButton.SetActive(false);
                     arenaButton.SetActive(false);
                     arenaButtonClone.SetActive(true);
                 }
-                else if(IncorrectLetterChoices.arenaEntry)
+                else if (IncorrectLetterChoices.arenaEntry)
                 {
                     tgButton.SetActive(true);
                     arenaButton.SetActive(true);
                     arenaButtonClone.SetActive(false);
                 }
-
-                panelBeforeArenaZone.SetActive(true);
-                panelWrongLetter.SetActive(false);
                 charMove.characterIsMoving = false;
                 stop = true;
-                Debug.Log("You collected 3 incorrected letters! - YOU NEED TO START OVER!!");
+                panelBeforeArenaZone.SetActive(true);
+                panelWrongLetter.SetActive(false);
+                Debug.Log("You collected 3 incorrected letters! - YOU NEED TO START OVER!! " + other.gameObject.tag);
             }
 
             if ((countCorrectLetters == wordLength) && (countIncorrectLetters < 3))
             {
                 isGameWon = true;
                 stop = true;
-                panelGameWon.SetActive(true);
                 charMove.chrctrIsDead = true;
                 charMove.m_rigidBody.velocity = Vector3.zero;
                 charMove.m_rigidBody.isKinematic = true;
+                panelGameWon.SetActive(true);
                 Debug.Log("Congratulations! You've successfully spelt out the word correctly! SimonSays - YOU COMPLETED THIS ZONE!!!");
                 StartCoroutine(StopTime());
                 StartCoroutine(WaitForSceneLoad());
@@ -305,7 +306,7 @@ public class LetterCollection : MonoBehaviour
                 //}
 
             }
-        }
+         }
         catch (Exception)
         {
             Debug.Log("You have bumped into the wrong letter!");
