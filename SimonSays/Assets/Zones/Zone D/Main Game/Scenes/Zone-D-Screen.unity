@@ -4874,6 +4874,7 @@ MonoBehaviour:
   newToughLetterList: []
   letterPlacementResult: []
   playerObj: {fileID: 1834506641}
+  avoidOtherLetters: []
   letterCount: 0
   totalLetters: 0
   letterSpacing: 0
@@ -13639,6 +13640,7 @@ MonoBehaviour:
   newToughLetterList: []
   letterPlacementResult: []
   playerObj: {fileID: 1834506641}
+  avoidOtherLetters: []
   letterCount: 0
   totalLetters: 0
   letterSpacing: 0
@@ -17580,6 +17582,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4697025995687146018, guid: a4325a14fd99d4d218120726fb2f5e9f,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b7eaca53f1ce14dfc9f067bc8a5f1316, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4325a14fd99d4d218120726fb2f5e9f, type: 3}
 --- !u!1001 &4718753195646454537
@@ -19550,6 +19557,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 473075458}
     m_Modifications:
+    - target: {fileID: 7200227027767828271, guid: 25b5ca26ba70b461e8c25a5b2a77641a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4dde5a916f6bf40018618f248bb13bb0, type: 2}
     - target: {fileID: 7200227027769814379, guid: 25b5ca26ba70b461e8c25a5b2a77641a,
         type: 3}
       propertyPath: m_Name

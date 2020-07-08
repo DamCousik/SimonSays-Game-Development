@@ -9471,6 +9471,7 @@ MonoBehaviour:
   newToughLetterList: []
   letterPlacementResult: []
   playerObj: {fileID: 2127383772}
+  avoidOtherLetters: []
   letterCount: 0
   totalLetters: 0
   letterSpacing: 0
@@ -11576,6 +11577,7 @@ MonoBehaviour:
   newToughLetterList: []
   letterPlacementResult: []
   playerObj: {fileID: 2127383772}
+  avoidOtherLetters: []
   letterCount: 0
   totalLetters: 0
   letterSpacing: 0
@@ -13372,7 +13374,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a9043437e5ea142b3a75d55f200b1ed2, type: 2}
+  - {fileID: 2100000, guid: fb76805570dbd43df9decf54ee775120, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -16980,7 +16982,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: da09d25d99683494384877d5f3717cc7, type: 2}
+      objectReference: {fileID: 2100000, guid: 43307970d6be7447c92f0e337dc7356c, type: 2}
     - target: {fileID: 4642918147861018943, guid: bbc8d1b3fd40b4923b4d1b349f3ae044,
         type: 3}
       propertyPath: m_Name
@@ -18239,7 +18241,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: da09d25d99683494384877d5f3717cc7, type: 2}
+      objectReference: {fileID: 2100000, guid: 43307970d6be7447c92f0e337dc7356c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b3d732d10006448289054f826343867, type: 3}
 --- !u!1001 &6520060020595078893
