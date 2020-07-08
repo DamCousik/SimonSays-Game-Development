@@ -427,7 +427,7 @@ public class CharacterMovement : MonoBehaviour
         }
         else if (ClickZone.zoneTag == "Zone 5")
         {
-            SceneManager.LoadScene("Zone-A-Screen");
+            SceneManager.LoadScene("Zone-H-Screen");
         }
     }
     public void mainMenuUI()
