@@ -108,7 +108,7 @@ public class ClickZone : MonoBehaviour
                 foreach (KeyValuePair<string, bool> kvp in LetterCollection.zoneState)
                 {
 
-                    if (kvp.Key == "z1")
+                    if (kvp.Key == "Zone 1")
                     {
                         if (kvp.Value == true)
                         {
@@ -116,7 +116,7 @@ public class ClickZone : MonoBehaviour
                             Destroy(zoneOneWord);
                         }   
                     }
-                    else if (kvp.Key == "z2")
+                    else if (kvp.Key == "Zone 2")
                     {
                         if (kvp.Value == true)
                         {
@@ -124,7 +124,7 @@ public class ClickZone : MonoBehaviour
                             Destroy(zoneTwoWord);
                         }
                     }
-                    else if (kvp.Key == "z3")
+                    else if (kvp.Key == "Zone 3")
                     {
                         if (kvp.Value == true)
                         {
@@ -153,7 +153,7 @@ public class ClickZone : MonoBehaviour
                 foreach (KeyValuePair<string, bool> kvp in LetterCollection.zoneState)
                 {
 
-                    if (kvp.Key == "z1")
+                    if (kvp.Key == "Zone 1")
                     {
                         if (kvp.Value == true)
                         {
@@ -161,7 +161,7 @@ public class ClickZone : MonoBehaviour
                             Destroy(zoneOneWord);
                         }   
                     }
-                    else if (kvp.Key == "z2")
+                    else if (kvp.Key == "Zone 2")
                     {
                         if (kvp.Value == true)
                         {
@@ -169,7 +169,7 @@ public class ClickZone : MonoBehaviour
                             Destroy(zoneTwoWord);
                         }
                     }
-                    else if (kvp.Key == "z3")
+                    else if (kvp.Key == "Zone 3")
                     {
                         if (kvp.Value == true)
                         {
@@ -177,7 +177,7 @@ public class ClickZone : MonoBehaviour
                             Destroy(zoneThreeWord);
                         }
                     }
-                    else if (kvp.Key == "z4")
+                    else if (kvp.Key == "Zone 4")
                     {
                         if (kvp.Value == true)
                         {
@@ -208,7 +208,7 @@ public class ClickZone : MonoBehaviour
             {
                 foreach (KeyValuePair<string, bool> kvp in LetterCollection.zoneState)
                 {
-                    if (kvp.Key == "z1")
+                    if (kvp.Key == "Zone 1")
                     {
                         if (kvp.Value == true)
                         {
@@ -216,7 +216,7 @@ public class ClickZone : MonoBehaviour
                             Destroy(zoneOneWord);
                         }   
                     }
-                    else if (kvp.Key == "z2")
+                    else if (kvp.Key == "Zone 2")
                     {
                         if (kvp.Value == true)
                         {
@@ -224,7 +224,7 @@ public class ClickZone : MonoBehaviour
                             Destroy(zoneTwoWord);
                         }
                     }
-                    else if (kvp.Key == "z3")
+                    else if (kvp.Key == "Zone 3")
                     {
                         if (kvp.Value == true)
                         {
@@ -232,7 +232,7 @@ public class ClickZone : MonoBehaviour
                             Destroy(zoneThreeWord);
                         }
                     }
-                    else if (kvp.Key == "z4")
+                    else if (kvp.Key == "Zone 4")
                     {
                         if (kvp.Value == true)
                         {
@@ -241,7 +241,7 @@ public class ClickZone : MonoBehaviour
                         }
                     }
                     //
-                    else if (kvp.Key == "z5")
+                    else if (kvp.Key == "Zone 5")
                     {
                         if (kvp.Value == true)
                         {
@@ -271,7 +271,7 @@ public class ClickZone : MonoBehaviour
                 foreach (KeyValuePair<string, bool> kvp in LetterCollection.zoneState)
                 {
 
-                    if (kvp.Key == "z1")
+                    if (kvp.Key == "Zone 1")
                     {
                         if (kvp.Value == true)
                         {
@@ -279,7 +279,7 @@ public class ClickZone : MonoBehaviour
                             Destroy(zoneOneWord);
                         }   
                     }
-                    else if (kvp.Key == "z2")
+                    else if (kvp.Key == "Zone 2")
                     {
                         if (kvp.Value == true)
                         {
@@ -287,7 +287,7 @@ public class ClickZone : MonoBehaviour
                             Destroy(zoneTwoWord);
                         }
                     }
-                    else if (kvp.Key == "z3")
+                    else if (kvp.Key == "Zone 3")
                     {
                         if (kvp.Value == true)
                         {
@@ -295,7 +295,7 @@ public class ClickZone : MonoBehaviour
                             Destroy(zoneThreeWord);
                         }
                     }
-                    else if (kvp.Key == "z4")
+                    else if (kvp.Key == "Zone 4")
                     {
                         if (kvp.Value == true)
                         {
@@ -303,7 +303,7 @@ public class ClickZone : MonoBehaviour
                             Destroy(zoneFourWord);
                         }
                     }
-                    else if (kvp.Key == "z5")
+                    else if (kvp.Key == "Zone 5")
                     {
                         if (kvp.Value == true)
                         {
@@ -342,7 +342,7 @@ public class ClickZone : MonoBehaviour
                 foreach (KeyValuePair<string, bool> kvp in LetterCollection.zoneState)
                 {
 
-                    if (kvp.Key == "z1")
+                    if (kvp.Key == "Zone 1")
                     {
                         if (kvp.Value == true)
                         {
@@ -350,7 +350,7 @@ public class ClickZone : MonoBehaviour
                             Destroy(zoneOneWord);
                         }   
                     }
-                    else if (kvp.Key == "z2")
+                    else if (kvp.Key == "Zone 2")
                     {
                         if (kvp.Value == true)
                         {
@@ -358,7 +358,7 @@ public class ClickZone : MonoBehaviour
                             Destroy(zoneTwoWord);
                         }
                     }
-                    else if (kvp.Key == "z3")
+                    else if (kvp.Key == "Zone 3")
                     {
                         if (kvp.Value == true)
                         {
@@ -366,7 +366,7 @@ public class ClickZone : MonoBehaviour
                             Destroy(zoneThreeWord);
                         }
                     }
-                    else if (kvp.Key == "z4")
+                    else if (kvp.Key == "Zone 4")
                     {
                         if (kvp.Value == true)
                         {
@@ -399,30 +399,30 @@ public class ClickZone : MonoBehaviour
                         zoneTag = hit.collider.gameObject.tag;
                         //DontDestroyOnLoad(GameObject.FindWithTag(zoneTag));
 
-                        wordNum = zoneTag[1] - '0' - 1;
+                        wordNum = zoneTag[5] - '0' - 1;
 
-                        if (hit.collider.gameObject.tag == "z1")
+                        if (hit.collider.gameObject.tag == "Zone 1")
                         {
                             zoneValue = hit.collider.gameObject;
                             SceneManager.LoadScene("Zone-A-Screen");
                         }
-                        else if (hit.collider.gameObject.tag == "z2")
+                        else if (hit.collider.gameObject.tag == "Zone 2")
                         {
                             zoneValue = hit.collider.gameObject;
                             SceneManager.LoadScene("Zone-B-Screen");
                         }
-                        else if (hit.collider.gameObject.tag == "z3")
+                        else if (hit.collider.gameObject.tag == "Zone 3")
                         {
                             zoneValue = hit.collider.gameObject;
                             SceneManager.LoadScene("Zone-C-Screen");
                         }
-                        else if (hit.collider.gameObject.tag == "z4")
+                        else if (hit.collider.gameObject.tag == "Zone 4")
                         {
                             zoneValue = hit.collider.gameObject;
                             SceneManager.LoadScene("Zone-D-Screen");
                         }
                         //
-                        else if (hit.collider.gameObject.tag == "z5")
+                        else if (hit.collider.gameObject.tag == "Zone 5")
                         {
                             zoneValue = hit.collider.gameObject;
                             SceneManager.LoadScene("Zone-A-Screen");
