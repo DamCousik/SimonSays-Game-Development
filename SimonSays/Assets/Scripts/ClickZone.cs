@@ -425,7 +425,7 @@ public class ClickZone : MonoBehaviour
                         else if (hit.collider.gameObject.tag == "Zone 5")
                         {
                             zoneValue = hit.collider.gameObject;
-                            SceneManager.LoadScene("Zone-A-Screen");
+                            SceneManager.LoadScene("Zone-H-Screen");
                             //A for now
                         }                       
                         else
