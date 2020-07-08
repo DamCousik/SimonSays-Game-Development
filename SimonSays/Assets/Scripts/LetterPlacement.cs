@@ -61,8 +61,8 @@ public class LetterPlacement : MonoBehaviour
 
         if (LevelDifficulty.difficulty.Equals("Easy"))
         {
-            totalLetters = 40;
-            letterSpacing = 6;
+            totalLetters = 45;
+            letterSpacing = 5;
             correctLetterCount = 2;
         }
         else if(LevelDifficulty.difficulty.Equals("Medium"))
@@ -73,13 +73,13 @@ public class LetterPlacement : MonoBehaviour
         }
         else if(LevelDifficulty.difficulty.Equals("Hard"))
         {
-            totalLetters = 80;
+            totalLetters = 85;
             letterSpacing = 3;
             correctLetterCount = 2;
         }
         else if (LevelDifficulty.difficulty.Equals("Extreme"))
         {
-            totalLetters = 95;
+            totalLetters = 105;
             letterSpacing = 2;
             correctLetterCount = 3;
         }
