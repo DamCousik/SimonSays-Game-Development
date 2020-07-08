@@ -37,6 +37,14 @@ public class CharacterMovement : MonoBehaviour
     float touchMagnitude;
     float touchBx,touchBy,touchEx,touchEy;
 
+    //sound
+    public AudioClip Impact;
+    public AudioClip Jump;
+    public AudioClip Die;
+    private AudioSource audio1;
+    private AudioSource audio2;
+    private AudioSource audio3;
+
     public void Initialize(GameObject character)
     {
         m_animator = character.GetComponent<Animator>();
@@ -62,6 +70,10 @@ public class CharacterMovement : MonoBehaviour
         speed = 6.0f;
         #endif
         started = false;
+
+        audio1 = GetComponent<AudioSource>();
+        audio2 = GetComponent<AudioSource>();
+        audio3 = GetComponent<AudioSource>();
     }
 
     void Awake()
@@ -309,17 +321,23 @@ public class CharacterMovement : MonoBehaviour
         {
             m_jumpTimeStamp = Time.time;
             m_rigidBody.AddForce(Vector3.up * m_jumpForce, ForceMode.Impulse);
+            //sound
+            audio1.PlayOneShot(Jump, 0.7F);
         }
         if (jumpCooldownOver && m_isGrounded && Input.GetKey(KeyCode.UpArrow))
         {
             m_jumpTimeStamp = Time.time;
             m_rigidBody.AddForce(Vector3.up * m_jumpForce, ForceMode.Impulse);
+            //sound
+            audio1.PlayOneShot(Jump, 0.7F);
         }
 
         if (jumpCooldownOver && m_isGrounded && Input.GetKey(KeyCode.Space))
         {
             m_jumpTimeStamp = Time.time;
             m_rigidBody.AddForce(Vector3.up * m_jumpForce, ForceMode.Impulse);
+            //sound
+            audio1.PlayOneShot(Jump, 0.7F);
         }
 
         if (!m_wasGrounded && m_isGrounded)
@@ -340,6 +358,9 @@ public class CharacterMovement : MonoBehaviour
             if (other.gameObject.tag == ("Obstacle"))
             {
                 Debug.Log("You hit an obstacle - YOU LOSE A LIFE!!");
+                //Sound
+                audio2.PlayOneShot(Impact, 0.5F);
+
                 panelObstacle.gameObject.SetActive(true);
                 StartCoroutine(StopTimeForObstacle());
                 healthCount -= 1;
@@ -364,6 +385,8 @@ public class CharacterMovement : MonoBehaviour
                 {
                     hb.gameObject.SetActive(false);
                     chrctrIsDead = true;
+                    //sound
+                    audio3.PlayOneShot(Die, 0.7F);
                     Debug.Log("You are all out of lives! Sorry, but SimonSays - YOU DIE!!");
                     m_rigidBody.velocity = Vector3.zero;
                     m_rigidBody.isKinematic = true;
@@ -379,6 +402,8 @@ public class CharacterMovement : MonoBehaviour
             {
                 Debug.Log("You've reached the end of the zone! Goodbye!!");
                 chrctrIsDead = true;
+                //sound
+                audio3.PlayOneShot(Die, 0.7F);
                 panelLethalObstacle.SetActive(true);
                 lc.stop = true;
             }
@@ -419,11 +444,11 @@ public class CharacterMovement : MonoBehaviour
         }
         else if (ClickZone.zoneTag == "Zone 3")
         {
-            SceneManager.LoadScene("Zone-E-Screen");
+            SceneManager.LoadScene("Zone-C-Screen");
         }
         else if (ClickZone.zoneTag == "Zone 4")
         {
-            SceneManager.LoadScene("Zone-F-Screen");
+            SceneManager.LoadScene("Zone-D-Screen");
         }
         else if (ClickZone.zoneTag == "Zone 5")
         {

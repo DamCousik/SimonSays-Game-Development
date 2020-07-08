@@ -31,6 +31,12 @@ public class LetterCollection : MonoBehaviour
     public DisplayLetters dispLet;
     public CharacterMovement charMove;
 
+    //sounds
+    public AudioClip RightLetterBell;
+    public AudioClip Impact;
+    AudioSource audio;
+    
+
     void Start()
     {
         word = SentenceJumble.originalWords[ClickZone.wordNum]; // Obtained from the arena
@@ -62,6 +68,10 @@ public class LetterCollection : MonoBehaviour
         // UnityEngine.Debug.Log("---------");
         // UnityEngine.Debug.Log(zone);
         //Destroy(GameObject.FindWithTag(ClickZone.zoneTag));
+
+        //Sound
+        audio = GetComponent<AudioSource>();
+        
 
     }
 
@@ -237,12 +247,14 @@ public class LetterCollection : MonoBehaviour
             {
                 charWordFrequencies[other.gameObject.tag]--;
                 countCorrectLetters += 1;
+                audio.PlayOneShot(RightLetterBell, 0.7F);
             }
 
             else if (charWordFrequencies.ContainsKey(other.gameObject.tag) && (charWordFrequencies[other.gameObject.tag] <= 0))
             {
                 countIncorrectLetters += 1;
                 Debug.Log("1) ---- OOPS! You bumped into a wrong letter " + other.gameObject.tag);
+                audio.PlayOneShot(Impact, 0.7F);
             }
 
             else
@@ -254,6 +266,7 @@ public class LetterCollection : MonoBehaviour
 
                     countIncorrectLetters += 1;
                     Debug.Log("2) ---- OOPS! You bumped into a wrong letter " + other.gameObject.tag);
+                    audio.PlayOneShot(Impact, 0.7F);
                 }
             }
 

@@ -9783,6 +9783,9 @@ MonoBehaviour:
   lc: {fileID: 1394252618}
   ps: {fileID: 1608295329}
   hb: {fileID: 249559371}
+  Impact: {fileID: 8300000, guid: 26031c744989c4459adc9132901cec3e, type: 3}
+  Jump: {fileID: 8300000, guid: 76fd695fa81094bd09cb1d50a0f3253b, type: 3}
+  Die: {fileID: 8300000, guid: e15e66d9fc2314d3ab9384d42d941143, type: 3}
   m_jumpForce: 6
   m_animator: {fileID: 1394252619}
   m_rigidBody: {fileID: 1394252615}
@@ -9811,6 +9814,8 @@ MonoBehaviour:
   panelState: 0
   dispLet: {fileID: 652170641}
   charMove: {fileID: 1394252617}
+  RightLetterBell: {fileID: 8300000, guid: a0714176b75cf4bab9b88c623d5f5d32, type: 3}
+  Impact: {fileID: 8300000, guid: 26031c744989c4459adc9132901cec3e, type: 3}
 --- !u!95 &1394252619
 Animator:
   serializedVersion: 3

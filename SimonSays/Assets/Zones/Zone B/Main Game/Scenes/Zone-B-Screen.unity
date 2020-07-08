@@ -6479,6 +6479,7 @@ MonoBehaviour:
   newToughLetterList: []
   letterPlacementResult: []
   playerObj: {fileID: 1221855540}
+  avoidOtherLetters: []
   letterCount: 0
   totalLetters: 0
   letterSpacing: 0
@@ -9639,6 +9640,9 @@ MonoBehaviour:
   lc: {fileID: 1221855543}
   ps: {fileID: 1719943862}
   hb: {fileID: 1455280419}
+  Impact: {fileID: 8300000, guid: 26031c744989c4459adc9132901cec3e, type: 3}
+  Jump: {fileID: 8300000, guid: 76fd695fa81094bd09cb1d50a0f3253b, type: 3}
+  Die: {fileID: 8300000, guid: e15e66d9fc2314d3ab9384d42d941143, type: 3}
   m_jumpForce: 6
   m_animator: {fileID: 1221855542}
   m_rigidBody: {fileID: 1221855538}
@@ -9686,6 +9690,104 @@ MonoBehaviour:
   panelState: 0
   dispLet: {fileID: 418862240}
   charMove: {fileID: 1221855541}
+  RightLetterBell: {fileID: 8300000, guid: a0714176b75cf4bab9b88c623d5f5d32, type: 3}
+  Impact: {fileID: 8300000, guid: 26031c744989c4459adc9132901cec3e, type: 3}
+--- !u!82 &1221855544
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1221855540}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!4 &1224628105 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 675269314807046086, guid: db1e2682126d9433ab04ca31b01c37fe,
@@ -13875,6 +13977,7 @@ MonoBehaviour:
   newToughLetterList: []
   letterPlacementResult: []
   playerObj: {fileID: 1221855540}
+  avoidOtherLetters: []
   letterCount: 0
   totalLetters: 0
   letterSpacing: 0
