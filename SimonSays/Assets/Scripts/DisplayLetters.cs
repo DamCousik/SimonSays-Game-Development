@@ -49,12 +49,18 @@ public class DisplayLetters : MonoBehaviour
     public void WordButtons(string word)
     {
         newLetter = word.ToUpper();
-        for(int i = 0; i < word.Length-1; i++)
-        {
+
+        if (newLetter.Length == 1)
             correctLetters.SetActive(true);
-            button = (GameObject)Instantiate(correctLetters);
-            button.transform.SetParent(correctWordPanel.transform, false);
-            button.transform.localScale = new Vector3(1.5f, 1.3f, 1.5f);
+        else
+        {
+            for (int i = 1; i <= newLetter.Length - 1; i++)
+            {
+                correctLetters.SetActive(true);
+                button = (GameObject)Instantiate(correctLetters);
+                button.transform.SetParent(correctWordPanel.transform, false);
+                button.transform.localScale = new Vector3(1.5f, 1.3f, 1.5f);
+            }
         }
 
         btn = GameObject.FindGameObjectsWithTag("correctColLetter");
