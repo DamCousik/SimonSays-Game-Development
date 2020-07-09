@@ -9,6 +9,7 @@ public class LetterCollection : MonoBehaviour
 {
     public static Dictionary<string, int> charWordFrequencies = new Dictionary<string, int>();
     public static Dictionary<string, bool> zoneState = new Dictionary<string, bool>();
+
     
     public List<string> collectedLetters = new List<string>();
     public int countIncorrectLetters = 0;
@@ -21,8 +22,6 @@ public class LetterCollection : MonoBehaviour
     public GameObject panelGameWon;
     public bool stop = false;
     public bool panelState = false;
-
-    //public static GameObject zone;
 
     int wordLength = 0;
     public static bool isGameWon = false;
@@ -278,7 +277,7 @@ public class LetterCollection : MonoBehaviour
                 Debug.Log("You collected 3 incorrected letters! - YOU NEED TO START OVER!! " + other.gameObject.tag);
             }
 
-            if ((countCorrectLetters == wordLength) && (countIncorrectLetters < 3))
+              if ((countCorrectLetters == wordLength) && (countIncorrectLetters < 3))
             {
                 isGameWon = true;
                 stop = true;

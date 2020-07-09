@@ -3054,7 +3054,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 641670223}
-  - component: {fileID: 641670222}
   m_Layer: 0
   m_Name: ToughLetters
   m_TagString: Untagged
@@ -3062,87 +3061,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &641670222
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 641670221}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f708accc4b7fe41eb9d86a7ac9dce651, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  letterSpawn: 0
-  xPos: 0
-  letterDistribution:
-  - {fileID: 2128513005}
-  - {fileID: 979441642}
-  - {fileID: 1164355149}
-  - {fileID: 198565202}
-  - {fileID: 398128464}
-  - {fileID: 791928186}
-  - {fileID: 1803757251}
-  - {fileID: 1143984694}
-  - {fileID: 941026798}
-  - {fileID: 2092235665}
-  - {fileID: 677341824}
-  - {fileID: 1928759537}
-  - {fileID: 1451480910}
-  - {fileID: 161770027}
-  - {fileID: 1793842756}
-  - {fileID: 10375378}
-  - {fileID: 926135540}
-  - {fileID: 1487754415}
-  - {fileID: 1478840480}
-  - {fileID: 1307986972}
-  - {fileID: 508303896}
-  - {fileID: 1328513371}
-  - {fileID: 1628563485}
-  - {fileID: 1933900823}
-  - {fileID: 1800519232}
-  - {fileID: 146635754}
-  toughLetterDistribution:
-  - {fileID: 1907267961}
-  - {fileID: 35819752}
-  - {fileID: 2026500804}
-  - {fileID: 390203921}
-  - {fileID: 2067598410}
-  - {fileID: 1609983245}
-  - {fileID: 178419897}
-  - {fileID: 1353333471}
-  - {fileID: 300064843}
-  - {fileID: 1884326423}
-  - {fileID: 1506506830}
-  - {fileID: 339611616}
-  - {fileID: 1875432212}
-  - {fileID: 638487666}
-  - {fileID: 125801554}
-  - {fileID: 146945764}
-  - {fileID: 681588391}
-  - {fileID: 1132948116}
-  - {fileID: 998716051}
-  - {fileID: 97143399}
-  - {fileID: 1439934438}
-  - {fileID: 219970571}
-  - {fileID: 689477097}
-  - {fileID: 926603682}
-  - {fileID: 828004316}
-  - {fileID: 1298492775}
-  newLetterPlacements: []
-  toughLetterPlacements: []
-  letterDistList: []
-  toughLetterPlt: []
-  newExtraLetterList: []
-  newToughLetterList: []
-  letterPlacementResult: []
-  playerObj: {fileID: 1394252614}
-  avoidOtherLetters: []
-  letterCount: 0
-  totalLetters: 0
-  letterSpacing: 0
-  correctLetterCount: 0
 --- !u!4 &641670223
 Transform:
   m_ObjectHideFlags: 0
@@ -4976,6 +4894,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pTG: {fileID: 1056188524}
   newLetterCount: 0
+  toughLetterPlt: []
+  newToughLetterList: []
 --- !u!114 &916342243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6169,6 +6089,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pTG: {fileID: 1056188524}
   newLetterCount: 0
+  toughLetterPlt: []
+  newToughLetterList: []
 --- !u!114 &1056188526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6875,6 +6797,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pTG: {fileID: 1056188524}
   newLetterCount: 0
+  toughLetterPlt: []
+  newToughLetterList: []
 --- !u!114 &1170990968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7726,6 +7650,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pTG: {fileID: 1056188524}
   newLetterCount: 0
+  toughLetterPlt: []
+  newToughLetterList: []
 --- !u!114 &1354832362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9855,6 +9781,11 @@ MonoBehaviour:
   - {fileID: 1933900823}
   - {fileID: 1800519232}
   - {fileID: 146635754}
+  newLetterPlacements: []
+  letterDistList: []
+  newExtraLetterList: []
+  letterPlacementResult: []
+  playerObj: {fileID: 0}
   toughLetterDistribution:
   - {fileID: 1907267961}
   - {fileID: 35819752}
@@ -9882,15 +9813,7 @@ MonoBehaviour:
   - {fileID: 926603682}
   - {fileID: 828004316}
   - {fileID: 1298492775}
-  newLetterPlacements: []
   toughLetterPlacements: []
-  letterDistList: []
-  toughLetterPlt: []
-  newExtraLetterList: []
-  newToughLetterList: []
-  letterPlacementResult: []
-  playerObj: {fileID: 0}
-  avoidOtherLetters: []
   letterCount: 26
   totalLetters: 0
   letterSpacing: 0
@@ -11389,6 +11312,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pTG: {fileID: 1056188524}
   newLetterCount: 0
+  toughLetterPlt: []
+  newToughLetterList: []
 --- !u!114 &1930071102
 MonoBehaviour:
   m_ObjectHideFlags: 0
