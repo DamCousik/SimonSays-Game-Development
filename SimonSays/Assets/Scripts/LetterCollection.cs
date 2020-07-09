@@ -245,10 +245,6 @@ public class LetterCollection : MonoBehaviour
                 countIncorrectLetters += 1;
                 Debug.Log("3) ---- OOPS! You bumped into a wrong letter " + other.gameObject.tag);
             }
-            else
-            {
-                Debug.Log("YOU ARE IN THE ELSE PART AFTER 2 ELSE-IFS !! " + other.gameObject.tag);
-            }
 
             if (countIncorrectLetters == 3)
             {
@@ -271,10 +267,6 @@ public class LetterCollection : MonoBehaviour
                 panelWrongLetter.SetActive(false);
                 Debug.Log("You collected 3 incorrected letters! - YOU NEED TO START OVER!! " + other.gameObject.tag);
             }
-            else
-            {
-                Debug.Log("YOU ARE IN THE ELSE PART OF 3 INCORRECT LETTER CONDITION!! " + other.gameObject.tag);
-            }
 
             if ((countCorrectLetters == wordLength) && (countIncorrectLetters < 3))
             {
@@ -290,13 +282,6 @@ public class LetterCollection : MonoBehaviour
                 StartCoroutine(WaitForSceneLoad());
 
                 zoneState.Add(ClickZone.zoneTag, isGameWon);
-            }
-            else
-            {
-                Debug.Log("Count of correct letters = " + countCorrectLetters);
-                Debug.Log("Count of incorrect letters = " + countIncorrectLetters);
-                Debug.Log("Word = " + word + " and Word Length at the end = " + wordLength);
-                Debug.Log(" YOU ARE IN THE ELSE PART OF THE ZONE WINNING CONDITION!! " + other.gameObject.tag);
             }
         }
         catch (Exception)
