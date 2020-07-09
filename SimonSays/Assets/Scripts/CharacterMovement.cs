@@ -405,33 +405,38 @@ public class CharacterMovement : MonoBehaviour
     }
     public void playAgainUI()
     {
-        SceneManager.LoadScene("ArenaZone");
+        SceneManager.LoadScene("Level");
     }
     public void playAgainLethal()
     {
         if (ClickZone.zoneTag == "Zone 1")
         {
-            SceneManager.LoadScene("Zone-A-Screen");
+            SceneManager.LoadScene("Zone-" + SentenceJumble.loadZoneScenes[0] + "-Screen");
         }
         else if (ClickZone.zoneTag == "Zone 2")
         {
-            SceneManager.LoadScene("Zone-B-Screen");
+            SceneManager.LoadScene("Zone-" + SentenceJumble.loadZoneScenes[1] + "-Screen");
         }
         else if (ClickZone.zoneTag == "Zone 3")
         {
-            SceneManager.LoadScene("Zone-E-Screen");
+            SceneManager.LoadScene("Zone-" + SentenceJumble.loadZoneScenes[2] + "-Screen");
         }
         else if (ClickZone.zoneTag == "Zone 4")
         {
-            SceneManager.LoadScene("Zone-F-Screen");
+            SceneManager.LoadScene("Zone-" + SentenceJumble.loadZoneScenes[3] + "-Screen");
         }
         else if (ClickZone.zoneTag == "Zone 5")
         {
-            SceneManager.LoadScene("Zone-G-Screen");
+            SceneManager.LoadScene("Zone-" + SentenceJumble.loadZoneScenes[4] + "-Screen");
         }
     }
     public void mainMenuUI()
     {
         SceneManager.LoadScene("StartGameScreen");
+    }
+
+    public void arenaUI()
+    {
+        SceneManager.LoadScene("ArenaZone");
     }
 }
