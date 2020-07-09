@@ -11,9 +11,6 @@ public class ClickZone : MonoBehaviour
     public static int wordNum;
     public string diff;
     public GameObject fireworks;
-    //sound
-    private AudioSource Aud;
-    public AudioClip WinZone;
     
     //For 3 and 5 zones
     public GameObject zoneOneCompleted;
@@ -60,7 +57,6 @@ public class ClickZone : MonoBehaviour
         menuBar.gameObject.SetActive(true);
         levelBar.gameObject.SetActive(true);
         fireworks.gameObject.SetActive(false);
-        Aud = GetComponent<AudioSource>();
 
         if(Sentence.wordCount == 3)  
             {
@@ -147,7 +143,6 @@ public class ClickZone : MonoBehaviour
                 {
                     panelWin.gameObject.SetActive(true);
                     fireworks.gameObject.SetActive(true);
-                Aud.PlayOneShot(WinZone, 0.7F);
             }
         } 
         //easy ends
@@ -204,7 +199,6 @@ public class ClickZone : MonoBehaviour
                 {
                     panelWin.gameObject.SetActive(true);
                     fireworks.gameObject.SetActive(true);
-                Aud.PlayOneShot(WinZone, 0.7F);
             }
         }
         //medium ends
@@ -268,8 +262,7 @@ public class ClickZone : MonoBehaviour
                 && zoneFiveCompleted.gameObject.activeSelf)
                 {
                     panelWin.gameObject.SetActive(true);
-                    fireworks.gameObject.SetActive(true);
-                Aud.PlayOneShot(WinZone, 0.7F);
+                fireworks.gameObject.SetActive(true);
             }
         }
         //Hard ends
@@ -331,8 +324,7 @@ public class ClickZone : MonoBehaviour
                 && zoneThreeCompleted.gameObject.activeSelf)
                 {
                     panelWin.gameObject.SetActive(true);
-                    fireworks.gameObject.SetActive(true);
-                Aud.PlayOneShot(WinZone, 0.7F);
+                fireworks.gameObject.SetActive(true);
             }
 
             if(Sentence.wordCount == 5 
@@ -344,7 +336,6 @@ public class ClickZone : MonoBehaviour
                 {
                     panelWin.gameObject.SetActive(true);
                     fireworks.gameObject.SetActive(true);
-                Aud.PlayOneShot(WinZone, 0.7F);
             }
         }
         //extreme ends 
@@ -401,7 +392,6 @@ public class ClickZone : MonoBehaviour
                 {
                     panelWin.gameObject.SetActive(true);
                     fireworks.gameObject.SetActive(true);
-                Aud.PlayOneShot(WinZone, 0.7F);
             }          
         }
 

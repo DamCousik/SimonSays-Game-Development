@@ -34,6 +34,7 @@ public class LetterCollection : MonoBehaviour
     //sounds
     public AudioClip RightLetterBell;
     public AudioClip Impact;
+    public AudioClip Gamewin;
     AudioSource audio;
     
 
@@ -299,6 +300,8 @@ public class LetterCollection : MonoBehaviour
                 charMove.m_rigidBody.velocity = Vector3.zero;
                 charMove.m_rigidBody.isKinematic = true;
                 panelGameWon.SetActive(true);
+                //sound
+                audio.PlayOneShot(Gamewin, 0.7F);
                 Debug.Log("Congratulations! You've successfully spelt out the word correctly! SimonSays - YOU COMPLETED THIS ZONE!!!");
                 StartCoroutine(StopTime());
                 StartCoroutine(WaitForSceneLoad());
