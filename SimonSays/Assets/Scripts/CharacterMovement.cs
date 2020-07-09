@@ -15,8 +15,8 @@ public class CharacterMovement : MonoBehaviour
     public float plainLeftMax = 1.57f;
     public float plainRightMax = -1.52f;
     public float leftRightSpeed = 3.0f;
-    bool left=false;
-    bool right=false;
+    bool left = false;
+    bool right = false;
     private float m_currentV = 0;
     private float m_currentH = 0;
     private readonly float m_interpolation = 10;
@@ -27,15 +27,17 @@ public class CharacterMovement : MonoBehaviour
     public GameObject panelObstacle;
     public GameObject panelpause;
     public GameObject panelLethalObstacle;
+    public GameObject panelExit;
     public bool characterIsMoving = false;
     public LetterCollection lc;
     public ParticleSystem ps;
     bool started;
     public Scrollbar hb;
     bool avoidHint = false;
-    float myPos=0;
+    float myPos = 0;
     float touchMagnitude;
-    float touchBx,touchBy,touchEx,touchEy;
+    float touchBx, touchBy, touchEx, touchEy;
+    bool characterStateBeforeQuit;
 
     public void Initialize(GameObject character)
     {
@@ -59,7 +61,7 @@ public class CharacterMovement : MonoBehaviour
     private void Start()
     {
         #if UNITY_EDITOR
-        speed = 6.0f;
+             speed = 6.0f;
         #endif
         started = false;
     }
@@ -69,30 +71,38 @@ public class CharacterMovement : MonoBehaviour
         if (!m_animator) { gameObject.GetComponent<Animator>(); }
         if (!m_rigidBody) { gameObject.GetComponent<Animator>(); }
     }
-    
+
     public void hintClick()
     {
         started = true;
         avoidHint = true;
     }
 
-    public void resumeOnClick() 
+    public void resumeOnClick()
     {
-        Debug.Log("Resume Button : Resume False");
+        Debug.Log("Resume Button : Resume False"); 
+        characterIsMoving = characterStateBeforeQuit;
+        if (characterIsMoving)
+            lc.stop = false;
+        else
+            lc.stop = true;
         panelpause.SetActive(false);
-        lc.stop = false;
+        panelExit.SetActive(false);
         Debug.Log("Resume Button : Resume True");
     }
 
-    public void pauseZone() 
+    public void pauseZone()
     {
-        Debug.Log("Paused Clicked");
-        panelpause.SetActive(true);
-        lc.stop = true;
-        m_rigidBody.velocity = Vector3.zero;
-        characterIsMoving = false;
-        Debug.Log("Paused Clicked : Resume set to false");
-
+        if (characterIsMoving)
+        {
+            Debug.Log("Paused Clicked");
+            lc.stop = true;
+            characterStateBeforeQuit = characterIsMoving;
+            m_rigidBody.velocity = Vector3.zero;
+            characterIsMoving = false;
+            panelpause.SetActive(true);
+            Debug.Log("Paused Clicked : Resume set to false");
+        }
     }
 
     void Update()
@@ -151,13 +161,13 @@ public class CharacterMovement : MonoBehaviour
                 avoidHint = false;
                 return;
             }
-            print("right val before:"+ right);
+            print("right val before:" + right);
             print("left val before:" + left);
             Touch touch = Input.GetTouch(0);
             if (touch.phase == TouchPhase.Began)
             {
                 touchMagnitude = touch.position.magnitude;
-                touchBy=touch.position.y;
+                touchBy = touch.position.y;
                 touchBx = touch.position.x;
                 return;
             }
@@ -177,8 +187,8 @@ public class CharacterMovement : MonoBehaviour
                     left = true;
                     print("Left true");
                 }
-                if (Mathf.Abs(touchEy-touchBy) > 200)
-                {               
+                if (Mathf.Abs(touchEy - touchBy) > 200)
+                {
                     JumpingAndLanding(true);
                 }
                 if (left == true)
@@ -343,7 +353,7 @@ public class CharacterMovement : MonoBehaviour
                 panelObstacle.gameObject.SetActive(true);
                 StartCoroutine(StopTimeForObstacle());
                 healthCount -= 1;
-                if(healthCount==2)
+                if (healthCount == 2)
                 {
                     hb.size = 0.6f;
                     hb.targetGraphic.color = Color.yellow;
@@ -352,7 +362,7 @@ public class CharacterMovement : MonoBehaviour
                 {
                     hb.size = 0.2f;
                     hb.targetGraphic.color = Color.red;
-                }                  
+                }
                 ps.Play();
                 StartCoroutine(ChangeSize());
                 SphereCollider myCollider;
@@ -405,33 +415,47 @@ public class CharacterMovement : MonoBehaviour
     }
     public void playAgainUI()
     {
-        SceneManager.LoadScene("ArenaZone");
+        SceneManager.LoadScene("Level");
     }
     public void playAgainLethal()
     {
         if (ClickZone.zoneTag == "Zone 1")
         {
-            SceneManager.LoadScene("Zone-A-Screen");
+            SceneManager.LoadScene("Zone-" + SentenceJumble.loadZoneScenes[0] + "-Screen");
         }
         else if (ClickZone.zoneTag == "Zone 2")
         {
-            SceneManager.LoadScene("Zone-B-Screen");
+            SceneManager.LoadScene("Zone-" + SentenceJumble.loadZoneScenes[1] + "-Screen");
         }
         else if (ClickZone.zoneTag == "Zone 3")
         {
-            SceneManager.LoadScene("Zone-E-Screen");
+            SceneManager.LoadScene("Zone-" + SentenceJumble.loadZoneScenes[2] + "-Screen");
         }
         else if (ClickZone.zoneTag == "Zone 4")
         {
-            SceneManager.LoadScene("Zone-F-Screen");
+            SceneManager.LoadScene("Zone-" + SentenceJumble.loadZoneScenes[3] + "-Screen");
         }
         else if (ClickZone.zoneTag == "Zone 5")
         {
-            SceneManager.LoadScene("Zone-G-Screen");
+            SceneManager.LoadScene("Zone-" + SentenceJumble.loadZoneScenes[4] + "-Screen");
         }
     }
     public void mainMenuUI()
     {
         SceneManager.LoadScene("StartGameScreen");
+    }
+
+    public void arenaUI()
+    {
+        SceneManager.LoadScene("ArenaZone");
+    }
+
+    public void quitButtonOnClick()
+    {
+        lc.stop = true;
+        m_rigidBody.velocity = Vector3.zero;
+        characterStateBeforeQuit = characterIsMoving;
+        characterIsMoving = false;
+        panelExit.SetActive(true);
     }
 }
