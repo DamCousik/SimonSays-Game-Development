@@ -49,19 +49,11 @@ public class LetterCollection : MonoBehaviour
             }
         }
 
-        foreach (KeyValuePair<string, int> item in charWordFrequencies)
-        {
-            wordLength += item.Value;
-        }
+        wordLength = word.Length;
 
+        Debug.Log("Word = " + word + " and Word Length at the beginning = " + wordLength);
         UnityEngine.Debug.Log("ClickZone.zoneTag : ---- : " + ClickZone.zoneTag);
         GameObject.Find("ZoneNumber").GetComponentInChildren<Text>().text = ClickZone.zoneTag;
-        // zone = GameObject.FindWithTag(ClickZone.zoneTag);
-        // UnityEngine.Debug.Log("zone : ---- : " + zone);
-        // UnityEngine.Debug.Log("---------");
-        // UnityEngine.Debug.Log(zone);
-        //Destroy(GameObject.FindWithTag(ClickZone.zoneTag));
-
     }
 
     private IEnumerator WaitForSceneLoad()
@@ -235,29 +227,32 @@ public class LetterCollection : MonoBehaviour
             if (charWordFrequencies.ContainsKey(other.gameObject.tag) && (charWordFrequencies[other.gameObject.tag] > 0))
             {
                 charWordFrequencies[other.gameObject.tag]--;
+                Debug.Log("1) ---- You corrected the right letter! " + other.gameObject.tag);
                 countCorrectLetters += 1;
             }
 
             else if (charWordFrequencies.ContainsKey(other.gameObject.tag) && (charWordFrequencies[other.gameObject.tag] <= 0))
             {
                 countIncorrectLetters += 1;
-                Debug.Log("1) ---- OOPS! You bumped into a wrong letter " + other.gameObject.tag);
+                Debug.Log("2) ---- OOPS! You bumped into a wrong letter " + other.gameObject.tag);
             }
 
+            else if (!(other.gameObject.CompareTag("Obstacle")) && !(other.gameObject.CompareTag("LethalObstacle")))
+            {
+                panelWrongLetter.gameObject.SetActive(true);
+                StartCoroutine(StopTimeForWrongLetter());
+
+                countIncorrectLetters += 1;
+                Debug.Log("3) ---- OOPS! You bumped into a wrong letter " + other.gameObject.tag);
+            }
             else
             {
-                if (!(other.gameObject.CompareTag("Obstacle")) && !(other.gameObject.CompareTag("LethalObstacle")))
-                {
-                    panelWrongLetter.gameObject.SetActive(true);
-                    StartCoroutine(StopTimeForWrongLetter());
-
-                    countIncorrectLetters += 1;
-                    Debug.Log("2) ---- OOPS! You bumped into a wrong letter " + other.gameObject.tag);
-                }
+                Debug.Log("YOU ARE IN THE ELSE PART AFTER 2 ELSE-IFS !! " + other.gameObject.tag);
             }
 
             if (countIncorrectLetters == 3)
             {
+                Debug.Log("4) ---- Entered condition for wrong letter! " + other.gameObject.tag);
                 if (IncorrectLetterChoices.tgState)
                 {
                     tgButton.SetActive(false);
@@ -276,9 +271,14 @@ public class LetterCollection : MonoBehaviour
                 panelWrongLetter.SetActive(false);
                 Debug.Log("You collected 3 incorrected letters! - YOU NEED TO START OVER!! " + other.gameObject.tag);
             }
-
-              if ((countCorrectLetters == wordLength) && (countIncorrectLetters < 3))
+            else
             {
+                Debug.Log("YOU ARE IN THE ELSE PART OF 3 INCORRECT LETTER CONDITION!! " + other.gameObject.tag);
+            }
+
+            if ((countCorrectLetters == wordLength) && (countIncorrectLetters < 3))
+            {
+                Debug.Log("5) ---- Entered condition for right letter (win)! " + other.gameObject.tag);
                 isGameWon = true;
                 stop = true;
                 charMove.chrctrIsDead = true;
@@ -290,22 +290,15 @@ public class LetterCollection : MonoBehaviour
                 StartCoroutine(WaitForSceneLoad());
 
                 zoneState.Add(ClickZone.zoneTag, isGameWon);
-                //added ClickZone.zoneTag to Dictionary
-     
-                //else
-                //{
-                //    panelExtraLetters.SetActive(true);
-                //    charMove.chrctrIsDead = true;
-                //    charMove.m_rigidBody.velocity = Vector3.zero;
-                //    charMove.m_rigidBody.isKinematic = true;
-                //    charMove.m_animator.gameObject.SetActive(false);
-                //    Debug.Log("You've collected extra letters which are irrelevant to the word. Sorry, but SimonSays - YOU LOSE!!!");
-                //    StartCoroutine(StopTime());
-                //    StartCoroutine(WaitForSceneLoad());
-                //}
-
             }
-         }
+            else
+            {
+                Debug.Log("Count of correct letters = " + countCorrectLetters);
+                Debug.Log("Count of incorrect letters = " + countIncorrectLetters);
+                Debug.Log("Word = " + word + " and Word Length at the end = " + wordLength);
+                Debug.Log(" YOU ARE IN THE ELSE PART OF THE ZONE WINNING CONDITION!! " + other.gameObject.tag);
+            }
+        }
         catch (Exception)
         {
             Debug.Log("You have bumped into the wrong letter!");
