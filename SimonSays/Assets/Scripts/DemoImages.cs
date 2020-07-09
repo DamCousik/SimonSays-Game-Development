@@ -10,11 +10,31 @@ public class DemoImages : MonoBehaviour
     public Button Arrow1;
     public Button Arrow2;
     public Button Arrow3;
+    public Button Arrow4;
+    public Button Go;
     public Button GotIt1;
     public Button GotIt2;
     public Button GotIt3;
     public GameObject jumble;
     public GameObject arena;
+    public GameObject arenaCompleted;
+    public static int control=0;
+    public void Start()
+    {
+        if(control==0)
+        {
+            unjumble.SetActive(true);
+            Arrow1.gameObject.SetActive(true);
+            GotIt1.gameObject.SetActive(true);
+        }
+        if(control==1)
+        {
+            arenaCompleted.SetActive(true);
+            Arrow4.gameObject.SetActive(true);
+            Go.gameObject.SetActive(true);
+        }
+        control = 1;
+    }
     public void playNext()
     {
         unjumble.SetActive(false);
@@ -25,7 +45,7 @@ public class DemoImages : MonoBehaviour
         GotIt2.gameObject.SetActive(true);
     }
     public void playNext1()
-    {
+    {      
         jumble.SetActive(false);
         arena.SetActive(true);
         Arrow2.gameObject.SetActive(false);
@@ -36,6 +56,10 @@ public class DemoImages : MonoBehaviour
     public void gotoDemo()
     {
         SceneManager.LoadScene("Demo");
+    }
+    public void chooseDifficulty()
+    {
+        SceneManager.LoadScene("Difficulty");
     }
 }
 

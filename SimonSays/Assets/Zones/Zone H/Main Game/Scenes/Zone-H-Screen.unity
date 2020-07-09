@@ -175,6 +175,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pTG: {fileID: 1958928883}
   newLetterCount: 0
+  toughLetterPlt: []
+  newToughLetterList: []
 --- !u!114 &11489186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4704,7 +4706,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 716248030}
-  - component: {fileID: 716248031}
   m_Layer: 0
   m_Name: ToughLetters
   m_TagString: Untagged
@@ -4752,87 +4753,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &716248031
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 716248029}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f708accc4b7fe41eb9d86a7ac9dce651, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  letterSpawn: 0
-  xPos: 0
-  letterDistribution:
-  - {fileID: 977682431}
-  - {fileID: 177540071}
-  - {fileID: 1712745198}
-  - {fileID: 72730239}
-  - {fileID: 1535472048}
-  - {fileID: 1626121868}
-  - {fileID: 507562225}
-  - {fileID: 397357799}
-  - {fileID: 1564475441}
-  - {fileID: 434935350}
-  - {fileID: 1289372367}
-  - {fileID: 865288917}
-  - {fileID: 451564657}
-  - {fileID: 700360815}
-  - {fileID: 836365035}
-  - {fileID: 1931067061}
-  - {fileID: 1600902031}
-  - {fileID: 372617042}
-  - {fileID: 534661318}
-  - {fileID: 2111785399}
-  - {fileID: 121867870}
-  - {fileID: 1265151177}
-  - {fileID: 1840205509}
-  - {fileID: 1665122239}
-  - {fileID: 2080400678}
-  - {fileID: 1330145317}
-  toughLetterDistribution:
-  - {fileID: 245562220}
-  - {fileID: 1350996240}
-  - {fileID: 1758713977}
-  - {fileID: 1622847277}
-  - {fileID: 800844764}
-  - {fileID: 54855044}
-  - {fileID: 1273213893}
-  - {fileID: 845303801}
-  - {fileID: 74102428}
-  - {fileID: 1597278516}
-  - {fileID: 1471181375}
-  - {fileID: 1561572288}
-  - {fileID: 1675199776}
-  - {fileID: 1962938694}
-  - {fileID: 513405044}
-  - {fileID: 978860387}
-  - {fileID: 861944004}
-  - {fileID: 1650092553}
-  - {fileID: 388033735}
-  - {fileID: 1179936659}
-  - {fileID: 1445273544}
-  - {fileID: 1864822116}
-  - {fileID: 718732874}
-  - {fileID: 165969192}
-  - {fileID: 662336230}
-  - {fileID: 177470140}
-  newLetterPlacements: []
-  toughLetterPlacements: []
-  letterDistList: []
-  toughLetterPlt: []
-  newExtraLetterList: []
-  newToughLetterList: []
-  letterPlacementResult: []
-  playerObj: {fileID: 1834506641}
-  avoidOtherLetters: []
-  letterCount: 0
-  totalLetters: 0
-  letterSpacing: 0
-  correctLetterCount: 0
 --- !u!1001 &718732872
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6778,6 +6698,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pTG: {fileID: 1958928883}
   newLetterCount: 0
+  toughLetterPlt: []
+  newToughLetterList: []
 --- !u!114 &1089850863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8838,7 +8760,7 @@ GameObject:
   - component: {fileID: 1429393629}
   - component: {fileID: 1429393628}
   m_Layer: 5
-  m_Name: Button
+  m_Name: ButtonHint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11058,6 +10980,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pTG: {fileID: 1958928883}
   newLetterCount: 0
+  toughLetterPlt: []
+  newToughLetterList: []
 --- !u!114 &1703924586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11831,10 +11755,18 @@ MonoBehaviour:
   arenaButton: {fileID: 1939742752}
   arenaButtonClone: {fileID: 11489183}
   panelGameWon: {fileID: 1167283214}
+  buttonHint: {fileID: 1429393626}
   stop: 0
   panelState: 0
+  pFix:
+  - st
+  - nd
+  - rd
+  - th
+  - th
   dispLet: {fileID: 974613618}
   charMove: {fileID: 1834506642}
+  hintText: 
 --- !u!1001 &1840205508
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12536,6 +12468,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pTG: {fileID: 1958928883}
   newLetterCount: 0
+  toughLetterPlt: []
+  newToughLetterList: []
 --- !u!114 &1939742755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12745,6 +12679,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pTG: {fileID: 1958928883}
   newLetterCount: 0
+  toughLetterPlt: []
+  newToughLetterList: []
 --- !u!114 &1958928885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13041,6 +12977,11 @@ MonoBehaviour:
   - {fileID: 1665122239}
   - {fileID: 2080400678}
   - {fileID: 1330145317}
+  newLetterPlacements: []
+  letterDistList: []
+  newExtraLetterList: []
+  letterPlacementResult: []
+  playerObj: {fileID: 1834506641}
   toughLetterDistribution:
   - {fileID: 245562220}
   - {fileID: 1350996240}
@@ -13068,15 +13009,7 @@ MonoBehaviour:
   - {fileID: 165969192}
   - {fileID: 662336230}
   - {fileID: 177470140}
-  newLetterPlacements: []
   toughLetterPlacements: []
-  letterDistList: []
-  toughLetterPlt: []
-  newExtraLetterList: []
-  newToughLetterList: []
-  letterPlacementResult: []
-  playerObj: {fileID: 1834506641}
-  avoidOtherLetters: []
   letterCount: 0
   totalLetters: 0
   letterSpacing: 0
@@ -13242,9 +13175,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Collect 4th Word of Movie
-
-    Click HERE to start'
+  m_Text: 
 --- !u!222 &2057022336
 CanvasRenderer:
   m_ObjectHideFlags: 0

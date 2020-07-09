@@ -1052,10 +1052,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sentences:
-  - sentence: The Lion King
+  - sentence: Kung Fu Panda
     words: []
     desiredRandom: 
-  - sentence: Man Of Steel
+  - sentence: The Lion King
     words: []
     desiredRandom: 
   - sentence: Maid Of Honor
@@ -1076,10 +1076,10 @@ MonoBehaviour:
   - sentence: The Sound Of Music
     words: []
     desiredRandom: 
-  - sentence: The Hills Have Eyes
+  - sentence: Back To The Future
     words: []
     desiredRandom: 
-  - sentence: Thirty Going On Thirteen
+  - sentence: The Hills Have Eyes
     words: []
     desiredRandom: 
   - sentence: How To Train Your Dragon
@@ -1124,6 +1124,8 @@ MonoBehaviour:
   space: 70
   lerpSpeed: 5
   currentSentence: 0
+  i: 1
+  zScenes: []
 --- !u!1 &422824505
 GameObject:
   m_ObjectHideFlags: 0
@@ -3668,7 +3670,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.62957764, y: -0.1146183}
+  m_AnchoredPosition: {x: -0.62957764, y: -0.114616394}
   m_SizeDelta: {x: 481.42163, y: 135.91222}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1477195299
@@ -3868,7 +3870,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.41400003}
   m_AnchorMax: {x: 1, y: 0.5563542}
-  m_AnchoredPosition: {x: 8.6, y: -7.5}
+  m_AnchoredPosition: {x: 8.599976, y: -7.5}
   m_SizeDelta: {x: -378.78064, y: 6.886841}
   m_Pivot: {x: 0.48741826, y: 0.5}
 --- !u!114 &1584686668

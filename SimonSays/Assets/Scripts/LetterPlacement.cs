@@ -10,25 +10,21 @@ public class LetterPlacement : MonoBehaviour
     public int xPos;
     private float zPos = 0;
     public GameObject[] letterDistribution;
-    public GameObject[] toughLetterDistribution;
     public List<GameObject> newLetterPlacements = new List<GameObject>();
-    public List<GameObject> toughLetterPlacements = new List<GameObject>();
-    IEnumerable <GameObject> extraLetterList;
-    IEnumerable <GameObject> toughLetterList;
+    IEnumerable<GameObject> extraLetterList;
     public List<GameObject> letterDistList = new List<GameObject>();
-    public List<GameObject> toughLetterPlt = new List<GameObject>();
     public List<GameObject> newExtraLetterList = new List<GameObject>();
-    public List<GameObject> newToughLetterList = new List<GameObject>();
     public List<GameObject> letterPlacementResult = new List<GameObject>();
     public Dictionary<string, int> wordAndIndexPairs = new Dictionary<string, int>();
     public GameObject playerObj;
-    public GameObject[] avoidOtherLetters = new GameObject[0];
 
+    public GameObject[] toughLetterDistribution;
+    public List<GameObject> toughLetterPlacements = new List<GameObject>();
     public int letterCount = 0;
     public int totalLetters;
     public int letterSpacing;
     public int correctLetterCount;
-    readonly string zoneWord = (SentenceJumble.originalWords[ClickZone.wordNum]).ToUpper();
+    public readonly string zoneWord = (SentenceJumble.originalWords[ClickZone.wordNum]).ToUpper();
 
     void Start()
     {
@@ -61,25 +57,25 @@ public class LetterPlacement : MonoBehaviour
 
         if (LevelDifficulty.difficulty.Equals("Easy"))
         {
-            totalLetters = 45;
+            totalLetters = 60;
             letterSpacing = 5;
             correctLetterCount = 2;
         }
-        else if(LevelDifficulty.difficulty.Equals("Medium"))
+        else if (LevelDifficulty.difficulty.Equals("Medium"))
         {
-            totalLetters = 65;
+            totalLetters = 90;
             letterSpacing = 4;
             correctLetterCount = 2;
         }
-        else if(LevelDifficulty.difficulty.Equals("Hard"))
+        else if (LevelDifficulty.difficulty.Equals("Hard"))
         {
-            totalLetters = 85;
+            totalLetters = 120;
             letterSpacing = 3;
             correctLetterCount = 2;
         }
         else if (LevelDifficulty.difficulty.Equals("Extreme"))
         {
-            totalLetters = 105;
+            totalLetters = 170;
             letterSpacing = 2;
             correctLetterCount = 3;
         }
@@ -103,7 +99,7 @@ public class LetterPlacement : MonoBehaviour
             position = new Vector3(xPos, (float)0.6, zPos);
             validPosition = true;
 
-            Collider[] colliders = Physics.OverlapSphere(position, (spacing/3));
+            Collider[] colliders = Physics.OverlapSphere(position, (spacing / 3));
 
             foreach (Collider col in colliders)
             {
@@ -170,15 +166,6 @@ public class LetterPlacement : MonoBehaviour
                     newLetterPlacements.Add(letterDistribution[wordAndIndexPairs[zoneWord[j].ToString()]]);
                     toughLetterPlacements.Add(toughLetterDistribution[wordAndIndexPairs[zoneWord[j].ToString()]]);
                 }
-            }
-
-            toughLetterPlt = toughLetterDistribution.OfType<GameObject>().ToList();
-            toughLetterList = toughLetterPlt.Except(toughLetterPlacements);
-            newToughLetterList = toughLetterList.OrderBy(x => Guid.NewGuid()).ToList();
-
-            foreach (GameObject gobj in newToughLetterList)
-            {
-                Debug.Log("TOUGH Letter Placement list at the start = " + gobj);
             }
 
             foreach (GameObject gobj in newLetterPlacements)

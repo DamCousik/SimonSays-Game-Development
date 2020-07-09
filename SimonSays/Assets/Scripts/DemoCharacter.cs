@@ -50,6 +50,7 @@ public class DemoCharacter : MonoBehaviour
     float Timer;
     bool x=false;
     bool waitingForRight = false, waitingForLeft=false, waitingForUp=false;
+    //public DemoImages d;
 
     public void Initialize(GameObject character)
     {
@@ -68,6 +69,7 @@ public class DemoCharacter : MonoBehaviour
 
     private void Start()
     {
+        print("Scene count democharacter " + UnityEditor.SceneManagement.EditorSceneManager.sceneCount);
      #if UNITY_EDITOR
         speed = 5.0f;
      #endif
@@ -518,7 +520,7 @@ public class DemoCharacter : MonoBehaviour
         {
             Display.transform.Find("Text").GetComponent<Text>().text = "To Move Left: Swipe Left or click ";       
             Display.transform.Find("Left").GetComponent<Image>().gameObject.SetActive(true);
-            Timer -= 1;
+            Timer -= 1.2f;
             waitingForLeft = true;
             x = true;
         }
@@ -545,7 +547,7 @@ public class DemoCharacter : MonoBehaviour
     }
     public void chooseDifficulty()
     {
-        SceneManager.LoadScene("Difficulty");
+        SceneManager.LoadScene("DemoJumble");
     }
     private IEnumerator StopTimeForObstacle()
     {

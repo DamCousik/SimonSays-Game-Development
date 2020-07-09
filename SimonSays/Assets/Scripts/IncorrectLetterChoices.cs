@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,12 +12,18 @@ public class IncorrectLetterChoices : MonoBehaviour
     public GameObject pTG;
     public static bool tgState = false;
     public static bool arenaEntry = false;
-    float position = 0;
+    int xPosition = 0;
+    float position;
     CharacterMovement charMove;
     LetterCollection cm;
     LetterPlacement lp;
     int remaining = 0;
     public int newLetterCount = 0;
+
+    IEnumerable<GameObject> toughLetterList;
+    public List<GameObject> toughLetterPlt = new List<GameObject>();
+    public List<GameObject> newToughLetterList = new List<GameObject>();
+    public Dictionary<string, int> wIndexPairs = new Dictionary<string, int>();
 
     private void Start()
     {
@@ -28,6 +36,33 @@ public class IncorrectLetterChoices : MonoBehaviour
         lp = lObj.GetComponent<LetterPlacement>();
 
         position = (player.transform.position.z) - 20;
+
+        wIndexPairs.Add("A", 0);
+        wIndexPairs.Add("B", 1);
+        wIndexPairs.Add("C", 2);
+        wIndexPairs.Add("D", 3);
+        wIndexPairs.Add("E", 4);
+        wIndexPairs.Add("F", 5);
+        wIndexPairs.Add("G", 6);
+        wIndexPairs.Add("H", 7);
+        wIndexPairs.Add("I", 8);
+        wIndexPairs.Add("J", 9);
+        wIndexPairs.Add("K", 10);
+        wIndexPairs.Add("L", 11);
+        wIndexPairs.Add("M", 12);
+        wIndexPairs.Add("N", 13);
+        wIndexPairs.Add("O", 14);
+        wIndexPairs.Add("P", 15);
+        wIndexPairs.Add("Q", 16);
+        wIndexPairs.Add("R", 17);
+        wIndexPairs.Add("S", 18);
+        wIndexPairs.Add("T", 19);
+        wIndexPairs.Add("U", 20);
+        wIndexPairs.Add("V", 21);
+        wIndexPairs.Add("W", 22);
+        wIndexPairs.Add("X", 23);
+        wIndexPairs.Add("Y", 24);
+        wIndexPairs.Add("Z", 25);
     }
 
     public void ReturnToArena()
@@ -80,60 +115,128 @@ public class IncorrectLetterChoices : MonoBehaviour
 
     public void TougherGame()
     {
-        Debug.Log("Player's Last Position = " + position);
-        cm.countIncorrectLetters = 0;
-        cm.stop = false;
-       
-        if (LevelDifficulty.difficulty.Equals("Easy"))
+        try
         {
-            lp.letterSpacing = 4;
-            newLetterCount = 30;
-        }
+            Debug.Log("Player's Last Position = " + position);
+            cm.countIncorrectLetters = 0;
+            cm.stop = false;
+            string zWord = (SentenceJumble.originalWords[ClickZone.wordNum]).ToUpper();
 
-        else if (LevelDifficulty.difficulty.Equals("Medium"))
-        {
-            lp.letterSpacing = 3;
-            newLetterCount = 20;
-        }
-
-        else if (LevelDifficulty.difficulty.Equals("Hard"))
-        {
-            lp.letterSpacing = 2;
-            newLetterCount = 15;
-        }
-
-        else if (LevelDifficulty.difficulty.Equals("Extreme"))
-        {
-            lp.letterSpacing = 1;
-            newLetterCount = 10;
-        }
-
-        remaining = newLetterCount - lp.newToughLetterList.Count;
-
-        if(remaining > 0)
-        {
-            for (int j = 0; j < remaining; j++)
+            if (LevelDifficulty.difficulty.Equals("Easy"))
             {
-                lp.newToughLetterList.Add(lp.newToughLetterList[j]);
+                lp.letterSpacing = 5;
+                newLetterCount = 30;
             }
-        }
 
-        for (int i = 0; i < newLetterCount; i++)
-        {
-            if(position > -340)
-                StartCoroutine(ObstacleDropForTougherGame(lp.newToughLetterList[i], lp.letterSpacing));
+            else if (LevelDifficulty.difficulty.Equals("Medium"))
+            {
+                lp.letterSpacing = 4;
+                newLetterCount = 20;
+            }
+
+            else if (LevelDifficulty.difficulty.Equals("Hard"))
+            {
+                lp.letterSpacing = 3;
+                newLetterCount = 15;
+            }
+
+            else if (LevelDifficulty.difficulty.Equals("Extreme"))
+            {
+                lp.letterSpacing = 2;
+                newLetterCount = 10;
+            }
+
+            toughLetterPlt = lp.toughLetterDistribution.OfType<GameObject>().ToList();
+            toughLetterList = toughLetterPlt.Except(lp.toughLetterPlacements);
+            newToughLetterList = toughLetterList.OrderBy(x => Guid.NewGuid()).ToList();
+
+            remaining = newLetterCount - newToughLetterList.Count;
+
+            if (remaining > 0)
+            {
+                for (int j = 0; j < remaining; j++)
+                {
+                    newToughLetterList.Add(newToughLetterList[j]);
+                }
+            }
+
+            for (int i = 0; i < newLetterCount; i++)
+            {
+                StartCoroutine(ObstacleDropForTougherGame(newToughLetterList[i], lp.letterSpacing));
+            }
+
+            pTG.SetActive(false);
         }
-        pTG.SetActive(false);
+        catch(Exception e)
+        {
+            Debug.Log("Error = " + e);
+        }
     }
 
     IEnumerator ObstacleDropForTougherGame(GameObject letterSpawn, int spacing)
     {
-        lp.xPos = UnityEngine.Random.Range(1, -2);
-        position -= spacing;
+        Vector3 letterPosition = Vector3.zero;
+        bool validPosition = false;
 
-        GameObject obj = Instantiate(letterSpawn, new Vector3(lp.xPos, (float)0.6, position), Quaternion.identity);
+        while (!validPosition)
+        {
+            xPosition = UnityEngine.Random.Range(1, -2);
 
-        obj.transform.localScale = new Vector3((float)0.5, (float)0.5, (float)0.03);
+            if (position < -345)
+                position = 0;
+
+            position -= spacing;
+            letterPosition = new Vector3(xPosition, (float)0.6, position);
+            validPosition = true;
+
+            Collider[] colliders = Physics.OverlapSphere(letterPosition, (spacing / 3));
+
+            foreach (Collider col in colliders)
+            {
+                switch ((col.tag))
+                {
+                    case "Obstacle":
+                    case "A":
+                    case "B":
+                    case "C":
+                    case "D":
+                    case "E":
+                    case "F":
+                    case "G":
+                    case "H":
+                    case "I":
+                    case "J":
+                    case "K":
+                    case "L":
+                    case "M":
+                    case "N":
+                    case "O":
+                    case "P":
+                    case "Q":
+                    case "R":
+                    case "S":
+                    case "T":
+                    case "U":
+                    case "V":
+                    case "W":
+                    case "X":
+                    case "Y":
+                    case "Z":
+                        validPosition = false;
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+        }
+
+        if (validPosition)
+        {
+            GameObject obj = Instantiate(letterSpawn, letterPosition, Quaternion.identity);
+            obj.transform.localScale = new Vector3((float)0.5, (float)0.5, (float)0.03);
+        }
+
         yield return new WaitForSeconds(0.005f);
 
     }
