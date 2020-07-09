@@ -10,7 +10,7 @@ public class LetterCollection : MonoBehaviour
     public static Dictionary<string, int> charWordFrequencies = new Dictionary<string, int>();
     public static Dictionary<string, bool> zoneState = new Dictionary<string, bool>();
 
-    
+
     public List<string> collectedLetters = new List<string>();
     public int countIncorrectLetters = 0;
     public int countCorrectLetters = 0;
@@ -20,6 +20,7 @@ public class LetterCollection : MonoBehaviour
     public GameObject arenaButton;
     public GameObject arenaButtonClone;
     public GameObject panelGameWon;
+    public GameObject buttonHint;
     public bool stop = false;
     public bool panelState = false;
 
@@ -27,7 +28,7 @@ public class LetterCollection : MonoBehaviour
     public static bool isGameWon = false;
     public static string word;
 
-    public string[] pFix = { "st", "nd", "rd", "th", "th"};
+    public string[] pFix = {"st", "nd", "rd", "th", "th"};
 
     public DisplayLetters dispLet;
     public CharacterMovement charMove;
@@ -56,13 +57,9 @@ public class LetterCollection : MonoBehaviour
 
         Debug.Log("Word = " + word + " and Word Length at the beginning = " + wordLength);
         UnityEngine.Debug.Log("ClickZone.zoneTag : ---- : " + ClickZone.zoneTag);
-        Debug.Log(" Zone Number = " + ClickZone.zoneTag[5]);
-        Debug.Log(" Hint number  = " + ClickZone.zoneTag[5] + pFix[ClickZone.zoneTag[5] - '0' - 1]);
-
-        hintText = "Collect " + ClickZone.zoneTag[5] + pFix[ClickZone.zoneTag[5] - '0' - 1] + " Word of Movie \n Click HERE to start";
 
         GameObject.Find("ZoneNumber").GetComponentInChildren<Text>().text = ClickZone.zoneTag;
-        GameObject.Find("PanelHint").transform.GetChild(0).GetChild(0).GetComponent<Text>().text = hintText;
+        buttonHint.transform.Find("Text").GetComponent<Text>().text = "Collect " + ClickZone.zoneTag[5] + pFix[ClickZone.zoneTag[5] - '0' - 1] + " Word of Movie \n Click HERE to start";
     }
 
     private IEnumerator WaitForSceneLoad()

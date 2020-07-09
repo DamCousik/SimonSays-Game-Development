@@ -83,8 +83,7 @@ public class SentenceJumble : MonoBehaviour
     private Text timerSeconds;
 
     //Zone Randomization
-    public int i = 1;
-
+    public int zoneNum = 1;
     public Dictionary<string, int> zoneScenes = new Dictionary<string, int>();
     IEnumerable<string> randomZoneScenes;
     public List<string> zScenes = new List<string>();
@@ -126,8 +125,8 @@ public class SentenceJumble : MonoBehaviour
 
         foreach (string gobj in loadZoneScenes)
         {
-            Debug.Log(" Zone " + i + " = " + gobj);
-            i += 1;
+            Debug.Log(" Zone " + zoneNum + " = " + gobj);
+            zoneNum += 1;
         }
     }
 
