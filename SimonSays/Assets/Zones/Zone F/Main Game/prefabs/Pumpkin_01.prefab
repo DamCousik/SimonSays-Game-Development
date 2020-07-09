@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7900514064778956484}
   - component: {fileID: 7900514064778148452}
   - component: {fileID: 7900514064777003708}
+  - component: {fileID: 1472573628303436545}
   m_Layer: 0
   m_Name: Pumpkin_01
   m_TagString: Untagged
@@ -79,3 +80,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!135 &1472573628303436545
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7900514064779384492}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.41164672
+  m_Center: {x: -0.00001129508, y: 0.013288692, z: 0.2632788}
