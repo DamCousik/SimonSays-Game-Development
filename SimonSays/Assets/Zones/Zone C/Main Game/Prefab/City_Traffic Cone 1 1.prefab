@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7829209100620469374}
   - component: {fileID: 7829209100619372222}
   - component: {fileID: 7829209100610157502}
-  - component: {fileID: 7829209100617469660}
+  - component: {fileID: 6150127644470000161}
   m_Layer: 0
   m_Name: City_Traffic Cone 1 1
   m_TagString: Obstacle
@@ -100,7 +100,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!65 &7829209100617469660
+--- !u!65 &6150127644470000161
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -111,5 +111,5 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.1851254, y: 3.2272396, z: 2.1851268}
-  m_Center: {x: -2.1412993e-18, y: 0.20133865, z: 0.000004708767}
+  m_Size: {x: 2.185125, y: 3.2272396, z: 2.1851265}
+  m_Center: {x: -6.9853376e-19, y: 0.20133865, z: -0.000117361546}

@@ -50,6 +50,7 @@ public class DemoCharacter : MonoBehaviour
     float Timer;
     bool x=false;
     bool waitingForRight = false, waitingForLeft=false, waitingForUp=false;
+    //public DemoImages d;
 
     public void Initialize(GameObject character)
     {
@@ -68,6 +69,7 @@ public class DemoCharacter : MonoBehaviour
 
     private void Start()
     {
+        print("Scene count democharacter " + UnityEditor.SceneManagement.EditorSceneManager.sceneCount);
      #if UNITY_EDITOR
         speed = 5.0f;
      #endif
@@ -419,15 +421,15 @@ public class DemoCharacter : MonoBehaviour
                 Congratulations.gameObject.SetActive(true);
             }           
             Destroy(other.gameObject);
-            if(other.gameObject.tag == ("J"))
-                CorrectPanel.gameObject.transform.Find("J").gameObject.SetActive(true);
+            if (other.gameObject.tag == ("J"))
+                CorrectPanel.gameObject.transform.Find("J").transform.Find("Text").GetComponent<Text>().text = "J";
             if (other.gameObject.tag == ("A"))
-                CorrectPanel.gameObject.transform.Find("A").gameObject.SetActive(true);
+                CorrectPanel.gameObject.transform.Find("A").transform.Find("Text").GetComponent<Text>().text = "A"; 
             if (other.gameObject.tag == ("W"))
-                CorrectPanel.gameObject.transform.Find("W").gameObject.SetActive(true);
+                CorrectPanel.gameObject.transform.Find("W").transform.Find("Text").GetComponent<Text>().text = "W"; 
             if (other.gameObject.tag == ("S"))
-                CorrectPanel.gameObject.transform.Find("S").gameObject.SetActive(true);
-           
+                CorrectPanel.gameObject.transform.Find("S").transform.Find("Text").GetComponent<Text>().text = "S";
+
         }
         if (other.gameObject.tag == ("B") || other.gameObject.tag == ("C") || other.gameObject.tag == ("L") || other.gameObject.tag == ("G"))
         {
@@ -518,7 +520,7 @@ public class DemoCharacter : MonoBehaviour
         {
             Display.transform.Find("Text").GetComponent<Text>().text = "To Move Left: Swipe Left or click ";       
             Display.transform.Find("Left").GetComponent<Image>().gameObject.SetActive(true);
-            Timer -= 1;
+            Timer -= 1.2f;
             waitingForLeft = true;
             x = true;
         }
@@ -545,7 +547,7 @@ public class DemoCharacter : MonoBehaviour
     }
     public void chooseDifficulty()
     {
-        SceneManager.LoadScene("Difficulty");
+        SceneManager.LoadScene("DemoJumble");
     }
     private IEnumerator StopTimeForObstacle()
     {

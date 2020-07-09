@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3886408529797705919}
   - component: {fileID: 3886408529796898127}
   - component: {fileID: 3886408529795436053}
-  - component: {fileID: 3886408529799630539}
+  - component: {fileID: 3779126714442206976}
   m_Layer: 0
   m_Name: Tombstone_01 (1)
   m_TagString: Untagged
@@ -80,7 +80,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &3886408529799630539
+--- !u!65 &3779126714442206976
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -88,8 +88,8 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3886408529797941463}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.6778235, y: 0.24460576, z: 1.1746786}
-  m_Center: {x: 0, y: 0, z: 0.5873393}
+  m_Size: {x: 0.6778235, y: 0.2446057, z: 1.1746783}
+  m_Center: {x: 0, y: 0, z: 0.58733916}
