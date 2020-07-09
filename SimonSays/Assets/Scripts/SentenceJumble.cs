@@ -82,6 +82,14 @@ public class SentenceJumble : MonoBehaviour
     private float timer = 20f;
     private Text timerSeconds;
 
+    //Zone Randomization
+    public int i = 1;
+
+    public Dictionary<string, int> zoneScenes = new Dictionary<string, int>();
+    IEnumerable<string> randomZoneScenes;
+    public List<string> zScenes = new List<string>();
+    public static List<string> loadZoneScenes = new List<string>();
+
     public void ChangeScene(string scene)
     {
         CheckSentence();
@@ -98,6 +106,29 @@ public class SentenceJumble : MonoBehaviour
         ShowScramble();
         //ShowScramble(currentSentence);
         timerSeconds = GameObject.Find("Timer").GetComponent<Text>();
+
+        zoneScenes.Add("A", 0);
+        zoneScenes.Add("B", 1);
+        zoneScenes.Add("C", 2);
+        zoneScenes.Add("D", 3);
+        zoneScenes.Add("E", 4);
+        zoneScenes.Add("F", 5);
+        zoneScenes.Add("G", 6);
+        zoneScenes.Add("H", 7);
+
+        foreach (KeyValuePair<string, int> gobj in zoneScenes)
+        {
+            zScenes.Add(gobj.Key);
+        }
+
+        randomZoneScenes = zScenes.OrderBy(x => Guid.NewGuid());
+        loadZoneScenes = randomZoneScenes.ToList();
+
+        foreach (string gobj in loadZoneScenes)
+        {
+            Debug.Log(" Zone " + i + " = " + gobj);
+            i += 1;
+        }
     }
 
     // Update is called once per frame

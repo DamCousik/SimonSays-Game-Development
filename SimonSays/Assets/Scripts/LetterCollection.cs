@@ -27,8 +27,11 @@ public class LetterCollection : MonoBehaviour
     public static bool isGameWon = false;
     public static string word;
 
+    public string[] pFix = { "st", "nd", "rd", "th", "th"};
+
     public DisplayLetters dispLet;
     public CharacterMovement charMove;
+    public string hintText;
 
     void Start()
     {
@@ -53,7 +56,13 @@ public class LetterCollection : MonoBehaviour
 
         Debug.Log("Word = " + word + " and Word Length at the beginning = " + wordLength);
         UnityEngine.Debug.Log("ClickZone.zoneTag : ---- : " + ClickZone.zoneTag);
+        Debug.Log(" Zone Number = " + ClickZone.zoneTag[5]);
+        Debug.Log(" Hint number  = " + ClickZone.zoneTag[5] + pFix[ClickZone.zoneTag[5] - '0' - 1]);
+
+        hintText = "Collect " + ClickZone.zoneTag[5] + pFix[ClickZone.zoneTag[5] - '0' - 1] + " Word of Movie \n Click HERE to start";
+
         GameObject.Find("ZoneNumber").GetComponentInChildren<Text>().text = ClickZone.zoneTag;
+        GameObject.Find("PanelHint").transform.GetChild(0).GetChild(0).GetComponent<Text>().text = hintText;
     }
 
     private IEnumerator WaitForSceneLoad()

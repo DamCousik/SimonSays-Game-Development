@@ -1317,8 +1317,15 @@ MonoBehaviour:
   panelGameWon: {fileID: 1521575605}
   stop: 0
   panelState: 0
+  pFix:
+  - st
+  - nd
+  - rd
+  - th
+  - th
   dispLet: {fileID: 85147466}
   charMove: {fileID: 157302961}
+  hintText: 
 --- !u!54 &157302963 stripped
 Rigidbody:
   m_CorrespondingSourceObject: {fileID: 54084939265967506, guid: 0e74cf81e6fd82546b4797f71ceffb81,
@@ -1495,9 +1502,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Collect 1st Word of Movie
-
-    Click HERE to start'
+  m_Text: 
 --- !u!222 &160818166
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3578,8 +3583,8 @@ GameObject:
   - component: {fileID: 564201510}
   - component: {fileID: 564201509}
   m_Layer: 5
-  m_Name: Button
-  m_TagString: Untagged
+  m_Name: ButtonHint
+  m_TagString: hintButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

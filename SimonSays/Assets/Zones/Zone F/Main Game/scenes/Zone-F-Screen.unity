@@ -4829,9 +4829,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Collect 5th Word of Movie
-
-    Click HERE to start'
+  m_Text: 
 --- !u!222 &914691446
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6215,7 +6213,7 @@ GameObject:
   - component: {fileID: 1072572286}
   - component: {fileID: 1072572285}
   m_Layer: 5
-  m_Name: Button
+  m_Name: ButtonHint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7898,6 +7896,12 @@ MonoBehaviour:
   panelGameWon: {fileID: 1051048800}
   stop: 0
   panelState: 0
+  pFix:
+  - st
+  - nd
+  - rd
+  - th
+  - th
   dispLet: {fileID: 652170641}
   charMove: {fileID: 1394252617}
 --- !u!95 &1394252619

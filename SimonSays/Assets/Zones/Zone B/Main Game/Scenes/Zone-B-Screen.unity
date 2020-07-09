@@ -9300,6 +9300,12 @@ MonoBehaviour:
   panelGameWon: {fileID: 353165144}
   stop: 0
   panelState: 0
+  pFix:
+  - st
+  - nd
+  - rd
+  - th
+  - th
   dispLet: {fileID: 418862240}
   charMove: {fileID: 1221855541}
 --- !u!4 &1224628105 stripped
@@ -12574,9 +12580,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Collect 2nd Word of Movie
-
-    Click HERE to start'
+  m_Text: 
 --- !u!222 &1647402676
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -14580,7 +14584,7 @@ GameObject:
   - component: {fileID: 2085081462}
   - component: {fileID: 2085081461}
   m_Layer: 5
-  m_Name: Button
+  m_Name: ButtonHint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
