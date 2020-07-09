@@ -301,6 +301,7 @@ public class LetterCollection : MonoBehaviour
                 charMove.m_rigidBody.isKinematic = true;
                 panelGameWon.SetActive(true);
                 //sound
+                audio.Stop();
                 audio.PlayOneShot(Gamewin, 0.7F);
                 Debug.Log("Congratulations! You've successfully spelt out the word correctly! SimonSays - YOU COMPLETED THIS ZONE!!!");
                 StartCoroutine(StopTime());

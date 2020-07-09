@@ -44,6 +44,7 @@ public class CharacterMovement : MonoBehaviour
     private AudioSource audio1;
     private AudioSource audio2;
     private AudioSource audio3;
+    bool isMute;
 
     public void Initialize(GameObject character)
     {
@@ -408,12 +409,22 @@ public class CharacterMovement : MonoBehaviour
                 lc.stop = true;
             }
         }
+
+       
         catch (Exception)
         {
             Debug.Log("Exception with Health!");
         }
 
     }
+
+    //mute button function
+    public void Mute()
+    {
+        isMute = !isMute;
+        AudioListener.volume = isMute ? 0 : 1;
+    }
+
 
     private IEnumerator StopTimeForObstacle()
     {
