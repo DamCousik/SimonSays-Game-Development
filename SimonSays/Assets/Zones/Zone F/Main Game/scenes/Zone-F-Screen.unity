@@ -7370,7 +7370,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4549428611729446, guid: 0e74cf81e6fd82546b4797f71ceffb81, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.067
       objectReference: {fileID: 0}
     - target: {fileID: 4549428611729446, guid: 0e74cf81e6fd82546b4797f71ceffb81, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7462,7 +7462,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 765aabb4c950d46a887af4717365c810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 6
+  speed: 7
   height: 5
   plainLeftMax: 1.52
   plainRightMax: -1.52
@@ -7513,7 +7513,6 @@ MonoBehaviour:
   - th
   dispLet: {fileID: 652170641}
   charMove: {fileID: 1394252617}
-  hintText: 
 --- !u!95 &1394252619
 Animator:
   serializedVersion: 3
