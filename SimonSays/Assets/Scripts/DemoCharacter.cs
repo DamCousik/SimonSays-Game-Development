@@ -69,7 +69,6 @@ public class DemoCharacter : MonoBehaviour
 
     private void Start()
     {
-        print("Scene count democharacter " + UnityEditor.SceneManagement.EditorSceneManager.sceneCount);
      #if UNITY_EDITOR
         speed = 5.0f;
      #endif
