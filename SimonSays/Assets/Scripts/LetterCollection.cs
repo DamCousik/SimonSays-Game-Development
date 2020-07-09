@@ -34,10 +34,10 @@ public class LetterCollection : MonoBehaviour
     public CharacterMovement charMove;
 
     //sounds
-    public AudioClip RightLetterBell;
-    public AudioClip Impact;
+    public AudioClip Bell;
+    public AudioClip Buzz;
     public AudioClip Gamewin;
-    AudioSource audio;
+    private AudioSource audio2;
 
     void Start()
     {
@@ -64,7 +64,7 @@ public class LetterCollection : MonoBehaviour
         UnityEngine.Debug.Log("ClickZone.zoneTag : ---- : " + ClickZone.zoneTag);
 
         //Sound
-        audio = GetComponent<AudioSource>();
+        audio2 = GetComponent<AudioSource>();
 
         GameObject.Find("ZoneNumber").GetComponentInChildren<Text>().text = ClickZone.zoneTag;
         buttonHint.transform.Find("Text").GetComponent<Text>().text = "Collect " + ClickZone.zoneTag[5] + pFix[ClickZone.zoneTag[5] - '0' - 1] + " Word of Movie \n Click HERE to start";
@@ -243,14 +243,15 @@ public class LetterCollection : MonoBehaviour
                 charWordFrequencies[other.gameObject.tag]--;
                 Debug.Log("1) ---- You corrected the right letter! " + other.gameObject.tag);
                 countCorrectLetters += 1;
-                audio.PlayOneShot(RightLetterBell, 0.7F);
+                //sound
+                audio2.PlayOneShot(Bell, 0.7F);
             }
 
             else if (charWordFrequencies.ContainsKey(other.gameObject.tag) && (charWordFrequencies[other.gameObject.tag] <= 0))
             {
                 countIncorrectLetters += 1;
                 Debug.Log("2) ---- OOPS! You bumped into a wrong letter " + other.gameObject.tag);
-                audio.PlayOneShot(Impact, 0.7F);
+                audio2.PlayOneShot(Buzz, 0.7F);
             }
 
             else if (!(other.gameObject.CompareTag("Obstacle")) && !(other.gameObject.CompareTag("LethalObstacle")))
@@ -260,7 +261,7 @@ public class LetterCollection : MonoBehaviour
 
                 countIncorrectLetters += 1;
                 Debug.Log("3) ---- OOPS! You bumped into a wrong letter " + other.gameObject.tag);
-                audio.PlayOneShot(Impact, 0.7F);
+                audio2.PlayOneShot(Buzz, 0.7F);
             }
 
             if (countIncorrectLetters == 3)
@@ -295,8 +296,7 @@ public class LetterCollection : MonoBehaviour
                 charMove.m_rigidBody.isKinematic = true;
                 panelGameWon.SetActive(true);
                 //sound
-                audio.Stop();
-                audio.PlayOneShot(Gamewin, 0.7F);
+                audio2.PlayOneShot(Gamewin, 0.7F);
                 Debug.Log("Congratulations! You've successfully spelt out the word correctly! SimonSays - YOU COMPLETED THIS ZONE!!!");
                 StartCoroutine(StopTime());
                 StartCoroutine(WaitForSceneLoad());

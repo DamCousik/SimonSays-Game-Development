@@ -38,8 +38,8 @@ public class CharacterMovement : MonoBehaviour
     float touchBx,touchBy,touchEx,touchEy;
 
     //sound
-    public AudioClip Impact;
-    public AudioClip Jump;
+    public AudioClip Obst_impact;
+    public AudioClip grunt;
     public AudioClip Die;
     private AudioSource audio1;
     private AudioSource audio2;
@@ -323,14 +323,14 @@ public class CharacterMovement : MonoBehaviour
             m_jumpTimeStamp = Time.time;
             m_rigidBody.AddForce(Vector3.up * m_jumpForce, ForceMode.Impulse);
             //sound
-            audio1.PlayOneShot(Jump, 0.7F);
+            audio1.PlayOneShot(grunt, 0.7F);
         }
         if (jumpCooldownOver && m_isGrounded && Input.GetKey(KeyCode.UpArrow))
         {
             m_jumpTimeStamp = Time.time;
             m_rigidBody.AddForce(Vector3.up * m_jumpForce, ForceMode.Impulse);
             //sound
-            audio1.PlayOneShot(Jump, 0.7F);
+            audio1.PlayOneShot(grunt, 0.7F);
         }
 
         if (jumpCooldownOver && m_isGrounded && Input.GetKey(KeyCode.Space))
@@ -338,7 +338,7 @@ public class CharacterMovement : MonoBehaviour
             m_jumpTimeStamp = Time.time;
             m_rigidBody.AddForce(Vector3.up * m_jumpForce, ForceMode.Impulse);
             //sound
-            audio1.PlayOneShot(Jump, 0.7F);
+            audio1.PlayOneShot(grunt, 0.7F);
         }
 
         if (!m_wasGrounded && m_isGrounded)
@@ -360,7 +360,7 @@ public class CharacterMovement : MonoBehaviour
             {
                 Debug.Log("You hit an obstacle - YOU LOSE A LIFE!!");
                 //Sound
-                audio2.PlayOneShot(Impact, 0.5F);
+                audio2.PlayOneShot(Obst_impact, 0.7F);
 
                 panelObstacle.gameObject.SetActive(true);
                 StartCoroutine(StopTimeForObstacle());
