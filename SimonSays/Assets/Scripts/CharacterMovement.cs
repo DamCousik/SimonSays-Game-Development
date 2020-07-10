@@ -39,11 +39,9 @@ public class CharacterMovement : MonoBehaviour
 
     //sound
     public AudioClip Obst_impact;
-    public AudioClip grunt;
     public AudioClip Die;
     private AudioSource audio1;
     private AudioSource audio2;
-    private AudioSource audio3;
     bool isMute;
 
     public void Initialize(GameObject character)
@@ -72,9 +70,9 @@ public class CharacterMovement : MonoBehaviour
         #endif
         started = false;
 
+        //sounds
         audio1 = GetComponent<AudioSource>();
         audio2 = GetComponent<AudioSource>();
-        audio3 = GetComponent<AudioSource>();
     }
 
     void Awake()
@@ -322,23 +320,17 @@ public class CharacterMovement : MonoBehaviour
         {
             m_jumpTimeStamp = Time.time;
             m_rigidBody.AddForce(Vector3.up * m_jumpForce, ForceMode.Impulse);
-            //sound
-            audio1.PlayOneShot(grunt, 0.7F);
         }
         if (jumpCooldownOver && m_isGrounded && Input.GetKey(KeyCode.UpArrow))
         {
             m_jumpTimeStamp = Time.time;
             m_rigidBody.AddForce(Vector3.up * m_jumpForce, ForceMode.Impulse);
-            //sound
-            audio1.PlayOneShot(grunt, 0.7F);
         }
 
         if (jumpCooldownOver && m_isGrounded && Input.GetKey(KeyCode.Space))
         {
             m_jumpTimeStamp = Time.time;
             m_rigidBody.AddForce(Vector3.up * m_jumpForce, ForceMode.Impulse);
-            //sound
-            audio1.PlayOneShot(grunt, 0.7F);
         }
 
         if (!m_wasGrounded && m_isGrounded)
@@ -360,12 +352,12 @@ public class CharacterMovement : MonoBehaviour
             {
                 Debug.Log("You hit an obstacle - YOU LOSE A LIFE!!");
                 //Sound
-                audio2.PlayOneShot(Obst_impact, 0.7F);
+                audio1.PlayOneShot(Obst_impact, 0.1F);
 
                 panelObstacle.gameObject.SetActive(true);
                 StartCoroutine(StopTimeForObstacle());
                 healthCount -= 1;
-                if(healthCount==2)
+                if (healthCount == 2)
                 {
                     hb.size = 0.6f;
                     hb.targetGraphic.color = Color.yellow;
@@ -374,7 +366,7 @@ public class CharacterMovement : MonoBehaviour
                 {
                     hb.size = 0.2f;
                     hb.targetGraphic.color = Color.red;
-                }                  
+                }
                 ps.Play();
                 StartCoroutine(ChangeSize());
                 SphereCollider myCollider;
@@ -386,8 +378,6 @@ public class CharacterMovement : MonoBehaviour
                 {
                     hb.gameObject.SetActive(false);
                     chrctrIsDead = true;
-                    //sound
-                    audio3.PlayOneShot(Die, 0.7F);
                     Debug.Log("You are all out of lives! Sorry, but SimonSays - YOU DIE!!");
                     m_rigidBody.velocity = Vector3.zero;
                     m_rigidBody.isKinematic = true;
@@ -404,13 +394,12 @@ public class CharacterMovement : MonoBehaviour
                 Debug.Log("You've reached the end of the zone! Goodbye!!");
                 chrctrIsDead = true;
                 //sound
-                audio3.PlayOneShot(Die, 0.7F);
+                audio2.PlayOneShot(Die, 0.7F);
                 panelLethalObstacle.SetActive(true);
                 lc.stop = true;
             }
-        }
 
-       
+        }
         catch (Exception)
         {
             Debug.Log("Exception with Health!");

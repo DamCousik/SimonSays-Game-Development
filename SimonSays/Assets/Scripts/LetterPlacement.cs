@@ -17,6 +17,7 @@ public class LetterPlacement : MonoBehaviour
     public List<GameObject> letterPlacementResult = new List<GameObject>();
     public Dictionary<string, int> wordAndIndexPairs = new Dictionary<string, int>();
     public GameObject playerObj;
+ 
 
     public GameObject[] toughLetterDistribution;
     public List<GameObject> toughLetterPlacements = new List<GameObject>();
@@ -82,6 +83,9 @@ public class LetterPlacement : MonoBehaviour
 
         LetterPlacementForLevel(totalLetters, letterSpacing, correctLetterCount, zoneWord);
     }
+
+  
+    
 
     IEnumerator ObstacleDrop(GameObject letterSpawn, int spacing)
     {

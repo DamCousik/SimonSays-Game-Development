@@ -37,6 +37,7 @@ public class LetterCollection : MonoBehaviour
     public AudioClip Bell;
     public AudioClip Buzz;
     public AudioClip Gamewin;
+    private AudioSource audio1;
     private AudioSource audio2;
 
     void Start()
@@ -64,6 +65,7 @@ public class LetterCollection : MonoBehaviour
         UnityEngine.Debug.Log("ClickZone.zoneTag : ---- : " + ClickZone.zoneTag);
 
         //Sound
+        audio1 = GetComponent<AudioSource>();
         audio2 = GetComponent<AudioSource>();
 
         GameObject.Find("ZoneNumber").GetComponentInChildren<Text>().text = ClickZone.zoneTag;
