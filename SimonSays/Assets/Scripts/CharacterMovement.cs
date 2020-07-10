@@ -76,17 +76,24 @@ public class CharacterMovement : MonoBehaviour
     {
         started = true;
         avoidHint = true;
+        lc.stop = false;
+    }
+
+    public void resumePause()
+    {
+        lc.stop = false;
+        characterIsMoving = true;
+        panelpause.SetActive(false);
     }
 
     public void resumeOnClick()
     {
         Debug.Log("Resume Button : Resume False"); 
         characterIsMoving = characterStateBeforeQuit;
-        if (characterIsMoving)
+        if ((characterIsMoving) && (!panelLethalObstacle.activeSelf))
             lc.stop = false;
         else
             lc.stop = true;
-        panelpause.SetActive(false);
         panelExit.SetActive(false);
         Debug.Log("Resume Button : Resume True");
     }
@@ -97,7 +104,6 @@ public class CharacterMovement : MonoBehaviour
         {
             Debug.Log("Paused Clicked");
             lc.stop = true;
-            characterStateBeforeQuit = characterIsMoving;
             m_rigidBody.velocity = Vector3.zero;
             characterIsMoving = false;
             panelpause.SetActive(true);

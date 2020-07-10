@@ -67,6 +67,7 @@ public class SentenceJumble : MonoBehaviour
     public GameObject word4Hint;
     public GameObject word5Hint;
     public static List<string> originalWords;
+    public GameObject panelExit;
 
     [Header("UI REFERENCE")]
     public WordObject prefab;
@@ -134,7 +135,8 @@ public class SentenceJumble : MonoBehaviour
     void Update()
     {
         RepositionObject();
-        timer -= Time.deltaTime;
+        if(!panelExit.activeSelf)
+            timer -= Time.deltaTime;
         timerSeconds.text = timer.ToString("0");
         if (timer <= 1)
         {
