@@ -557,4 +557,8 @@ public class DemoCharacter : MonoBehaviour
         stop = false;
         characterIsMoving = true;
     }
+    public void mainMenu()
+    {
+        SceneManager.LoadScene("StartGameScreen");
+    }
 }
