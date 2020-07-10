@@ -50,7 +50,6 @@ public class DemoCharacter : MonoBehaviour
     float Timer;
     bool x=false;
     bool waitingForRight = false, waitingForLeft=false, waitingForUp=false;
-    //public DemoImages d;
 
     public void Initialize(GameObject character)
     {

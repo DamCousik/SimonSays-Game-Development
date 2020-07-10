@@ -28,16 +28,19 @@ public class CharacterMovement : MonoBehaviour
     public GameObject panelpause;
     public GameObject panelLethalObstacle;
     public GameObject panelExit;
+    public GameObject panelHealth;
     public bool characterIsMoving = false;
     public LetterCollection lc;
     public ParticleSystem ps;
     bool started;
+    bool health=false;
     public Scrollbar hb;
     bool avoidHint = false;
     float myPos = 0;
     float touchMagnitude;
     float touchBx, touchBy, touchEx, touchEy;
     bool characterStateBeforeQuit;
+    float timer;
 
     public void Initialize(GameObject character)
     {
@@ -60,8 +63,10 @@ public class CharacterMovement : MonoBehaviour
 
     private void Start()
     {
+        health = false;
+        panelHealth.SetActive(true);
         #if UNITY_EDITOR
-             speed = 6.0f;
+        speed = 6.0f;
         #endif
         started = false;
     }
@@ -107,6 +112,10 @@ public class CharacterMovement : MonoBehaviour
 
     void Update()
     {
+        if(!health)
+        {
+            return;
+        }
         if (!started)
         {
             panelHint.SetActive(true);
@@ -117,7 +126,6 @@ public class CharacterMovement : MonoBehaviour
         {
             return;
         }
-
         characterIsMoving = true;
         panelHint.SetActive(false);
         transform.Translate(0, 0, speed * Time.deltaTime);
@@ -210,6 +218,12 @@ public class CharacterMovement : MonoBehaviour
     }
     void FixedUpdate()
     {
+        timer += Time.deltaTime;
+        if (!health)
+        {          
+            StartCoroutine(StopTimeForHealth());         
+            return;
+        }
         if (!started)
         {
             panelHint.SetActive(true);
@@ -399,7 +413,24 @@ public class CharacterMovement : MonoBehaviour
         }
 
     }
-
+    private IEnumerator StopTimeForHealth()
+    {
+        print("Inside Coroutine");
+        panelHealth.transform.Find("Red").gameObject.SetActive(true);
+        yield return new WaitForSeconds(2);
+        panelHealth.transform.Find("Red").gameObject.SetActive(false);
+        panelHealth.transform.Find("Yellow").gameObject.SetActive(true);
+        yield return new WaitForSeconds(2);
+        panelHealth.transform.Find("Yellow").gameObject.SetActive(false);
+        panelHealth.transform.Find("Green").gameObject.SetActive(true);
+        yield return new WaitForSeconds(2);
+        closeHealth();        
+    }
+    public void closeHealth()
+    {
+        panelHealth.SetActive(false);
+        health = true;
+    }
     private IEnumerator StopTimeForObstacle()
     {
         yield return new WaitForSeconds(2);
@@ -440,6 +471,7 @@ public class CharacterMovement : MonoBehaviour
             SceneManager.LoadScene("Zone-" + SentenceJumble.loadZoneScenes[4] + "-Screen");
         }
     }
+
     public void mainMenuUI()
     {
         SceneManager.LoadScene("StartGameScreen");
