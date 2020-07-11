@@ -27,11 +27,13 @@ public class LetterCollection : MonoBehaviour
     int wordLength = 0;
     public static bool isGameWon = false;
     public static string word;
+    public GameObject[] wrongLetters;
 
     public string[] pFix = {"st", "nd", "rd", "th", "th"};
 
     public DisplayLetters dispLet;
     public CharacterMovement charMove;
+    public static LetterCollection main;
 
     void Start()
     {
@@ -59,6 +61,11 @@ public class LetterCollection : MonoBehaviour
 
         GameObject.Find("ZoneNumber").GetComponentInChildren<Text>().text = ClickZone.zoneTag;
         buttonHint.transform.Find("Text").GetComponent<Text>().text = "Collect " + ClickZone.zoneTag[5] + pFix[ClickZone.zoneTag[5] - '0' - 1] + " Word of Movie \n Click HERE to start";
+    }
+
+    private void Awake()
+    {
+        main = this;
     }
 
     private IEnumerator WaitForSceneLoad()

@@ -420,8 +420,7 @@ public class CharacterMovement : MonoBehaviour
 
     }
     private IEnumerator StopTimeForHealth()
-    {
-        print("Inside Coroutine");
+    { 
         panelHealth.transform.Find("Red").gameObject.SetActive(true);
         yield return new WaitForSeconds(2);
         panelHealth.transform.Find("Red").gameObject.SetActive(false);
