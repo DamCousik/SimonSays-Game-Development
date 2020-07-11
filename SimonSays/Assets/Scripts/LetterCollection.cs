@@ -253,7 +253,7 @@ public class LetterCollection : MonoBehaviour
             {
                 countIncorrectLetters += 1;
                 Debug.Log("2) ---- OOPS! You bumped into a wrong letter " + other.gameObject.tag);
-                audio2.PlayOneShot(Buzz, 0.7F);
+                audio2.PlayOneShot(Buzz, 0.2F);
             }
 
             else if (!(other.gameObject.CompareTag("Obstacle")) && !(other.gameObject.CompareTag("LethalObstacle")))
@@ -263,7 +263,7 @@ public class LetterCollection : MonoBehaviour
 
                 countIncorrectLetters += 1;
                 Debug.Log("3) ---- OOPS! You bumped into a wrong letter " + other.gameObject.tag);
-                audio2.PlayOneShot(Buzz, 0.7F);
+                audio2.PlayOneShot(Buzz, 0.2F);
             }
 
             if (countIncorrectLetters == 3)
