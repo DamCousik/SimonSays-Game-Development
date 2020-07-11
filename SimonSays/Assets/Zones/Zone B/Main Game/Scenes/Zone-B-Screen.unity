@@ -1123,7 +1123,6 @@ GameObject:
   - component: {fileID: 142479065}
   - component: {fileID: 142479064}
   - component: {fileID: 142479063}
-  - component: {fileID: 142479067}
   m_Layer: 5
   m_Name: Choice2
   m_TagString: Untagged
@@ -1221,6 +1220,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 761621250}
+        m_MethodName: PlayOneShot
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 68ba518eba51145469dae800d36db0ce,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &142479065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1258,19 +1269,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 142479061}
   m_CullTransparentMesh: 0
---- !u!114 &142479067
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 142479061}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5ee4ead7517e49c5a1d60b67161ecfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sound: {fileID: 8300000, guid: 68ba518eba51145469dae800d36db0ce, type: 3}
 --- !u!1001 &143613802
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2191,7 +2189,6 @@ GameObject:
   - component: {fileID: 225594459}
   - component: {fileID: 225594458}
   - component: {fileID: 225594456}
-  - component: {fileID: 225594455}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2199,14 +2196,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &225594455
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 225594454}
-  m_Enabled: 1
 --- !u!124 &225594456
 Behaviour:
   m_ObjectHideFlags: 0
@@ -2604,7 +2593,6 @@ GameObject:
   - component: {fileID: 295115780}
   - component: {fileID: 295115779}
   - component: {fileID: 295115778}
-  - component: {fileID: 295115781}
   m_Layer: 5
   m_Name: Arena
   m_TagString: Untagged
@@ -2686,6 +2674,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 761621250}
+        m_MethodName: PlayOneShot
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 68ba518eba51145469dae800d36db0ce,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &295115779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2723,19 +2723,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 295115776}
   m_CullTransparentMesh: 0
---- !u!114 &295115781
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 295115776}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5ee4ead7517e49c5a1d60b67161ecfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sound: {fileID: 8300000, guid: 68ba518eba51145469dae800d36db0ce, type: 3}
 --- !u!1001 &304961439
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2842,7 +2829,6 @@ GameObject:
   - component: {fileID: 322833422}
   - component: {fileID: 322833421}
   - component: {fileID: 322833420}
-  - component: {fileID: 322833424}
   m_Layer: 5
   m_Name: Choice3
   m_TagString: Untagged
@@ -2940,6 +2926,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 761621250}
+        m_MethodName: PlayOneShot
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 68ba518eba51145469dae800d36db0ce,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &322833422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2977,19 +2975,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 322833418}
   m_CullTransparentMesh: 0
---- !u!114 &322833424
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 322833418}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5ee4ead7517e49c5a1d60b67161ecfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sound: {fileID: 8300000, guid: 68ba518eba51145469dae800d36db0ce, type: 3}
 --- !u!1 &323701620
 GameObject:
   m_ObjectHideFlags: 0
@@ -3002,7 +2987,6 @@ GameObject:
   - component: {fileID: 323701624}
   - component: {fileID: 323701623}
   - component: {fileID: 323701622}
-  - component: {fileID: 323701625}
   m_Layer: 5
   m_Name: PlayAgain
   m_TagString: Untagged
@@ -3084,6 +3068,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 761621250}
+        m_MethodName: PlayOneShot
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 68ba518eba51145469dae800d36db0ce,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &323701623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3121,19 +3117,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 323701620}
   m_CullTransparentMesh: 0
---- !u!114 &323701625
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 323701620}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5ee4ead7517e49c5a1d60b67161ecfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sound: {fileID: 8300000, guid: 68ba518eba51145469dae800d36db0ce, type: 3}
 --- !u!1 &325747237
 GameObject:
   m_ObjectHideFlags: 0
@@ -3146,7 +3129,6 @@ GameObject:
   - component: {fileID: 325747241}
   - component: {fileID: 325747240}
   - component: {fileID: 325747239}
-  - component: {fileID: 325747242}
   m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
@@ -3228,6 +3210,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 761621250}
+        m_MethodName: PlayOneShot
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 68ba518eba51145469dae800d36db0ce,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &325747240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3265,19 +3259,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 325747237}
   m_CullTransparentMesh: 0
---- !u!114 &325747242
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 325747237}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5ee4ead7517e49c5a1d60b67161ecfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sound: {fileID: 8300000, guid: 68ba518eba51145469dae800d36db0ce, type: 3}
 --- !u!1 &335561025 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6575799623452214940, guid: 78cb51a30bf694de5a8a41bbdf6639d3,
@@ -4174,7 +4155,6 @@ GameObject:
   - component: {fileID: 489737927}
   - component: {fileID: 489737926}
   - component: {fileID: 489737925}
-  - component: {fileID: 489737929}
   m_Layer: 5
   m_Name: Choice2Arena
   m_TagString: Untagged
@@ -4272,6 +4252,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 761621250}
+        m_MethodName: PlayOneShot
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 68ba518eba51145469dae800d36db0ce,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &489737927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4309,19 +4301,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 489737923}
   m_CullTransparentMesh: 0
---- !u!114 &489737929
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 489737923}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5ee4ead7517e49c5a1d60b67161ecfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sound: {fileID: 8300000, guid: 68ba518eba51145469dae800d36db0ce, type: 3}
 --- !u!1 &490019266 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6575799623452214940, guid: 78cb51a30bf694de5a8a41bbdf6639d3,
@@ -6541,6 +6520,133 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 756906728}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &761621248
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 761621249}
+  - component: {fileID: 761621250}
+  m_Layer: 0
+  m_Name: Clicksound
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &761621249
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 761621248}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 81.99524, y: -368.77496, z: 368.2116}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1267518646}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &761621250
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 761621248}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &766027713
 GameObject:
   m_ObjectHideFlags: 0
@@ -8181,7 +8287,6 @@ GameObject:
   - component: {fileID: 996476053}
   - component: {fileID: 996476052}
   - component: {fileID: 996476051}
-  - component: {fileID: 996476054}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -8263,6 +8368,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 761621250}
+        m_MethodName: PlayOneShot
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 68ba518eba51145469dae800d36db0ce,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &996476052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8300,19 +8417,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 996476049}
   m_CullTransparentMesh: 0
---- !u!114 &996476054
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 996476049}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5ee4ead7517e49c5a1d60b67161ecfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sound: {fileID: 8300000, guid: 68ba518eba51145469dae800d36db0ce, type: 3}
 --- !u!1 &1002345232
 GameObject:
   m_ObjectHideFlags: 0
@@ -8874,7 +8978,6 @@ GameObject:
   - component: {fileID: 1121124244}
   - component: {fileID: 1121124243}
   - component: {fileID: 1121124242}
-  - component: {fileID: 1121124246}
   m_Layer: 5
   m_Name: Choice1
   m_TagString: Untagged
@@ -8972,6 +9075,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 761621250}
+        m_MethodName: PlayOneShot
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 68ba518eba51145469dae800d36db0ce,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1121124244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9009,19 +9124,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1121124240}
   m_CullTransparentMesh: 0
---- !u!114 &1121124246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1121124240}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5ee4ead7517e49c5a1d60b67161ecfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sound: {fileID: 8300000, guid: 68ba518eba51145469dae800d36db0ce, type: 3}
 --- !u!1001 &1127787596
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10009,6 +10111,7 @@ RectTransform:
   - {fileID: 1660765072}
   - {fileID: 1455280418}
   - {fileID: 1053886640}
+  - {fileID: 761621249}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10823,7 +10926,6 @@ GameObject:
   - component: {fileID: 1354054935}
   - component: {fileID: 1354054934}
   - component: {fileID: 1354054933}
-  - component: {fileID: 1354054938}
   m_Layer: 5
   m_Name: PanelTGInfo
   m_TagString: Untagged
@@ -10901,6 +11003,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 761621250}
+        m_MethodName: PlayOneShot
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 68ba518eba51145469dae800d36db0ce,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1354054935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10958,19 +11072,6 @@ RectTransform:
   m_AnchoredPosition: {x: 1.5804443, y: -45.740112}
   m_SizeDelta: {x: 214.53552, y: 6.1306763}
   m_Pivot: {x: 0.30644238, y: -7.184954}
---- !u!114 &1354054938
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1354054932}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5ee4ead7517e49c5a1d60b67161ecfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sound: {fileID: 8300000, guid: 68ba518eba51145469dae800d36db0ce, type: 3}
 --- !u!1001 &1363525188
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11110,7 +11211,6 @@ GameObject:
   - component: {fileID: 1375085095}
   - component: {fileID: 1375085094}
   - component: {fileID: 1375085093}
-  - component: {fileID: 1375085096}
   m_Layer: 5
   m_Name: PauseButton
   m_TagString: Untagged
@@ -11192,6 +11292,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 761621250}
+        m_MethodName: PlayOneShot
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 68ba518eba51145469dae800d36db0ce,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1375085094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11229,19 +11341,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1375085091}
   m_CullTransparentMesh: 0
---- !u!114 &1375085096
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1375085091}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5ee4ead7517e49c5a1d60b67161ecfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sound: {fileID: 8300000, guid: 68ba518eba51145469dae800d36db0ce, type: 3}
 --- !u!1001 &1386135327
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11436,7 +11535,6 @@ GameObject:
   - component: {fileID: 1420552238}
   - component: {fileID: 1420552237}
   - component: {fileID: 1420552236}
-  - component: {fileID: 1420552239}
   m_Layer: 5
   m_Name: PlayAgain
   m_TagString: Untagged
@@ -11518,6 +11616,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 761621250}
+        m_MethodName: PlayOneShot
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 68ba518eba51145469dae800d36db0ce,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1420552237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11555,19 +11665,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1420552234}
   m_CullTransparentMesh: 0
---- !u!114 &1420552239
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1420552234}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5ee4ead7517e49c5a1d60b67161ecfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sound: {fileID: 8300000, guid: 68ba518eba51145469dae800d36db0ce, type: 3}
 --- !u!1001 &1423453887
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15366,7 +15463,6 @@ GameObject:
   - component: {fileID: 2085081463}
   - component: {fileID: 2085081462}
   - component: {fileID: 2085081461}
-  - component: {fileID: 2085081464}
   m_Layer: 5
   m_Name: ButtonHint
   m_TagString: Untagged
@@ -15448,6 +15544,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 761621250}
+        m_MethodName: PlayOneShot
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 68ba518eba51145469dae800d36db0ce,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2085081462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15485,19 +15593,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2085081459}
   m_CullTransparentMesh: 0
---- !u!114 &2085081464
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2085081459}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5ee4ead7517e49c5a1d60b67161ecfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sound: {fileID: 8300000, guid: 68ba518eba51145469dae800d36db0ce, type: 3}
 --- !u!1001 &2103984046
 PrefabInstance:
   m_ObjectHideFlags: 0

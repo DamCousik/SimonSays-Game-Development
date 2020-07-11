@@ -9,8 +9,7 @@ public class ClickSound : MonoBehaviour
 {
     public AudioClip sound;
 
-    private Button button { get { return GetComponent<Button>(); } }
-    private AudioSource source { get { return GetComponent<AudioSource>(); } }
+   
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +21,8 @@ public class ClickSound : MonoBehaviour
         button.onClick.AddListener(() => PlaySound());
     }
 
+    private Button button { get { return GetComponent<Button>(); } }
+    private AudioSource source { get { return GetComponent<AudioSource>(); } }
 
     public void PlaySound()
     {
