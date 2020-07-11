@@ -81,7 +81,7 @@ public class IncorrectLetterChoices : MonoBehaviour
     }
 
     public void LoseALife()
-    { 
+    {
         cm.countIncorrectLetters = 0;
         cm.panelWrongLetter.SetActive(false);
         Debug.Log("Calling to clear incorrect letters from lose a life");
