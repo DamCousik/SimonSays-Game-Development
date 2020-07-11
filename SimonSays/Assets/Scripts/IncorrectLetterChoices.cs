@@ -11,8 +11,6 @@ public class IncorrectLetterChoices : MonoBehaviour
     GameObject player;
     GameObject lObj;
     public GameObject pTG;
-    public static bool tgState = false;
-    public static bool arenaEntry = false;
     int xPosition = 0;
     float position;
     CharacterMovement charMove;
@@ -67,9 +65,7 @@ public class IncorrectLetterChoices : MonoBehaviour
     }
 
     public void ReturnToArena()
-    {
-        arenaEntry = true;
-        tgState = false;
+    { 
         if (charMove.healthCount < 1)
         {
             SceneManager.LoadScene("StartGameScreen");
@@ -249,8 +245,8 @@ public class IncorrectLetterChoices : MonoBehaviour
     public void tougherGameInfo()
     {
         pTG.SetActive(true);
-        tgState = true;
-        arenaEntry = false;
+        LetterPlacement.tgState = true;
+        LetterPlacement.arenaEntry = false;
         cm.panelBeforeArenaZone.SetActive(false);
         cm.panelWrongLetter.SetActive(false);
     }
