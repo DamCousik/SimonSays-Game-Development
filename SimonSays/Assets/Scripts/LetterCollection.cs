@@ -36,7 +36,6 @@ public class LetterCollection : MonoBehaviour
 
     //sounds
     public AudioClip Bell;
-    public AudioClip Buzz;
     public AudioClip Gamewin;
     private AudioSource audio1;
     private AudioSource audio2;
@@ -252,14 +251,13 @@ public class LetterCollection : MonoBehaviour
                 Debug.Log("1) ---- You corrected the right letter! " + other.gameObject.tag);
                 countCorrectLetters += 1;
                 //sound
-                audio2.PlayOneShot(Bell, 0.7F);
+                audio2.PlayOneShot(Bell, 0.4F);
             }
 
             else if (charWordFrequencies.ContainsKey(other.gameObject.tag) && (charWordFrequencies[other.gameObject.tag] <= 0))
             {
                 countIncorrectLetters += 1;
                 Debug.Log("2) ---- OOPS! You bumped into a wrong letter " + other.gameObject.tag);
-                audio2.PlayOneShot(Buzz, 0.2F);
             }
 
             else if (!(other.gameObject.CompareTag("Obstacle")) && !(other.gameObject.CompareTag("LethalObstacle")))
@@ -269,7 +267,6 @@ public class LetterCollection : MonoBehaviour
 
                 countIncorrectLetters += 1;
                 Debug.Log("3) ---- OOPS! You bumped into a wrong letter " + other.gameObject.tag);
-                audio2.PlayOneShot(Buzz, 0.2F);
             }
 
             if (countIncorrectLetters == 3)

@@ -382,7 +382,7 @@ public class CharacterMovement : MonoBehaviour
             {
                 Debug.Log("You hit an obstacle - YOU LOSE A LIFE!!");
                 //Sound
-                audio1.PlayOneShot(Obst_impact, 0.1F);
+                audio1.PlayOneShot(Obst_impact, 0.15F);
 
                 panelObstacle.gameObject.SetActive(true);
                 StartCoroutine(StopTimeForObstacle());
@@ -424,7 +424,7 @@ public class CharacterMovement : MonoBehaviour
                 Debug.Log("You've reached the end of the zone! Goodbye!!");
                 chrctrIsDead = true;
                 //sound
-                audio2.PlayOneShot(Die, 0.7F);
+                audio2.PlayOneShot(Die, 0.1F);
                 panelLethalObstacle.SetActive(true);
                 lc.stop = true;
             }
