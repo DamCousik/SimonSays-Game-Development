@@ -50,6 +50,12 @@ public class DemoCharacter : MonoBehaviour
     float Timer;
     bool x=false;
     bool waitingForRight = false, waitingForLeft=false, waitingForUp=false;
+    //Sound
+    bool isMute;
+    public AudioClip Bell;
+    public AudioClip obs_Impact;
+    private AudioSource audio1;
+    private AudioSource audio2;
 
     public void Initialize(GameObject character)
     {
@@ -72,6 +78,10 @@ public class DemoCharacter : MonoBehaviour
         speed = 5.0f;
      #endif
         started = false;
+
+        //Sound
+        audio1 = GetComponent<AudioSource>();
+        audio2 = GetComponent<AudioSource>();
     }
     void Awake()
     {
@@ -274,7 +284,16 @@ public class DemoCharacter : MonoBehaviour
         m_animator.SetBool("Grounded", m_isGrounded);
         m_wasGrounded = m_isGrounded;
     }
-    private void OnCollisionEnter(Collision collision)
+
+    //mute button
+    //mute button function
+    public void Mute()
+    {
+        isMute = !isMute;
+        AudioListener.volume = isMute ? 0 : 1;
+    }
+
+        private void OnCollisionEnter(Collision collision)
     {
         ContactPoint[] contactPoints = collision.contacts;
         for (int i = 0; i < contactPoints.Length; i++)
@@ -375,6 +394,8 @@ public class DemoCharacter : MonoBehaviour
         if (other.gameObject.tag == ("Obstacle"))
         {
             Debug.Log("You hit an obstacle - YOU LOSE A LIFE!!");
+            //sound
+            audio1.PlayOneShot(obs_Impact, 0.2F);
             PanelObstacle.gameObject.SetActive(true);
             StartCoroutine(StopTimeForObstacle());
             healthCount -= 1;
@@ -403,6 +424,8 @@ public class DemoCharacter : MonoBehaviour
         }
         if (other.gameObject.tag == ("J")|| other.gameObject.tag == ("A")|| other.gameObject.tag == ("W")|| other.gameObject.tag == ("S"))
         {
+            //sound
+            audio2.PlayOneShot(Bell, 0.2F);
             PanelCorrectLetter.gameObject.SetActive(true);
             stop = true;
             characterIsMoving = false;          
