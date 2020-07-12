@@ -581,6 +581,7 @@ public class DemoCharacter : MonoBehaviour
     }
     public void mainMenu()
     {
+        DemoImages.control = 0; 
         SceneManager.LoadScene("StartGameScreen");
     }
 }
