@@ -251,7 +251,7 @@ public class LetterCollection : MonoBehaviour
                 Debug.Log("1) ---- You corrected the right letter! " + other.gameObject.tag);
                 countCorrectLetters += 1;
                 //sound
-                audio2.PlayOneShot(Bell, 0.4F);
+                audio2.PlayOneShot(Bell, 0.2F);
             }
 
             else if (charWordFrequencies.ContainsKey(other.gameObject.tag) && (charWordFrequencies[other.gameObject.tag] <= 0))
