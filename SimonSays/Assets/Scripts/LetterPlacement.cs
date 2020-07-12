@@ -88,6 +88,9 @@ public class LetterPlacement : MonoBehaviour
         LetterPlacementForLevel(totalLetters, letterSpacing, correctLetterCount, zoneWord);
     }
 
+  
+    
+
     IEnumerator ObstacleDrop(GameObject letterSpawn, int spacing)
     {
         Vector3 position = Vector3.zero;

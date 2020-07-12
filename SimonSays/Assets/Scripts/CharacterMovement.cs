@@ -42,6 +42,13 @@ public class CharacterMovement : MonoBehaviour
     bool characterStateBeforeQuit;
     float timer;
 
+    //sound
+    public AudioClip Obst_impact;
+    public AudioClip Die;
+    private AudioSource audio1;
+    private AudioSource audio2;
+    bool isMute;
+
     public void Initialize(GameObject character)
     {
         m_animator = character.GetComponent<Animator>();
@@ -69,6 +76,10 @@ public class CharacterMovement : MonoBehaviour
         speed = 6.0f;
         #endif
         started = false;
+
+        //sounds
+        audio1 = GetComponent<AudioSource>();
+        audio2 = GetComponent<AudioSource>();
     }
 
     void Awake()
@@ -370,6 +381,9 @@ public class CharacterMovement : MonoBehaviour
             if (other.gameObject.tag == ("Obstacle"))
             {
                 Debug.Log("You hit an obstacle - YOU LOSE A LIFE!!");
+                //Sound
+                audio1.PlayOneShot(Obst_impact, 0.15F);
+
                 panelObstacle.gameObject.SetActive(true);
                 StartCoroutine(StopTimeForObstacle());
                 healthCount -= 1;
@@ -409,9 +423,12 @@ public class CharacterMovement : MonoBehaviour
             {
                 Debug.Log("You've reached the end of the zone! Goodbye!!");
                 chrctrIsDead = true;
+                //sound
+                audio2.PlayOneShot(Die, 0.1F);
                 panelLethalObstacle.SetActive(true);
                 lc.stop = true;
             }
+
         }
         catch (Exception)
         {
@@ -419,6 +436,14 @@ public class CharacterMovement : MonoBehaviour
         }
 
     }
+
+    //mute button function
+    public void Mute()
+    {
+        isMute = !isMute;
+        AudioListener.volume = isMute ? 0 : 1;
+    }
+
     private IEnumerator StopTimeForHealth()
     { 
         panelHealth.transform.Find("Red").gameObject.SetActive(true);
@@ -436,6 +461,7 @@ public class CharacterMovement : MonoBehaviour
         panelHealth.SetActive(false);
         health = true;
     }
+
     private IEnumerator StopTimeForObstacle()
     {
         yield return new WaitForSeconds(2);

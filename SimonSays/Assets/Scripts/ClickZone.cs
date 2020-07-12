@@ -12,6 +12,7 @@ public class ClickZone : MonoBehaviour
     public static string zoneTag;
     public static int wordNum;
     public string diff;
+    public GameObject fireworks;
     
     //For 3 and 5 zones
     public GameObject zoneOneCompleted;
@@ -55,6 +56,7 @@ public class ClickZone : MonoBehaviour
     public void Start()
     { 
         levelBar.gameObject.SetActive(true);
+        fireworks.gameObject.SetActive(false);
 
         if(Sentence.wordCount == 3)  
         {
@@ -63,7 +65,7 @@ public class ClickZone : MonoBehaviour
             zoneTwo.SetActive(true);
             zoneTwoWord.gameObject.SetActive(true);
             zoneThree.SetActive(true);
-            zoneThreeWord.gameObject.SetActive(true);             
+            zoneThreeWord.gameObject.SetActive(true);
         }
 
         if(Sentence.wordCount == 4) 
@@ -78,7 +80,7 @@ public class ClickZone : MonoBehaviour
             zoneFourWordFour.gameObject.SetActive(true);
         }
 
-        if(Sentence.wordCount == 5)  
+        if(Sentence.wordCount == 5)
         {
             zoneOne.SetActive(true);
             zoneOneWord.gameObject.SetActive(true);
@@ -89,7 +91,7 @@ public class ClickZone : MonoBehaviour
             zoneFour.SetActive(true);
             zoneFourWord.gameObject.SetActive(true);
             zoneFive.SetActive(true);
-            zoneFiveWord.gameObject.SetActive(true);   
+            zoneFiveWord.gameObject.SetActive(true);
         }
     }
 
@@ -129,16 +131,17 @@ public class ClickZone : MonoBehaviour
                             Destroy(zoneThreeWord);
                         }
                     }
-                }        
+                }
             }
-            //Easy  
+            //Easy
             if (zoneOneCompleted.gameObject.activeSelf 
                 && zoneTwoCompleted.gameObject.activeSelf 
                 && zoneThreeCompleted.gameObject.activeSelf)
                 {
                     panelWin.gameObject.SetActive(true);
-                }
-        } 
+                    fireworks.gameObject.SetActive(true);
+            }
+        }
         //easy ends
 
         //Medium : words = 4 and Level = Medium
@@ -181,7 +184,7 @@ public class ClickZone : MonoBehaviour
                             Destroy(zoneFourWord);
                         }
                     }
-                }                   
+                }
             }
 
             if(zoneOneCompletedFour.gameObject.activeSelf 
@@ -191,7 +194,8 @@ public class ClickZone : MonoBehaviour
                 
                 {
                     panelWin.gameObject.SetActive(true);
-                }
+                    fireworks.gameObject.SetActive(true);
+            }
         }
         //medium ends
 
@@ -243,8 +247,8 @@ public class ClickZone : MonoBehaviour
                             Destroy(zoneFiveWord);
                         }
                     }
-                }                
-            }  
+                }
+            }
             if(zoneOneCompleted.gameObject.activeSelf 
                 && zoneTwoCompleted.gameObject.activeSelf 
                 && zoneThreeCompleted.gameObject.activeSelf 
@@ -252,7 +256,8 @@ public class ClickZone : MonoBehaviour
                 && zoneFiveCompleted.gameObject.activeSelf)
                 {
                     panelWin.gameObject.SetActive(true);
-                }
+                fireworks.gameObject.SetActive(true);
+            }
         }
         //Hard ends
 
@@ -304,7 +309,7 @@ public class ClickZone : MonoBehaviour
                             Destroy(zoneFiveWord);
                         }
                     }
-                }                
+                }
             }
             if(Sentence.wordCount == 3 
                 && zoneOneCompleted.gameObject.activeSelf 
@@ -312,7 +317,8 @@ public class ClickZone : MonoBehaviour
                 && zoneThreeCompleted.gameObject.activeSelf)
                 {
                     panelWin.gameObject.SetActive(true);
-                }
+                fireworks.gameObject.SetActive(true);
+            }
 
             if(Sentence.wordCount == 5 
                 && zoneOneCompleted.gameObject.activeSelf 
@@ -322,7 +328,8 @@ public class ClickZone : MonoBehaviour
                 && zoneFiveCompleted.gameObject.activeSelf)
                 {
                     panelWin.gameObject.SetActive(true);
-                }
+                    fireworks.gameObject.SetActive(true);
+            }
         }
         //extreme ends 
 
@@ -340,7 +347,7 @@ public class ClickZone : MonoBehaviour
                         {
                             zoneOneCompletedFour.gameObject.SetActive(true);
                             Destroy(zoneOneWord);
-                        }   
+                        }
                     }
                     else if (kvp.Key == "Zone 2")
                     {
@@ -366,17 +373,18 @@ public class ClickZone : MonoBehaviour
                             Destroy(zoneFourWord);
                         }
                     }
-                }                   
+                }
             }
 
             if(zoneOneCompletedFour.gameObject.activeSelf 
                 && zoneTwoCompletedFour.gameObject.activeSelf 
                 && zoneThreeCompletedFour.gameObject.activeSelf 
                 && zoneFourCompletedFour.gameObject.activeSelf)
-                
+
             {
                 panelWin.gameObject.SetActive(true);
-            }          
+                fireworks.gameObject.SetActive(true);
+            }
         }
 
 
@@ -426,7 +434,7 @@ public class ClickZone : MonoBehaviour
 
     public void menuBarUI()
     {
-        SceneManager.LoadScene("StartGameScreen");     
+        SceneManager.LoadScene("StartGameScreen");
     }
 
     public void levelBarUI()
@@ -440,4 +448,3 @@ public class ClickZone : MonoBehaviour
     }
 
 }
-    

@@ -34,6 +34,12 @@ public class LetterCollection : MonoBehaviour
     public CharacterMovement charMove;
     public static LetterCollection main;
 
+    //sounds
+    public AudioClip Bell;
+    public AudioClip Gamewin;
+    private AudioSource audio1;
+    private AudioSource audio2;
+
     void Start()
     {
         word = SentenceJumble.originalWords[ClickZone.wordNum]; // Obtained from the arena
@@ -57,6 +63,10 @@ public class LetterCollection : MonoBehaviour
 
         Debug.Log("Word = " + word + " and Word Length at the beginning = " + wordLength);
         UnityEngine.Debug.Log("ClickZone.zoneTag : ---- : " + ClickZone.zoneTag);
+
+        //Sound
+        audio1 = GetComponent<AudioSource>();
+        audio2 = GetComponent<AudioSource>();
 
         GameObject.Find("ZoneNumber").GetComponentInChildren<Text>().text = ClickZone.zoneTag;
         buttonHint.transform.Find("Text").GetComponent<Text>().text = "Collect " + ClickZone.zoneTag[5] + pFix[ClickZone.zoneTag[5] - '0' - 1] + " Word of Movie \n Click HERE to start";
@@ -240,6 +250,8 @@ public class LetterCollection : MonoBehaviour
                 charWordFrequencies[other.gameObject.tag]--;
                 Debug.Log("1) ---- You corrected the right letter! " + other.gameObject.tag);
                 countCorrectLetters += 1;
+                //sound
+                audio2.PlayOneShot(Bell, 0.2F);
             }
 
             else if (charWordFrequencies.ContainsKey(other.gameObject.tag) && (charWordFrequencies[other.gameObject.tag] <= 0))
@@ -288,6 +300,8 @@ public class LetterCollection : MonoBehaviour
                 charMove.m_rigidBody.velocity = Vector3.zero;
                 charMove.m_rigidBody.isKinematic = true;
                 panelGameWon.SetActive(true);
+                //sound
+                audio2.PlayOneShot(Gamewin, 0.7F);
                 Debug.Log("Congratulations! You've successfully spelt out the word correctly! SimonSays - YOU COMPLETED THIS ZONE!!!");
                 StartCoroutine(StopTime());
                 StartCoroutine(WaitForSceneLoad());
