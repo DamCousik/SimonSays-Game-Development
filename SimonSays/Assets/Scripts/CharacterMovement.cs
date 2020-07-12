@@ -41,6 +41,9 @@ public class CharacterMovement : MonoBehaviour
     float touchBx, touchBy, touchEx, touchEy;
     bool characterStateBeforeQuit;
     float timer;
+    public GameObject pauseButton;
+    public GameObject resumeButton;
+
 
     //sound
     public AudioClip Obst_impact;
@@ -97,9 +100,14 @@ public class CharacterMovement : MonoBehaviour
 
     public void resumePause()
     {
-        lc.stop = false;
-        characterIsMoving = true;
-        panelpause.SetActive(false);
+        if(!panelExit.activeSelf)
+        {
+            lc.stop = false;
+            characterIsMoving = true;
+            resumeButton.gameObject.SetActive(false);
+            pauseButton.gameObject.SetActive(true);
+        }
+
     }
 
     public void resumeOnClick()
@@ -116,13 +124,14 @@ public class CharacterMovement : MonoBehaviour
 
     public void pauseZone()
     {
-        if (characterIsMoving)
+        if (characterIsMoving && !panelExit.activeSelf)
         {
             Debug.Log("Paused Clicked");
             lc.stop = true;
             m_rigidBody.velocity = Vector3.zero;
             characterIsMoving = false;
-            panelpause.SetActive(true);
+            resumeButton.gameObject.SetActive(true);
+            pauseButton.gameObject.SetActive(false);
             Debug.Log("Paused Clicked : Resume set to false");
         }
     }

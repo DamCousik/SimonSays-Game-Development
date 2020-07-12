@@ -59,6 +59,7 @@ public class DemoImages : MonoBehaviour
     }
     public void chooseDifficulty()
     {
+        control = 0; 
         SceneManager.LoadScene("Difficulty");
     }
 }
