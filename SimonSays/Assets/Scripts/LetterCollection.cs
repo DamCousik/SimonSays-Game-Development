@@ -23,15 +23,16 @@ public class LetterCollection : MonoBehaviour
     public GameObject buttonHint;
     public bool stop = false;
     public bool panelState = false;
-
     int wordLength = 0;
     public static bool isGameWon = false;
     public static string word;
+    public GameObject[] wrongLetters;
 
     public string[] pFix = {"st", "nd", "rd", "th", "th"};
 
     public DisplayLetters dispLet;
     public CharacterMovement charMove;
+    public static LetterCollection main;
 
     //sounds
     public AudioClip Bell;
@@ -70,6 +71,11 @@ public class LetterCollection : MonoBehaviour
 
         GameObject.Find("ZoneNumber").GetComponentInChildren<Text>().text = ClickZone.zoneTag;
         buttonHint.transform.Find("Text").GetComponent<Text>().text = "Collect " + ClickZone.zoneTag[5] + pFix[ClickZone.zoneTag[5] - '0' - 1] + " Word of Movie \n Click HERE to start";
+    }
+
+    private void Awake()
+    {
+        main = this;
     }
 
     private IEnumerator WaitForSceneLoad()
@@ -269,13 +275,13 @@ public class LetterCollection : MonoBehaviour
             if (countIncorrectLetters == 3)
             {
                 Debug.Log("4) ---- Entered condition for wrong letter! " + other.gameObject.tag);
-                if (IncorrectLetterChoices.tgState)
+                if (LetterPlacement.tgState)
                 {
                     tgButton.SetActive(false);
                     arenaButton.SetActive(false);
                     arenaButtonClone.SetActive(true);
                 }
-                else if (IncorrectLetterChoices.arenaEntry)
+                else if (LetterPlacement.arenaEntry)
                 {
                     tgButton.SetActive(true);
                     arenaButton.SetActive(true);

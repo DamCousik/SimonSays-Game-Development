@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class DisplayLetters : MonoBehaviour
-{
-    public GameObject IncorrectLetters;
+{ 
     public GameObject inCorrectWordPanel;
 
     public GameObject correctLetters;
@@ -15,6 +14,8 @@ public class DisplayLetters : MonoBehaviour
     string newLetter;
     int index = 0;
     public float newLetterCount = 0;
+    bool letterSetState = false;
+    int i = 0;
 
     public void DisplayCollectedLetters(string letterValue)
     {
@@ -37,12 +38,11 @@ public class DisplayLetters : MonoBehaviour
         
         if (state == false)
         {
-            IncorrectLetters.SetActive(true);
-            button = (GameObject)Instantiate(IncorrectLetters);
-            button.transform.SetParent(inCorrectWordPanel.transform, false);
-            button.transform.localScale = new Vector3(1.5f, 1.3f, 1.5f);
-            button.transform.GetChild(0).GetComponent<Text>().text = letterValue;
-            IncorrectLetters.SetActive(false);
+            if (i == 3)
+                i = 0;
+
+            LetterCollection.main.wrongLetters[i].transform.GetChild(0).GetComponent<Text>().text = " " + letterValue;
+            i += 1;
         }
     }
 

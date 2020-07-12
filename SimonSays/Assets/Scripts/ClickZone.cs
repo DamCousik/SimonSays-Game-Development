@@ -49,14 +49,12 @@ public class ClickZone : MonoBehaviour
     public GameObject zoneThreeWordFour;
     public GameObject zoneFourWordFour;
 
-    public GameObject menuBar;
     public GameObject levelBar;
 
     public GameObject panelWin;
 
     public void Start()
-    {
-        menuBar.gameObject.SetActive(true);
+    { 
         levelBar.gameObject.SetActive(true);
         fireworks.gameObject.SetActive(false);
 

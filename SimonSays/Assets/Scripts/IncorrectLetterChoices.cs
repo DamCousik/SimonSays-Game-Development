@@ -4,14 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class IncorrectLetterChoices : MonoBehaviour
 {
     GameObject player;
     GameObject lObj;
     public GameObject pTG;
-    public static bool tgState = false;
-    public static bool arenaEntry = false;
     int xPosition = 0;
     float position;
     CharacterMovement charMove;
@@ -66,9 +65,7 @@ public class IncorrectLetterChoices : MonoBehaviour
     }
 
     public void ReturnToArena()
-    {
-        arenaEntry = true;
-        tgState = false;
+    { 
         if (charMove.healthCount < 1)
         {
             SceneManager.LoadScene("StartGameScreen");
@@ -80,9 +77,11 @@ public class IncorrectLetterChoices : MonoBehaviour
     }
 
     public void LoseALife()
-    { 
+    {
         cm.countIncorrectLetters = 0;
         cm.panelWrongLetter.SetActive(false);
+        Debug.Log("Calling to clear incorrect letters from lose a life");
+        clearIncorrectLetters(LetterCollection.main.wrongLetters);
         cm.stop = false;
         cm.panelBeforeArenaZone.SetActive(false);
 
@@ -119,6 +118,8 @@ public class IncorrectLetterChoices : MonoBehaviour
         {
             Debug.Log("Player's Last Position = " + position);
             cm.countIncorrectLetters = 0;
+            Debug.Log("Calling to clear incorrect letters from tougher game");
+            clearIncorrectLetters(LetterCollection.main.wrongLetters);
             cm.stop = false;
             string zWord = (SentenceJumble.originalWords[ClickZone.wordNum]).ToUpper();
 
@@ -244,9 +245,19 @@ public class IncorrectLetterChoices : MonoBehaviour
     public void tougherGameInfo()
     {
         pTG.SetActive(true);
-        tgState = true;
-        arenaEntry = false;
+        LetterPlacement.tgState = true;
+        LetterPlacement.arenaEntry = false;
         cm.panelBeforeArenaZone.SetActive(false);
         cm.panelWrongLetter.SetActive(false);
+    }
+
+    public void clearIncorrectLetters(GameObject[] inCorrectLetters)
+    {
+        Debug.Log("Clearing incorrect letters");
+        for(int i = 0; i < 3; i++)
+        {
+            Debug.Log("Incorrect letter = " + inCorrectLetters[i]);
+            inCorrectLetters[i].transform.GetChild(0).GetComponent<Text>().text = " ";
+        }
     }
 }

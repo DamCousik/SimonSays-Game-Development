@@ -17,7 +17,8 @@ public class LetterPlacement : MonoBehaviour
     public List<GameObject> letterPlacementResult = new List<GameObject>();
     public Dictionary<string, int> wordAndIndexPairs = new Dictionary<string, int>();
     public GameObject playerObj;
- 
+    public static bool arenaEntry;
+    public static bool tgState;
 
     public GameObject[] toughLetterDistribution;
     public List<GameObject> toughLetterPlacements = new List<GameObject>();
@@ -29,6 +30,9 @@ public class LetterPlacement : MonoBehaviour
 
     void Start()
     {
+        arenaEntry = true;
+        tgState = false;
+
         wordAndIndexPairs.Add("A", 0);
         wordAndIndexPairs.Add("B", 1);
         wordAndIndexPairs.Add("C", 2);

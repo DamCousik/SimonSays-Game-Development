@@ -50,7 +50,6 @@ public class DemoCharacter : MonoBehaviour
     float Timer;
     bool x=false;
     bool waitingForRight = false, waitingForLeft=false, waitingForUp=false;
-    //public DemoImages d;
 
     public void Initialize(GameObject character)
     {
@@ -69,7 +68,6 @@ public class DemoCharacter : MonoBehaviour
 
     private void Start()
     {
-        print("Scene count democharacter " + UnityEditor.SceneManagement.EditorSceneManager.sceneCount);
      #if UNITY_EDITOR
         speed = 5.0f;
      #endif
@@ -557,5 +555,9 @@ public class DemoCharacter : MonoBehaviour
         PanelWrongLetter.gameObject.SetActive(false);
         stop = false;
         characterIsMoving = true;
+    }
+    public void mainMenu()
+    {
+        SceneManager.LoadScene("StartGameScreen");
     }
 }
