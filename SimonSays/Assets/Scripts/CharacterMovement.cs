@@ -456,13 +456,13 @@ public class CharacterMovement : MonoBehaviour
     private IEnumerator StopTimeForHealth()
     { 
         panelHealth.transform.Find("Red").gameObject.SetActive(true);
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         panelHealth.transform.Find("Red").gameObject.SetActive(false);
         panelHealth.transform.Find("Yellow").gameObject.SetActive(true);
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         panelHealth.transform.Find("Yellow").gameObject.SetActive(false);
         panelHealth.transform.Find("Green").gameObject.SetActive(true);
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         closeHealth();        
     }
     public void closeHealth()
