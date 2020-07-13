@@ -137,14 +137,14 @@ public class IncorrectLetterChoices : MonoBehaviour
 
             else if (LevelDifficulty.difficulty.Equals("Hard"))
             {
-                lp.letterSpacing = 3;
-                newLetterCount = 15;
+                lp.letterSpacing = 5;
+                newLetterCount = 25;
             }
 
             else if (LevelDifficulty.difficulty.Equals("Extreme"))
             {
-                lp.letterSpacing = 2;
-                newLetterCount = 10;
+                lp.letterSpacing = 5;
+                newLetterCount = 15;
             }
 
             toughLetterPlt = lp.toughLetterDistribution.OfType<GameObject>().ToList();
