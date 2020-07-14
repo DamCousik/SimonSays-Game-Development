@@ -400,27 +400,27 @@ public class ClickZone : MonoBehaviour
 
                 wordNum = zoneTag[5] - '0' - 1;
 
-                if (hit.collider.gameObject.tag == "Zone 1")
+                if (hit.collider.gameObject.tag == "Zone 1" && !(LetterCollection.zoneState.ContainsKey("Zone 1")))
                 {
                     zoneValue = hit.collider.gameObject;
                     SceneManager.LoadScene("Zone-" + SentenceJumble.loadZoneScenes[0] + "-Screen");
                 }
-                else if (hit.collider.gameObject.tag == "Zone 2")
+                else if (hit.collider.gameObject.tag == "Zone 2" && !(LetterCollection.zoneState.ContainsKey("Zone 2")))
                 {
                     zoneValue = hit.collider.gameObject;
                     SceneManager.LoadScene("Zone-" + SentenceJumble.loadZoneScenes[1] + "-Screen");
                 }
-                else if (hit.collider.gameObject.tag == "Zone 3")
+                else if (hit.collider.gameObject.tag == "Zone 3" && !(LetterCollection.zoneState.ContainsKey("Zone 3")))
                 {
                     zoneValue = hit.collider.gameObject;
                     SceneManager.LoadScene("Zone-" + SentenceJumble.loadZoneScenes[2] + "-Screen");
                 }
-                else if (hit.collider.gameObject.tag == "Zone 4")
+                else if (hit.collider.gameObject.tag == "Zone 4" && !(LetterCollection.zoneState.ContainsKey("Zone 4")))
                 {
                     zoneValue = hit.collider.gameObject;
                     SceneManager.LoadScene("Zone-" + SentenceJumble.loadZoneScenes[3] + "-Screen");
                 }
-                else if (hit.collider.gameObject.tag == "Zone 5")
+                else if (hit.collider.gameObject.tag == "Zone 5" && !(LetterCollection.zoneState.ContainsKey("Zone 5")))
                 {
                     zoneValue = hit.collider.gameObject;
                     SceneManager.LoadScene("Zone-" + SentenceJumble.loadZoneScenes[4] + "-Screen");
