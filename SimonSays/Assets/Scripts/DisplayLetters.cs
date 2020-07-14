@@ -27,10 +27,10 @@ public class DisplayLetters : MonoBehaviour
                 if(!string.IsNullOrEmpty(btn[newLetter.IndexOf(letterValue)].transform.GetChild(0).GetComponent<Text>().text))
                 {
                     index = (newLetter.IndexOf(letterValue)) + 1;
-                    btn[newLetter.IndexOf(letterValue, index)].transform.GetChild(0).GetComponent<Text>().text = " " + letterValue;
+                    btn[newLetter.IndexOf(letterValue, index)].transform.GetChild(0).GetComponent<Text>().text = letterValue;
                 }
                 else
-                    btn[newLetter.IndexOf(letterValue)].transform.GetChild(0).GetComponent<Text>().text = " " + letterValue;
+                    btn[newLetter.IndexOf(letterValue)].transform.GetChild(0).GetComponent<Text>().text = letterValue;
 
                 state = true;
             }
@@ -41,7 +41,7 @@ public class DisplayLetters : MonoBehaviour
             if (i == 3)
                 i = 0;
 
-            LetterCollection.main.wrongLetters[i].transform.GetChild(0).GetComponent<Text>().text = " " + letterValue;
+            LetterCollection.main.wrongLetters[i].transform.GetChild(0).GetComponent<Text>().text = letterValue;
             i += 1;
         }
     }
@@ -59,7 +59,7 @@ public class DisplayLetters : MonoBehaviour
                 correctLetters.SetActive(true);
                 button = (GameObject)Instantiate(correctLetters);
                 button.transform.SetParent(correctWordPanel.transform, false);
-                button.transform.localScale = new Vector3(1.5f, 1.3f, 1.5f);
+                button.transform.localScale = new Vector3(1f, 1f, 1f);
             }
         }
 

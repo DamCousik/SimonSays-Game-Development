@@ -309,9 +309,9 @@ public class LetterCollection : MonoBehaviour
                 zoneState.Add(ClickZone.zoneTag, isGameWon);
             }
         }
-        catch (Exception)
+        catch (Exception e)
         {
-            Debug.Log("You have bumped into the wrong letter!");
+            Debug.Log("Exception = " + e);
         }
     }
 }
