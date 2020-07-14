@@ -149,11 +149,12 @@ public class LetterPlacement : MonoBehaviour
         if (validPosition)
         {
             GameObject obj = Instantiate(letterSpawn, position, Quaternion.identity);
+            obj.transform.tag = letterSpawn.transform.tag;
             obj.transform.localScale = new Vector3((float)0.5, (float)0.5, (float)0.01);
             BoxCollider bc = (BoxCollider)obj.gameObject.AddComponent(typeof(BoxCollider));
             bc.center = Vector3.zero;
             bc.isTrigger = true;
-            bc.transform.localScale = new Vector3((float)0.5, (float)0.5, (float)0.01);
+            bc.size = new Vector3((float)1.1, (float)1.1, (float)1.1);
         }
 
         yield return new WaitForSeconds(0.005f);

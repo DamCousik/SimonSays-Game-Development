@@ -383,69 +383,6 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        try
-        {
-            if (other.gameObject.tag == ("Obstacle"))
-            {
-                Debug.Log("You hit an obstacle - YOU LOSE A LIFE!!");
-                //Sound
-                audio1.PlayOneShot(Obst_impact, 0.15F);
-
-                panelObstacle.gameObject.SetActive(true);
-                StartCoroutine(StopTimeForObstacle());
-                healthCount -= 1;
-                if (healthCount == 2)
-                {
-                    hb.size = 0.6f;
-                    hb.targetGraphic.color = Color.yellow;
-                }
-                if (healthCount == 1)
-                {
-                    hb.size = 0.2f;
-                    hb.targetGraphic.color = Color.red;
-                }
-                ps.Play();
-                StartCoroutine(ChangeSize());
-                SphereCollider myCollider;
-                myCollider = other.gameObject.GetComponent<SphereCollider>();
-                if (myCollider)
-                    transform.position = new Vector3(transform.position.x, transform.position.y, (transform.position.z - 2 * myCollider.radius));
-
-                if (healthCount < 1)
-                {
-                    hb.gameObject.SetActive(false);
-                    chrctrIsDead = true;
-                    Debug.Log("You are all out of lives! Sorry, but SimonSays - YOU DIE!!");
-                    m_rigidBody.velocity = Vector3.zero;
-                    m_rigidBody.isKinematic = true;
-                    m_animator.gameObject.SetActive(false);
-                    healthCount = 0;
-                    lc.panelBeforeArenaZone.SetActive(false);
-                    lc.panelWrongLetter.SetActive(false);
-                    panelObstacle.gameObject.SetActive(false);
-                    gameOverPanel.SetActive(true);
-                }
-            }
-            else if (other.gameObject.CompareTag("LethalObstacle"))
-            {
-                Debug.Log("You've reached the end of the zone! Goodbye!!");
-                chrctrIsDead = true;
-                //sound
-                audio2.PlayOneShot(Die, 0.1F);
-                panelLethalObstacle.SetActive(true);
-                lc.stop = true;
-            }
-
-        }
-        catch (Exception)
-        {
-            Debug.Log("Exception with Health!");
-        }
-
-    }
-
     //mute button function
     public void Mute()
     {
@@ -471,7 +408,7 @@ public class CharacterMovement : MonoBehaviour
         health = true;
     }
 
-    private IEnumerator StopTimeForObstacle()
+    public IEnumerator StopTimeForObstacle()
     {
         yield return new WaitForSeconds(2);
         panelObstacle.gameObject.SetActive(false);

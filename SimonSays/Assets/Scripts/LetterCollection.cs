@@ -308,6 +308,58 @@ public class LetterCollection : MonoBehaviour
 
                 zoneState.Add(ClickZone.zoneTag, isGameWon);
             }
+
+            if (other.gameObject.tag == ("Obstacle"))
+            {
+                Debug.Log("You hit an obstacle - YOU LOSE A LIFE!!");
+                //Sound
+                audio1.PlayOneShot(charMove.Obst_impact, 0.15F);
+
+                charMove.panelObstacle.gameObject.SetActive(true);
+                StartCoroutine(charMove.StopTimeForObstacle());
+                charMove.healthCount -= 1;
+                if (charMove.healthCount == 2)
+                {
+                    charMove.hb.size = 0.6f;
+                    charMove.hb.targetGraphic.color = Color.yellow;
+                }
+                if (charMove.healthCount == 1)
+                {
+                    charMove.hb.size = 0.2f;
+                    charMove.hb.targetGraphic.color = Color.red;
+                }
+                charMove.ps.Play();
+                StartCoroutine(charMove.ChangeSize());
+                SphereCollider myCollider;
+                myCollider = other.gameObject.GetComponent<SphereCollider>();
+                if (myCollider)
+                    transform.position = new Vector3(transform.position.x, transform.position.y, (transform.position.z - 2 * myCollider.radius));
+
+                if (charMove.healthCount < 1)
+                {
+                    charMove.hb.gameObject.SetActive(false);
+                    charMove.chrctrIsDead = true;
+                    Debug.Log("You are all out of lives! Sorry, but SimonSays - YOU DIE!!");
+                    charMove.m_rigidBody.velocity = Vector3.zero;
+                    charMove.m_rigidBody.isKinematic = true;
+                    charMove.m_animator.gameObject.SetActive(false);
+                    charMove.healthCount = 0;
+                    panelBeforeArenaZone.SetActive(false);
+                    panelWrongLetter.SetActive(false);
+                    charMove.panelObstacle.gameObject.SetActive(false);
+                    charMove.gameOverPanel.SetActive(true);
+                }
+            }
+
+            else if (other.gameObject.CompareTag("LethalObstacle"))
+            {
+                Debug.Log("You've reached the end of the zone! Goodbye!!");
+                charMove.chrctrIsDead = true;
+                //sound
+                audio2.PlayOneShot(charMove.Die, 0.1F);
+                charMove.panelLethalObstacle.SetActive(true);
+                stop = true;
+            }
         }
         catch (Exception e)
         {
