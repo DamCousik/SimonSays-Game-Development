@@ -88,9 +88,6 @@ public class LetterPlacement : MonoBehaviour
         LetterPlacementForLevel(totalLetters, letterSpacing, correctLetterCount, zoneWord);
     }
 
-  
-    
-
     IEnumerator ObstacleDrop(GameObject letterSpawn, int spacing)
     {
         Vector3 position = Vector3.zero;
@@ -152,7 +149,12 @@ public class LetterPlacement : MonoBehaviour
         if (validPosition)
         {
             GameObject obj = Instantiate(letterSpawn, position, Quaternion.identity);
-            obj.transform.localScale = new Vector3((float)0.5, (float)0.5, (float)0.03);
+            obj.transform.tag = letterSpawn.transform.tag;
+            obj.transform.localScale = new Vector3((float)0.5, (float)0.5, (float)0.01);
+            BoxCollider bc = (BoxCollider)obj.gameObject.AddComponent(typeof(BoxCollider));
+            bc.center = Vector3.zero;
+            bc.isTrigger = true;
+            bc.size = new Vector3((float)1.1, (float)1.1, (float)1.1);
         }
 
         yield return new WaitForSeconds(0.005f);
