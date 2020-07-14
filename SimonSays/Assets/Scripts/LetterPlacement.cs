@@ -16,9 +16,12 @@ public class LetterPlacement : MonoBehaviour
     public List<GameObject> newExtraLetterList = new List<GameObject>();
     public List<GameObject> letterPlacementResult = new List<GameObject>();
     public Dictionary<string, int> wordAndIndexPairs = new Dictionary<string, int>();
+    public Dictionary<int, string> oppositeWordIndex = new Dictionary<int, string>();
+    public List<string> letterTags = new List<string>();
     public GameObject playerObj;
     public static bool arenaEntry;
     public static bool tgState;
+    string tag;
 
     public GameObject[] toughLetterDistribution;
     public List<GameObject> toughLetterPlacements = new List<GameObject>();
@@ -60,6 +63,33 @@ public class LetterPlacement : MonoBehaviour
         wordAndIndexPairs.Add("Y", 24);
         wordAndIndexPairs.Add("Z", 25);
 
+        oppositeWordIndex.Add(0, "A");
+        oppositeWordIndex.Add(1, "B");
+        oppositeWordIndex.Add(2, "C");
+        oppositeWordIndex.Add(3, "D");
+        oppositeWordIndex.Add(4, "E");
+        oppositeWordIndex.Add(5, "F");
+        oppositeWordIndex.Add(6, "G");
+        oppositeWordIndex.Add(7, "H");
+        oppositeWordIndex.Add(8, "I");
+        oppositeWordIndex.Add(9, "J");
+        oppositeWordIndex.Add(10, "K");
+        oppositeWordIndex.Add(11, "L");
+        oppositeWordIndex.Add(12, "M");
+        oppositeWordIndex.Add(13, "N");
+        oppositeWordIndex.Add(14, "O");
+        oppositeWordIndex.Add(15, "P");
+        oppositeWordIndex.Add(16, "Q");
+        oppositeWordIndex.Add(17, "R");
+        oppositeWordIndex.Add(18, "S");
+        oppositeWordIndex.Add(19, "T");
+        oppositeWordIndex.Add(20, "U");
+        oppositeWordIndex.Add(21, "V");
+        oppositeWordIndex.Add(22, "W");
+        oppositeWordIndex.Add(23, "X");
+        oppositeWordIndex.Add(24, "Y");
+        oppositeWordIndex.Add(25, "Z");
+
         if (LevelDifficulty.difficulty.Equals("Easy"))
         {
             totalLetters = 60;
@@ -88,7 +118,7 @@ public class LetterPlacement : MonoBehaviour
         LetterPlacementForLevel(totalLetters, letterSpacing, correctLetterCount, zoneWord);
     }
 
-    IEnumerator ObstacleDrop(GameObject letterSpawn, int spacing)
+    IEnumerator ObstacleDrop(GameObject letterSpawn, int spacing, string tag)
     {
         Vector3 position = Vector3.zero;
         bool validPosition = false;
@@ -149,7 +179,7 @@ public class LetterPlacement : MonoBehaviour
         if (validPosition)
         {
             GameObject obj = Instantiate(letterSpawn, position, Quaternion.identity);
-            obj.transform.tag = letterSpawn.transform.tag;
+            obj.transform.tag = tag;
             obj.transform.localScale = new Vector3((float)0.5, (float)0.5, (float)0.01);
             BoxCollider bc = (BoxCollider)obj.gameObject.AddComponent(typeof(BoxCollider));
             bc.center = Vector3.zero;
@@ -201,12 +231,26 @@ public class LetterPlacement : MonoBehaviour
 
             for (int i = 0; i < letterPlacementResult.Count; i++)
             {
-                StartCoroutine(ObstacleDrop(letterPlacementResult[i], letterSpacing));
+                tag = GetLetterTag(letterPlacementResult[i]);
+                StartCoroutine(ObstacleDrop(letterPlacementResult[i], letterSpacing, tag));
             }
         }
         catch (Exception e)
         {
             Debug.Log(e);
         }
+    }
+
+    public string GetLetterTag(GameObject obj)
+    {
+        string lTag = "";
+        for(int i = 0; i < letterDistribution.Length; i++)
+        {
+            if(obj == letterDistribution[i])
+            {
+                lTag = oppositeWordIndex[i];
+            }
+        }
+        return lTag;
     }
 }
