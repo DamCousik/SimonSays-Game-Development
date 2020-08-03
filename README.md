@@ -2,7 +2,9 @@
 
 ## 1. Game Overview
 
-**Genre:** Word Puzzle and Platform Game
+**Genre:** Word Puzzle and Platform Game 
+
+Links : https://simon-says.itch.io/simonsayscsci526 (Web Consoles) and https://simmer.io/@SimonSaysGame/simonsaysfinalcsci526 (Mobile devices)
 
 **Elevator Pitch:** 
 SimonSays is a 3D single player platformer game that aims to bring together elements of word puzzle coupled with action packed tasks that the player must complete in order to win . The player is initially presented with a list of words in a jumbled fashion which has to be decoded and put back in the right order to make sense. Think this is easy? But SimonSays otherwise!
